@@ -215,7 +215,9 @@ void ecranGameMode(){
 //
 
 void ecranJeuSurvie(){
+  background(fondJeu);
 }
+
 
 //
 //Définition de l'écran de Jeu 1 contre 1
@@ -262,7 +264,7 @@ void AffOp(){   //Ces paramètres sont mis à jour à chaque image tant que l'on
   
   imageMode(CENTER);                                                //Affichage instantané d'un aperçu "en jeu" du paramètre réglé
   //image(Ennemis,725,70,tEnnemis,tEnnemis);
-  //image(Personnage,725,190,tPersonnage,tPersonnage);
+  image(Personnage,725,190,tPersonnage,tPersonnage);
   
   volumeM=(cp5.getController("Volume musique").getValue())/100;    //Réglage du volume
   music.amp(0.125*volumeM);

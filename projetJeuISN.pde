@@ -258,16 +258,16 @@ void ecranOptions(){
 void AffOp(){   //Ces paramètres sont mis à jour à chaque image tant que l'on est sur l'écran des options
 
   tEnnemis = (int)cp5.getController("Taille Enemis").getValue();    //Récupération de la valeur issue de la SlideBar
-  tPersonnage = (int)cp5.getController("Taille Vaisseau").getValue();
+  tPersonnage = (int)cp5.getController("Taille Personnage").getValue();
   
   imageMode(CENTER);                                                //Affichage instantané d'un aperçu "en jeu" du paramètre réglé
-  image(Ennemis,725,70,tEnnemis,tEnnemis);
-  image(Personnage,725,190,tPersonnage,tPersonnage);
+  //image(Ennemis,725,70,tEnnemis,tEnnemis);
+  //image(Personnage,725,190,tPersonnage,tPersonnage);
   
   volumeM=(cp5.getController("Volume musique").getValue())/100;    //Réglage du volume
   music.amp(0.125*volumeM);
   
-  volumeE=(cp5.getController("Volume Explosion").getValue())/100;
+  volumeE=(cp5.getController("Volume Tirs").getValue())/100;
   explode.amp(0.05*volumeE);
 }
 

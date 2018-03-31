@@ -52,6 +52,7 @@ void setup(){
   
   xVaisseau = width>>1;                                                                                                             //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs
   yVaisseau = height>>1;                                                                                                            //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
+
   
   screen = 0;                                 //Initialisation de l'écran initial à l'écran d'accueil
   
@@ -188,25 +189,6 @@ void ecranGameMode(){
 //
 
 void ecranJeuSurvie(){
-  background(fondJeu);                                 
-  noCursor();
-  if((int)random(0,100)<=spawnRate) ajouterEnnemis();  //Si la valeur aléatoire (entre 1 et 100) est inférieure à la variable, on fait apparaître un ennemi
-  bougerEnnemi();                                      //Déplacement des ennemis
-  bougerVaisseau();                                    //Déplacement du vaisseau
-  collision();
-  affichage();
-  
-  fill(gameTextColor);
-  stroke(255,0,0);
-  textFont(texte,20);                                  //Ecriture des différents éléments
-  text("Space/Espace : Pause",width-100,20);
-  String score = "Score : "+playerScore;
-  textFont(texte,25);
-  text(score,60,30);
-  
-  if(espace){                                          //Si on appuie sur espace, l'écran d'accueil est ouvert (mise en pause du jeu)
-    screen=0;
-  }
 }
 
 //
@@ -248,13 +230,17 @@ void ecranOptions(){
 
 void AffOp(){   //Ces paramètres sont mis à jour à chaque image tant que l'on est sur l'écran des options
 
+  tEnnemis = (int)cp5.getController("Taille Enemis").getValue();    //Récupération de la valeur issue de la SlideBar
+  tVaisseau = (int)cp5.getController("Taille Vaisseau").getValue();
+  
   imageMode(CENTER);                                                //Affichage instantané d'un aperçu "en jeu" du paramètre réglé
   image(asteroid,725,70,tEnnemis,tEnnemis);
   image(vaisseau,725,190,tVaisseau,tVaisseau);
-  //Réglage du volume
+  
+  volumeM=(cp5.getController("Volume musique").getValue())/100;    //Réglage du volume
   music.amp(0.125*volumeM);
   
-  
+  volumeE=(cp5.getController("Volume Explosion").getValue())/100;
   explode.amp(0.05*volumeE);
 }
 
@@ -263,7 +249,31 @@ void AffOp(){   //Ces paramètres sont mis à jour à chaque image tant que l'on
 //
 
 void ecranCredits(){
-
+  background(fondJeu);
+  textAlign(CENTER);
+  textFont(titre,75);
+  fill(creditsTextColor);
+  text("Credits",width>>1,height/8);
+  textFont(texte,30);
+  text("Système de collision : Clément G.",width>>1,height/5);
+  text("Ecran d’accueil : Vincent",width>>1,height/5+40);
+  text("Gestion des menus : Vincent / Clément G.",width>>1,height/5+80);
+  text("Sons : Clément V.",width>>1,height/5+120);
+  text("Gestion Clavier : Vincent",width>>1,height/5+160);
+  text("Organisation du code / Commentaires : Clément V.",width>>1,height/5+200);
+  text("Design et gestion des ennemis : Clément V. ",width>>1,height/5+240);
+  text("Game design : Clément G., V. / Vincent",width>>1,height/5+280);
+  text("Musique : \"Main Theme 8-BIT - ARMS\" - Loeder (Youtube)",width>>1,height/5+320);
+  textFont(texte,20);
+  text("Avec l'autorisation du créateur",width>>1,height/5+350);
+  textFont(texte,30);
+  fill(creditsBackButtonColor);
+  text("Back / Retour",width>>1,height*0.9+10);
+  if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) {   //Bouton Retour
+    fill(255,50);
+  }
+  else noFill();
+  rect(width>>1,height*0.9,200,80);
 }
 
 //
@@ -320,6 +330,7 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
       eSpeed =(int) cp5.getController("Vitesse Ennemis").getValue();
       spawnRate =(int) cp5.getController("Chance d'apparation d'un ennemi").getValue()/2;  
       
+      
       screen=0;   //Retour à l'accueil
     }
   }
@@ -363,35 +374,3 @@ void keyReleased(){  //Lorsque l'on relâche la touche, la variable correspondan
   }  
 }
 
-void ajouterEnnemis(){  //Ajout des ennemis
-}
-
- void bougerEnnemi(){   //Mouvement des ennemis (on ajoute la vitesse (en pixel) à chaque appel de la fonction, à chaque frame, à chaque ennemi, sur la coordonée x)
-}
-
-void bougerVaisseau(){  //Mouvement du vaisseau
-
-}
-
-//
-//Collision
-//
-
-void collision(){
-}
-   
-void Sound(){                                                               //Fonction appelée lors de chaque colision qui produit un son
-    explode.play();
-} 
-
-void affichage(){                                                           //Affichage des ennemis
-  int x,y;                                                                  //Varibles qui changent à chaque tour de boucle
- 
-  for(int i = 0;i<xE.size();i++){                                           //Pour chaque cercle
-    x = xE.get(i); y = yE.get(i);                                           //Récupération des coordonnées du cercle
-    imageMode(CENTER);                                                      //Affichage (et éventuellement remise à l'échelle) de l'astéroide
-    image(asteroid,x,y,tEnnemis,tEnnemis); 
-  }
-  imageMode(CORNER);
-  image(vaisseau,xs1,ys1-tVaisseau/2,tVaisseau,tVaisseau);                  //Même chose pour le vaisseau
-}

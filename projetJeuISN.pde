@@ -38,7 +38,7 @@ int spawnRate = 5;            //Valeur initiale en % taux d'apparition maximum
 
 color sliderActiveColor=#FF0000, sliderForegroundColor=#AA0000;         //Couleurs liées au sliderBar
 color gameTitleColor=#FF0000, homeTextColor=#FF0000, gameTextColor=#FF0000, creditsTextColor=#FF0000, exitTextColor=#FF7800;    //Couleurs liées au texte dans les différents menus
-color optionsBackButtonColor=#007FFF, creditsBackButtonColor=#FF0000, exitYesButtonColor=#FF0000, exitNoButtonColor=#FF0000;    //Couleurs liées au texte dans différents "boutons"
+color optionsBackButtonColor=#007FFF, creditsBackButtonColor=#FF0000, exitYesButtonColor=#FF0000, exitNoButtonColor=#FF0000, gameModeBackButtonColor=#007FFF;    //Couleurs liées au texte dans différents "boutons"
  
 void setup(){
   size(800,600);
@@ -195,11 +195,18 @@ void ecranGameMode(){
   else noFill();
   rect(width*0.75,height>>1,200,80);
   
+  if(mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.75)+40 && mouseY>(height*0.75)-40){
+    fill(255,50); }
+  else noFill();
+  rect(width>>1,height*0.75,200,80);
+  
   textFont(texte,30);
   fill(exitYesButtonColor);
   text("Survival",width>>2,(height>>1)+10);
   fill(exitNoButtonColor);
   text("1 versus 1",width*0.75,(height>>1)+10);
+  fill(gameModeBackButtonColor);
+  text("Back/Retour",width>>1,(height*0.75)+10);
   
 }
 
@@ -215,6 +222,7 @@ void ecranJeuSurvie(){
 //
 
 void ecranJeu1vs1(){
+  background(fondJeu);
 }
 
 //
@@ -318,6 +326,14 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.67)+40 && mouseY>(height*0.67)-40) screen=5;   // Click Souris sur Credits
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.84)+40 && mouseY>(height*0.84)-40) screen=6;   // Click Souris sur Fin
   }
+  
+  if(screen==1){
+    if(mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) screen=2;
+    if(mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) screen=3;
+    if(mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.75)+40 && mouseY>(height*0.75)-40) screen=0;
+    
+  }
+  
   if(screen == 4){      //Dans l'écran des options
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40){      //Click sur le bouton retour -> masquage des barres
       cp5.getController("Taille Enemis").setVisible(false);
@@ -376,4 +392,3 @@ void keyReleased(){  //Lorsque l'on relâche la touche, la variable correspondan
     case 68: right=         false; break;  //d
   }  
 }
-

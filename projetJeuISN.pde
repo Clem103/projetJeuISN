@@ -3,15 +3,14 @@ import controlP5.*;           //Librairie permettant l'ajout de barres glissante
 SoundFile explode;            //Déclaration des variables de son (Explosion)
 SoundFile music;              //Musique de fond
 
-int tVaisseau = 45;           //Taille des Objets
+int tPersonnage = 45;           //Taille des Objets
 int tEnnemis = 40;
 
 int eSpeed = 4;               //Vitesses ennemis et vaisseau
-int vSpeed = 6;
+int pSpeed = 6;
 
-int xVaisseau;                //Coordonnées du vaisseau
-int yVaisseau;
-int xs1,ys1,xs2,ys2,xs3,ys3;  //Coordonnées des sommets du vaisseau (en triangle) s1 = sommet gauche, s2 = sommet haut droit, s3 = sommet bas droit
+int xPersonnage;                //Coordonnées du vaisseau
+int yPersonnage;
 
 ArrayList<Integer> xE = new ArrayList();  //Liste des coordonnées des ennemis
 ArrayList<Integer> yE = new ArrayList();
@@ -22,13 +21,11 @@ boolean down=     false;
 boolean left=     false;
 boolean right=    false;
 
-int screen;                   //Ecran à afficher (0=Accueil, 1=Jeu, 2=Options, 3=Crédits, 4=Ecran de sortie
-
-double aireT;                 //Aire du vaisseau (considéré comme un triangle)
+int screen;                   //Ecran à afficher
 
 PFont titre, texte;           //Déclaration des polices d'écriture
 
-PImage fondAccueil,fondJeu,asteroid , vaisseau;    //Déclaration des images
+PImage fondAccueil,fondJeu, Ennemis, Personnage;    //Déclaration des images
 
 int playerScore=0;            //Score du joueur
 
@@ -50,8 +47,8 @@ void setup(){
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
   smooth();                                   //Rend les contours plus lisses
   
-  xVaisseau = width>>1;                                                                                                             //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs
-  yVaisseau = height>>1;                                                                                                            //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
+  xPersonnage = width>>1;                                                                                                             //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs
+  yPersonnage = height>>1;                                                                                                            //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
 
   
   screen = 0;                                 //Initialisation de l'écran initial à l'écran d'accueil
@@ -64,8 +61,8 @@ void setup(){
   
   fondAccueil = loadImage("fondAccueil.jpg");                   //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");
-  asteroid = loadImage("asteroid.png");
-  vaisseau = loadImage("vaisseau.png");
+  Ennemis = loadImage("Ennemis.png");
+  Personnage = loadImage("Personnage.png");
   
    cp5 = new ControlP5(this);                                                        //Initialisation du controlleur
    cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);  //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
@@ -81,7 +78,7 @@ void setup(){
       .setPosition(10,170)
       .setSize(550,40)
       .setRange(15,100)
-      .setValue(tVaisseau)
+      .setValue(tPersonnage)
       .setVisible(false);
       
    cp5.addSlider("Vitesse Ennemis")
@@ -95,7 +92,7 @@ void setup(){
       .setPosition(10,300)
       .setSize(550,40)
       .setRange(1,20)
-      .setValue(vSpeed)
+      .setValue(pSpeed)
       .setVisible(false);
       
    cp5.addSlider("Volume musique")
@@ -178,10 +175,32 @@ void ecranAccueil(){
 }
 
 //
-//Définition de l'écran de Jeu survie
+//Définition de l'écran choix de mode jeu
 //
 
 void ecranGameMode(){
+  background(fondAccueil);
+  textAlign(CENTER);
+  fill(exitTextColor);
+  textFont(texte,30);
+  text("Choose a game mode",width>>1,height/3);
+  
+  if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) { //Case Yes
+    fill(255,50); }
+  else noFill();
+  rect(width>>2,height>>1,200,80);
+  
+  if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) { //Case No
+    fill(255,50); }
+  else noFill();
+  rect(width*0.75,height>>1,200,80);
+  
+  textFont(texte,30);
+  fill(exitYesButtonColor);
+  text("Survival",width>>2,(height>>1)+10);
+  fill(exitNoButtonColor);
+  text("1 versus 1",width*0.75,(height>>1)+10);
+  
 }
 
 //
@@ -231,11 +250,11 @@ void ecranOptions(){
 void AffOp(){   //Ces paramètres sont mis à jour à chaque image tant que l'on est sur l'écran des options
 
   tEnnemis = (int)cp5.getController("Taille Enemis").getValue();    //Récupération de la valeur issue de la SlideBar
-  tVaisseau = (int)cp5.getController("Taille Vaisseau").getValue();
+  tPersonnage = (int)cp5.getController("Taille Vaisseau").getValue();
   
   imageMode(CENTER);                                                //Affichage instantané d'un aperçu "en jeu" du paramètre réglé
-  image(asteroid,725,70,tEnnemis,tEnnemis);
-  image(vaisseau,725,190,tVaisseau,tVaisseau);
+  image(Ennemis,725,70,tEnnemis,tEnnemis);
+  image(Personnage,725,190,tPersonnage,tPersonnage);
   
   volumeM=(cp5.getController("Volume musique").getValue())/100;    //Réglage du volume
   music.amp(0.125*volumeM);
@@ -251,23 +270,7 @@ void AffOp(){   //Ces paramètres sont mis à jour à chaque image tant que l'on
 void ecranCredits(){
   background(fondJeu);
   textAlign(CENTER);
-  textFont(titre,75);
-  fill(creditsTextColor);
-  text("Credits",width>>1,height/8);
-  textFont(texte,30);
-  text("Système de collision : Clément G.",width>>1,height/5);
-  text("Ecran d’accueil : Vincent",width>>1,height/5+40);
-  text("Gestion des menus : Vincent / Clément G.",width>>1,height/5+80);
-  text("Sons : Clément V.",width>>1,height/5+120);
-  text("Gestion Clavier : Vincent",width>>1,height/5+160);
-  text("Organisation du code / Commentaires : Clément V.",width>>1,height/5+200);
-  text("Design et gestion des ennemis : Clément V. ",width>>1,height/5+240);
-  text("Game design : Clément G., V. / Vincent",width>>1,height/5+280);
-  text("Musique : \"Main Theme 8-BIT - ARMS\" - Loeder (Youtube)",width>>1,height/5+320);
-  textFont(texte,20);
-  text("Avec l'autorisation du créateur",width>>1,height/5+350);
-  textFont(texte,30);
-  fill(creditsBackButtonColor);
+  textFont(texte,30);  
   text("Back / Retour",width>>1,height*0.9+10);
   if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) {   //Bouton Retour
     fill(255,50);
@@ -318,15 +321,15 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
   if(screen == 4){      //Dans l'écran des options
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40){      //Click sur le bouton retour -> masquage des barres
       cp5.getController("Taille Enemis").setVisible(false);
-      cp5.getController("Taille Vaisseau").setVisible(false);
+      cp5.getController("Taille Personnage").setVisible(false);
       cp5.getController("Vitesse Ennemis").setVisible(false);
-      cp5.getController("Vitesse Vaisseau").setVisible(false);
+      cp5.getController("Vitesse Personnage").setVisible(false);
       cp5.getController("Volume musique").setVisible(false);
-      cp5.getController("Volume Explosion").setVisible(false);
+      cp5.getController("Volume Tirs").setVisible(false);
       cp5.getController("Chance d'apparation d'un ennemi").setVisible(false);
       
       
-      vSpeed =(int) cp5.getController("Vitesse Vaisseau").getValue();                                              //On récupère les valeurs, non mises à jour à chaque image, à la sortie du menu
+      pSpeed =(int) cp5.getController("Vitesse Personnage").getValue();                                              //On récupère les valeurs, non mises à jour à chaque image, à la sortie du menu
       eSpeed =(int) cp5.getController("Vitesse Ennemis").getValue();
       spawnRate =(int) cp5.getController("Chance d'apparation d'un ennemi").getValue()/2;  
       

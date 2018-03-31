@@ -52,7 +52,6 @@ void setup(){
   
   xVaisseau = width>>1;                                                                                                             //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs
   yVaisseau = height>>1;                                                                                                            //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
-  aireT = AireTriangle(xVaisseau, yVaisseau,xVaisseau+tVaisseau, (yVaisseau-(tVaisseau>>1)), xVaisseau+tVaisseau, (yVaisseau+(tVaisseau>>1)));    //Calcul de l'aire du vaisseau
   
   screen = 0;                                 //Initialisation de l'écran initial à l'écran d'accueil
   
@@ -249,17 +248,13 @@ void ecranOptions(){
 
 void AffOp(){   //Ces paramètres sont mis à jour à chaque image tant que l'on est sur l'écran des options
 
-  tEnnemis = (int)cp5.getController("Taille Enemis").getValue();    //Récupération de la valeur issue de la SlideBar
-  tVaisseau = (int)cp5.getController("Taille Vaisseau").getValue();
-  
   imageMode(CENTER);                                                //Affichage instantané d'un aperçu "en jeu" du paramètre réglé
   image(asteroid,725,70,tEnnemis,tEnnemis);
   image(vaisseau,725,190,tVaisseau,tVaisseau);
-  
-  volumeM=(cp5.getController("Volume musique").getValue())/100;    //Réglage du volume
+  //Réglage du volume
   music.amp(0.125*volumeM);
   
-  volumeE=(cp5.getController("Volume Explosion").getValue())/100;
+  
   explode.amp(0.05*volumeE);
 }
 
@@ -268,31 +263,7 @@ void AffOp(){   //Ces paramètres sont mis à jour à chaque image tant que l'on
 //
 
 void ecranCredits(){
-  background(fondJeu);
-  textAlign(CENTER);
-  textFont(titre,75);
-  fill(creditsTextColor);
-  text("Credits",width>>1,height/8);
-  textFont(texte,30);
-  text("Système de collision : Clément G.",width>>1,height/5);
-  text("Ecran d’accueil : Vincent",width>>1,height/5+40);
-  text("Gestion des menus : Vincent / Clément G.",width>>1,height/5+80);
-  text("Sons : Clément V.",width>>1,height/5+120);
-  text("Gestion Clavier : Vincent",width>>1,height/5+160);
-  text("Organisation du code / Commentaires : Clément V.",width>>1,height/5+200);
-  text("Design et gestion des ennemis : Clément V. ",width>>1,height/5+240);
-  text("Game design : Clément G., V. / Vincent",width>>1,height/5+280);
-  text("Musique : \"Main Theme 8-BIT - ARMS\" - Loeder (Youtube)",width>>1,height/5+320);
-  textFont(texte,20);
-  text("Avec l'autorisation du créateur",width>>1,height/5+350);
-  textFont(texte,30);
-  fill(creditsBackButtonColor);
-  text("Back / Retour",width>>1,height*0.9+10);
-  if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) {   //Bouton Retour
-    fill(255,50);
-  }
-  else noFill();
-  rect(width>>1,height*0.9,200,80);
+
 }
 
 //
@@ -306,21 +277,21 @@ void ecranSortie(){
   textFont(texte,30);
   text("Êtes-vous sûr de vouloir quitter ?",width>>1,height/3);
   
-  if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) { //Case Yes/Oui
+  if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) { //Case Yes
     fill(255,50); }
   else noFill();
   rect(width>>2,height>>1,200,80);
   
-  if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) { //Case Non/No
+  if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) { //Case No
     fill(255,50); }
   else noFill();
   rect(width*0.75,height>>1,200,80);
   
   textFont(texte,30);
   fill(exitYesButtonColor);
-  text("Yes / Oui",width>>2,(height>>1)+10);
+  text("Yes",width>>2,(height>>1)+10);
   fill(exitNoButtonColor);
-  text("No / Non",width*0.75,(height>>1)+10);
+  text("No",width*0.75,(height>>1)+10);
 }
 
 //
@@ -330,11 +301,11 @@ void ecranSortie(){
 void mousePressed(){    //Au moment où le click souris est enfoncé
   if (screen == 0){     //Dans l'écran d'accueil
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height/3)+40 && mouseY>(height/3)-40)       screen=1;   // Click Souris sur Play/Jouer
-    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40)     screen=3;   // Click Souris sur Options
-    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.67)+40 && mouseY>(height*0.67)-40) screen=4;   // Click Souris sur Credits
-    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.84)+40 && mouseY>(height*0.84)-40) screen=5;   // Click Souris sur Fin
+    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40)     screen=4;   // Click Souris sur Options
+    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.67)+40 && mouseY>(height*0.67)-40) screen=5;   // Click Souris sur Credits
+    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.84)+40 && mouseY>(height*0.84)-40) screen=6;   // Click Souris sur Fin
   }
-  if(screen == 2){      //Dans l'écran des options
+  if(screen == 4){      //Dans l'écran des options
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40){      //Click sur le bouton retour -> masquage des barres
       cp5.getController("Taille Enemis").setVisible(false);
       cp5.getController("Taille Vaisseau").setVisible(false);
@@ -349,14 +320,13 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
       eSpeed =(int) cp5.getController("Vitesse Ennemis").getValue();
       spawnRate =(int) cp5.getController("Chance d'apparation d'un ennemi").getValue()/2;  
       
-      aireT = AireTriangle(xVaisseau, yVaisseau,xVaisseau+tVaisseau, (yVaisseau-(tVaisseau>>1)), xVaisseau+tVaisseau, (yVaisseau+(tVaisseau>>1)));  //Mise à jour de l'aire du triangle (au cas où tVaisseau ou tEnnemis ont changé)
       screen=0;   //Retour à l'accueil
     }
   }
-  if (screen == 3){ //Dans l'écran des crédits
+  if (screen == 5){ //Dans l'écran des crédits
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) screen=0;     //Retour à l'accueil lors du click sur Retour
   }
-  if (screen == 4){ //Dans l'écran de sortie
+  if (screen == 6){ //Dans l'écran de sortie
     if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) screen=0;   //Retour à l'accueil lors du click sur No/Non
     if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) exit();         //Fermeture de la fenêtre lors du click sur Yes/Oui
   }
@@ -394,28 +364,13 @@ void keyReleased(){  //Lorsque l'on relâche la touche, la variable correspondan
 }
 
 void ajouterEnnemis(){  //Ajout des ennemis
-  xE.add(0);            //A la coordonée x=0
-  yE.add((int)(Math.random()*(height-tEnnemis))+(tEnnemis/2));  //A la coordonée tEnnemis < y < height-tEnnemis  (pour éviter les astéroïdes à moitié dans l'écran)
 }
 
  void bougerEnnemi(){   //Mouvement des ennemis (on ajoute la vitesse (en pixel) à chaque appel de la fonction, à chaque frame, à chaque ennemi, sur la coordonée x)
-  for(int i=0;i<xE.size();i++){
-    xE.set(i,xE.get(i)+eSpeed);
-  }
 }
 
 void bougerVaisseau(){  //Mouvement du vaisseau
-  if(up && (ys2>0))        yVaisseau-=vSpeed;  //Mouvement vers le haut (on soustrait la vitesse (en pixel) sur y) ssi le vaisseau n'est pas sur le bord haut et que la touche "up" est enfoncée
-  if(down && (ys3<height)) yVaisseau+=vSpeed;  //Mouvement vers le bas (on additionne la vitesse (en pixel) sur y) ssi le vaisseau n'est pas sur le bord bas et que la touche "down" est enfoncée
-  if(left && (xs1>0))      xVaisseau-=vSpeed;  //Mouvement vers la gauche (on soustrait la vitesse (en pixel) sur x) ssi le vaisseau n'est pas sur le bord gauche et que la touche "left" est enfoncée
-  if(right && (xs2<width)) xVaisseau+=vSpeed;  //Mouvement vers la droite (on additionne la vitesse (en pixel) sur x) ssi le vaisseau n'est pas sur le bord droit et que la touche "right" est enfoncée
-    
-  xs1=xVaisseau;        //Calcul des nouvelles coordonnées des sommets du triangle
-  ys1=yVaisseau;        //s1 = sommet gauche, s2 = sommet haut droit, s3 = sommet bas droit
-  xs2=xVaisseau+tVaisseau;
-  ys2=yVaisseau-(tVaisseau>>1);
-  xs3=xVaisseau+tVaisseau;
-  ys3=yVaisseau+(tVaisseau>>1);
+
 }
 
 //
@@ -423,68 +378,6 @@ void bougerVaisseau(){  //Mouvement du vaisseau
 //
 
 void collision(){
-  float x,y,r;
-  r=tEnnemis>>1;
- 
-  for (int i=0 ; i<xE.size();i++) {
-    x=xE.get(i);y=yE.get(i);
-    if(x-tEnnemis>width){
-      xE.remove(i);
-      yE.remove(i);
-    }
-    else if ((y+r>yVaisseau-(tVaisseau>>1) && y-(tEnnemis>>1)<yVaisseau+(tVaisseau>>1)) && (x+(tEnnemis>>1)>xVaisseau && x-(tEnnemis>>1)<xVaisseau+tVaisseau)) { 
-      if (testCollision(x,y,r)) {
-        xE.remove(i);
-        yE.remove(i);
-        Sound();
-        playerScore+=1;
-      }  
-    }    
-  }
-}
-
-boolean testCollision(float xO,float yO ,float r){    //xO, yO = Coordonnées du centre du cercle
-  int xR,yR,xG,yG;                               //Définition des points G (centre de gravité du vaisseau, triangle), et R, intersection entre la longueur OG (centre du triangle - centre du cercle) et le cercle
-  float OGx, OGy, angle, A1, A2, A3, AT;         //Définition des composantes du vecteur OG, de l'angle entre OG et l'axe des abscisses, et des aires A1, A2, A3 et AT sommes des 3 aires (voir plus loin)
-
-  xG = (xs1+xs2+xs3)/3;                          //Définition du centre de gravité (moyenne des coordonnées des sommets)
-  yG = (ys1+ys2+ys3)/3;
-  OGx = xG-xO;                                   //Calcul des composantes du vecteur OG (centre - centre)
-  OGy = yG-yO;
-  angle  = atan2(OGy,OGx);                       //Calcul de l'angle entre OG et l'axe des abscisses (atan2 = arctan)
-                                                 
-  xR= int(xO+cos(angle)*r);                      //Calcul des coordonnées du point R
-  yR =int(yO+sin(angle)*r);
-
-  A1=AireTriangle(xR,yR,xs1,ys1,xs2,ys2);           //Calcul des aires des triangles intermédiaires utilisés pour connaître l'état de la collision
-  A2=AireTriangle(xR,yR,xs2,ys2,xs3,ys3);           //Si on considère le vaisseau comme un triangle ABC, on réalise les aires des triangles RAC, RAB et RBC
-  A3=AireTriangle(xR,yR,xs1,ys1,xs3,ys3);           //Si la somme AT (des trois aires A1, A2 et A3) est égale à l'aire du triangle, le point R est situé dans ou sur un des côtés du triangle, donc
-   
-  AT= A1+A2+A3;                                  
-
-  if (aireT==AT)                                     return true;   //il y a collision, on retourne true
-  else if(collisionCercleSommet(xs1 ,ys1 , xO,yO,r)) return true;   //Autre cas : Si un des sommets du triangle rentre en collision avec le cercle, on retourne true
-  else if(collisionCercleSommet(xs2 ,ys2 , xO,yO,r)) return true;
-  else if(collisionCercleSommet(xs3 ,ys3 , xO,yO,r)) return true; 
-  
-  return false;                                                     //Autrement, on retourne false
-}
-
-boolean collisionCercleSommet(float xS,float yS,float xO,float yO,float r){ //Test de la collision entre le cercle et un des sommets. On considère le sommet S et le cercle de centre O
-  return (xS-xO)*(xS-xO)+(yS-yO)*(yS-yO)<= r*r;                             //Si la longueur OS est inférieure ou égale au rayon du cercle, il y collision, on retourne true
-}
-
-float AireTriangle(int xR, int yR , int xS1 ,int yS1 ,int xS2 , int yS2){      //Calcul de l'aire des triangles (vaisseau, et intermédiaires)
-                                                                            
-  float Aire, RS1x, RS1y, RS2x, RS2y;                                       //RS1 = vecteur définit par les points R et S1 (sommet 1), RS2 = vecteur définit par les points R et S2 (sommet 2)
-  
-  RS1x=xS1-xR;                                                              //Calcul des coordonnées des vecteurs
-  RS1y=yS1-yR;
-  RS2x=xS2-xR;
-  RS2y=yS2-yR;
- 
-  Aire = 0.5*abs((RS2x*RS1y)-(RS2y*RS1x));                                  //Calcul de l'aire du triangle Aire = 1/2*(RS1 ^ RS2) (^ = Vectorielle). abs = valeur absolue
-  return Aire;
 }
    
 void Sound(){                                                               //Fonction appelée lors de chaque colision qui produit un son

@@ -3,14 +3,15 @@ import controlP5.*;           //Librairie permettant l'ajout de barres glissante
 SoundFile explode;            //Déclaration des variables de son (Explosion)
 SoundFile music;              //Musique de fond
 
-int tPersonnage = 45;           //Taille des Objets
-int tEnnemis = 40;
+int tPersonnage = 50;           //Taille des Objets
+int tEnnemis = 45;
 
 int eSpeed = 4;               //Vitesses ennemis et vaisseau
 int pSpeed = 6;
 
-int xPersonnage;                //Coordonnées du vaisseau
-int yPersonnage;
+int xPersonnage;                //Coordonnées du personnage
+int yPersonnage; 
+int xs1,ys1,xs2,ys2,xs3,ys3,xs4,ys4;  //Coordonnées des sommets du vaisseau (en carré) s1 = sommet haut gauche, s2 = sommet haut droit, s3 = sommet bas droit, s4 = sommet bas gauche
 
 ArrayList<Integer> xE = new ArrayList();  //Liste des coordonnées des ennemis
 ArrayList<Integer> yE = new ArrayList();
@@ -27,8 +28,6 @@ PFont titre, texte;           //Déclaration des polices d'écriture
 
 PImage fondAccueil,fondJeu, Ennemis, Personnage;    //Déclaration des images
 
-int playerScore=0;            //Score du joueur
-
 ControlP5 cp5;                //Déclaration du controlleur (permetant la création d'une SlideBar)
 
 float volumeM = 0.50;         //Valeur initiale en % du volume de la musique
@@ -39,6 +38,7 @@ int spawnRate = 5;            //Valeur initiale en % taux d'apparition maximum
 color sliderActiveColor=#FF0000, sliderForegroundColor=#AA0000;         //Couleurs liées au sliderBar
 color gameTitleColor=#FF0000, homeTextColor=#FF0000, gameTextColor=#FF0000, creditsTextColor=#FF0000, exitTextColor=#FF7800;    //Couleurs liées au texte dans les différents menus
 color optionsBackButtonColor=#007FFF, creditsBackButtonColor=#FF0000, exitYesButtonColor=#FF0000, exitNoButtonColor=#FF0000, gameModeBackButtonColor=#007FFF;    //Couleurs liées au texte dans différents "boutons"
+
  
 void setup(){
   size(800,600);
@@ -47,9 +47,8 @@ void setup(){
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
   smooth();                                   //Rend les contours plus lisses
   
-  xPersonnage = width>>1;                                                                                                             //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs
-  yPersonnage = height>>1;                                                                                                            //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
-
+  xPersonnage =  width>>1;      //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs                                                                                                          //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
+  yPersonnage = height>>1;
   
   screen = 0;                                 //Initialisation de l'écran initial à l'écran d'accueil
   
@@ -128,6 +127,22 @@ void draw(){
    case 6: ecranSortie();         break;    //Affichage de l'écran de sortie
   }
 }
+
+void bougerPersonnage(){
+  if(up && (yPersonnage>=0))        yPersonnage-=pSpeed;  //Mouvement vers le haut (on soustrait la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord haut et que la touche "up" est enfoncée
+  if(down && (yPersonnage<height-tPersonnage)) yPersonnage+=pSpeed;  //Mouvement vers le bas (on additionne la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord bas et que la touche "down" est enfoncée
+  if(left && (xPersonnage>=0))      xPersonnage-=pSpeed;  //Mouvement vers la gauche (on soustrait la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord gauche et que la touche "left" est enfoncée
+  if(right && (xPersonnage<width-tPersonnage)) xPersonnage+=pSpeed;  //Mouvement vers la droite (on additionne la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord droit et que la touche "right" est enfoncée
+  
+  xs1=xPersonnage;        //Calcul des nouvelles coordonnées des sommets du triangle
+  ys1=yPersonnage;        //s1 = sommet haut gauche, s2 = sommet haut droit, s3 = sommet bas droit, s4 = sommet bas gauche
+  xs2=xPersonnage+tPersonnage;
+  ys2=yPersonnage;
+  xs3=xPersonnage+tPersonnage;
+  ys3=yPersonnage+tPersonnage;
+  xs4=xPersonnage;
+  ys4=yPersonnage+tPersonnage;
+}  
 
 //
 // Définition de l'écran d'accueil
@@ -215,7 +230,21 @@ void ecranGameMode(){
 //
 
 void ecranJeuSurvie(){
-  background(fondJeu);
+ background(fondJeu);                                 
+  noCursor();
+  bougerPersonnage();
+  affichage();
+ 
+  
+  fill(gameTextColor);
+  stroke(255,0,0);
+  textFont(texte,20);                                  //Ecriture des différents éléments
+  text("Space/Espace : Pause",width-100,20);
+  textFont(texte,25);
+  
+  if(espace){                                          //Si on appuie sur espace, l'écran d'accueil est ouvert (mise en pause du jeu)
+    screen=0;
+  }
 }
 
 
@@ -393,4 +422,8 @@ void keyReleased(){  //Lorsque l'on relâche la touche, la variable correspondan
     case 83: down=          false; break;  //s
     case 68: right=         false; break;  //d
   }  
+}
+
+void affichage(){                                                           //Affichage des personnages
+  image(Personnage,xs1,ys1,tPersonnage,tPersonnage);                
 }

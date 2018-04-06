@@ -1,0 +1,7 @@
+Character control
+Up & Down	Moves the character up or down	3	SLIDER	Axe Y	0	1.0	0.1
+Right & Left	Moves the character right & left	3	SLIDER	Axe X	0	1.0	0.1
+Y Aim axis	Controls the Y aim axis	3	SLIDER	Rotation Y	0	1.0	0.0
+X Aim axis 	Controls the X aim axis	3	SLIDER	Rotation X	0	1.0	0.0
+Shot	Controls the shot	3	SLIDER	Axe Z	0	1.0	0.15
+Pick Up	Picks up an item	1	BUTTON	Bouton 2	0	0.0	0.0

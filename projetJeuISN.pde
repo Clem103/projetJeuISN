@@ -130,7 +130,7 @@ void draw(){
 
 void bougerPersonnage(){
   if(up && (yPersonnage>=0))        yPersonnage-=pSpeed;  //Mouvement vers le haut (on soustrait la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord haut et que la touche "up" est enfoncée
-  if(down && (yPersonnage<height-tPersonnage)) yPersonnage+=pSpeed;  //Mouvement vers le bas (on additionne la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord bas et que la touche "down" est enfoncée
+  if(down && (yPersonnage<height-tPersonnage-25)) yPersonnage+=pSpeed;  //Mouvement vers le bas (on additionne la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord bas et que la touche "down" est enfoncée
   if(left && (xPersonnage>=0))      xPersonnage-=pSpeed;  //Mouvement vers la gauche (on soustrait la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord gauche et que la touche "left" est enfoncée
   if(right && (xPersonnage<width-tPersonnage)) xPersonnage+=pSpeed;  //Mouvement vers la droite (on additionne la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord droit et que la touche "right" est enfoncée
   
@@ -253,7 +253,21 @@ void ecranJeuSurvie(){
 //
 
 void ecranJeu1vs1(){
-  background(fondJeu);
+ background(fondJeu);                                 
+  noCursor();
+  bougerPersonnage();
+  affichage();
+ 
+  
+  fill(gameTextColor);
+  stroke(255,0,0);
+  textFont(texte,20);                                  //Ecriture des différents éléments
+  text("Space/Espace : Pause",width-100,20);
+  textFont(texte,25);
+  
+  if(espace){                                          //Si on appuie sur espace, l'écran d'accueil est ouvert (mise en pause du jeu)
+    screen=0;
+  }
 }
 
 //

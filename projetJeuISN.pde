@@ -1,16 +1,26 @@
-import processing.sound.*;    //Librairie permettant de jouer des sons
-import controlP5.*;           //Librairie permettant l'ajout de barres glissantes
+import processing.sound.*;          //Librairie permettant de jouer des sons
+import controlP5.*;                 //Librairie permettant l'ajout de barres glissantes
+import org.gamecontrolplus.gui.*;   //Librairies permettant de controler des perosnnages à la manette
+import org.gamecontrolplus.*;
+import net.java.games.input.*;
+
 SoundFile explode;            //Déclaration des variables de son (Explosion)
 SoundFile music;              //Musique de fond
 
 int eSpeed = 4;               //Vitesses ennemis et vaisseau
-int pSpeed = 6;
+int pSpeed1 = 6;
+float pSpeedX2=6;
+float pSpeedY2=6;
 
-int tPersonnage=50;
+int tPersonnage1=50;
 
-int xPersonnage;                //Coordonnées du personnage
-int yPersonnage; 
-int xs1,ys1,xs2,ys2,xs3,ys3,xs4,ys4;  //Coordonnées des sommets du vaisseau (en carré) s1 = sommet haut gauche, s2 = sommet haut droit, s3 = sommet bas droit, s4 = sommet bas gauche
+
+int xPersonnage1;                //Coordonnées du personnage
+int yPersonnage1; 
+int xs1,ys1,xs2,ys2,xs3,ys3,xs4,ys4;  //Coordonnées des sommets du personnage1 (en carré) s1 = sommet haut gauche, s2 = sommet haut droit, s3 = sommet bas droit, s4 = sommet bas gauche
+
+int xPersonnage2, yPersonnage2;
+int xS1,yS1,xS2,yS2,xS3,yS3,xS4,yS4;
 
 ArrayList<Integer> xE = new ArrayList();  //Liste des coordonnées des ennemis
 ArrayList<Integer> yE = new ArrayList();
@@ -38,6 +48,11 @@ color sliderActiveColor=#FF0000, sliderForegroundColor=#AA0000;         //Couleu
 color gameTitleColor=#FF0000, homeTextColor=#FF0000, gameTextColor=#FF0000, creditsTextColor=#FF0000, exitTextColor=#FF7800;    //Couleurs liées au texte dans les différents menus
 color optionsBackButtonColor=#007FFF, creditsBackButtonColor=#FF0000, exitYesButtonColor=#FF0000, exitNoButtonColor=#FF0000, gameModeBackButtonColor=#007FFF;    //Couleurs liées au texte dans différents "boutons"
 
+ControlIO control;                  //Definition des variables associées à l'utilisation d'une manette
+Configuration config;
+ControlDevice gpad;
+float posXGamePad, posYGamePad;
+
  
 void setup(){
   size(800,600);
@@ -46,8 +61,8 @@ void setup(){
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
   smooth();                                   //Rend les contours plus lisses
   
-  xPersonnage =  width>>1;      //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs                                                                                                          //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
-  yPersonnage = height>>1;
+  xPersonnage1 =  width>>1;      //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs                                                                                                          //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
+  yPersonnage1 = height>>1;
   
   screen = 0;                                 //Initialisation de l'écran initial à l'écran d'accueil
   
@@ -57,18 +72,18 @@ void setup(){
   music.loop();                                                 //Répétition en boucle de la musique
   explode.amp(0.05*volumeE);                                    //Volume initial d'explosion (Volume max = 0.05, Volume initial = 0.05*0.5)
   
-  fondAccueil = loadImage("fondAccueil.jpg");                   //Chargement des images dans des variables
+  fondAccueil = loadImage("fondAccueil.png");                   //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");
   Personnage = loadImage("Personnage.png");
   
    cp5 = new ControlP5(this);                                                        //Initialisation du controlleur
    cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);  //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
                                                                                         
-   cp5.addSlider("Vitesse Personnage")                                               //Initialisation des différentes barres avec leurs paramètres (Position, taille, valeurMin/Max, valeur initiale, visibilité)
+   cp5.addSlider("Vitesse Personnage1")                                               //Initialisation des différentes barres avec leurs paramètres (Position, taille, valeurMin/Max, valeur initiale, visibilité)
       .setPosition(10,300)
       .setSize(550,40)
       .setRange(1,20)
-      .setValue(pSpeed)
+      .setValue(pSpeed1)
       .setVisible(false);
       
    cp5.addSlider("Volume musique")
@@ -84,7 +99,15 @@ void setup(){
       .setRange(0,100)
       .setValue(50) 
       .setVisible(false);  
+      
+ control = ControlIO.getInstance(this);
+ gpad=control.getMatchedDevice("XboxGamePadConfig");
+ if(gpad== null) System.exit(-1);
+ posXGamePad= gpad.getSlider("Right & Left").getValue();
+ posYGamePad= gpad.getSlider("Up & Down").getValue();
 }
+
+
 
 void draw(){
   switch(screen) {
@@ -97,20 +120,40 @@ void draw(){
 }
 
 void bougerPersonnageClavier(){
-  if(up && (yPersonnage>=0))        yPersonnage-=pSpeed;  //Mouvement vers le haut (on soustrait la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord haut et que la touche "up" est enfoncée
-  if(down && (yPersonnage<height-tPersonnage-30)) yPersonnage+=pSpeed;  //Mouvement vers le bas (on additionne la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord bas et que la touche "down" est enfoncée
-  if(left && (xPersonnage>=20))      xPersonnage-=pSpeed;  //Mouvement vers la gauche (on soustrait la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord gauche et que la touche "left" est enfoncée
-  if(right && (xPersonnage<width-tPersonnage-15)) xPersonnage+=pSpeed;  //Mouvement vers la droite (on additionne la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord droit et que la touche "right" est enfoncée
+  if(up && (yPersonnage1>=0))        yPersonnage1-=pSpeed1;  //Mouvement vers le haut (on soustrait la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord haut et que la touche "up" est enfoncée
+  if(down && (yPersonnage1<height-tPersonnage1-30)) yPersonnage1+=pSpeed1;  //Mouvement vers le bas (on additionne la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord bas et que la touche "down" est enfoncée
+  if(left && (xPersonnage1>=20))      xPersonnage1-=pSpeed1;  //Mouvement vers la gauche (on soustrait la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord gauche et que la touche "left" est enfoncée
+  if(right && (xPersonnage1<width-tPersonnage1-15)) xPersonnage1+=pSpeed1;  //Mouvement vers la droite (on additionne la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord droit et que la touche "right" est enfoncée
   
-  xs1=xPersonnage;        //Calcul des nouvelles coordonnées des coins de l'image
-  ys1=yPersonnage;        //s1 = coin haut gauche, s2 = coin haut droit, s3 = coin bas droit, s4 = coin bas gauche
-  xs2=xPersonnage+tPersonnage;
-  ys2=yPersonnage;
-  xs3=xPersonnage+tPersonnage;
-  ys3=yPersonnage+tPersonnage;
-  xs4=xPersonnage;
-  ys4=yPersonnage+tPersonnage;
+  xs1=xPersonnage1;        //Calcul des nouvelles coordonnées des coins de l'image
+  ys1=yPersonnage1;        //s1 = coin haut gauche, s2 = coin haut droit, s3 = coin bas droit, s4 = coin bas gauche
+  xs2=xPersonnage1+tPersonnage1;
+  ys2=yPersonnage1;
+  xs3=xPersonnage1+tPersonnage1;
+  ys3=yPersonnage1+tPersonnage1;
+  xs4=xPersonnage1;
+  ys4=yPersonnage1+tPersonnage1;
 }  
+
+
+void bougerPersonnageGamepad(){
+  pSpeedX2=pSpeedX2*posXGamePad;
+  pSpeedY2=pSpeedY2*posYGamePad;
+  xPersonnage2+=pSpeedX2;
+  yPersonnage2+=pSpeedY2;
+  
+  
+  
+  xs1=xPersonnage1;        //Calcul des nouvelles coordonnées des coins de l'image
+  ys1=yPersonnage1;        //s1 = coin haut gauche, s2 = coin haut droit, s3 = coin bas droit, s4 = coin bas gauche
+  xs2=xPersonnage1+tPersonnage1;
+  ys2=yPersonnage1;
+  xs3=xPersonnage1+tPersonnage1;
+  ys3=yPersonnage1+tPersonnage1;
+  xs4=xPersonnage1;
+  ys4=yPersonnage1+tPersonnage1;
+}
+
 
 //
 // Définition de l'écran d'accueil
@@ -185,7 +228,7 @@ void ecranJeu1vs1(){
 
 void ecranOptions(){
   background(fondAccueil);
-  cp5.getController("Vitesse Personnage").setVisible(true);            //On affiche les barres définies dans le setup{}
+  cp5.getController("Vitesse Personnage1").setVisible(true);            //On affiche les barres définies dans le setup{}
   cp5.getController("Volume musique").setVisible(true);
   cp5.getController("Volume Tirs").setVisible(true);
   
@@ -273,12 +316,12 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
   
   if(screen == 2){      //Dans l'écran des options
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40){      //Click sur le bouton retour -> masquage des barres
-      cp5.getController("Vitesse Personnage").setVisible(false);
+      cp5.getController("Vitesse Personnage1").setVisible(false);
       cp5.getController("Volume musique").setVisible(false);
       cp5.getController("Volume Tirs").setVisible(false);
       
       
-      pSpeed =(int) cp5.getController("Vitesse Personnage").getValue();                                              //On récupère les valeurs, non mises à jour à chaque image, à la sortie du menu
+      pSpeed1 =(int) cp5.getController("Vitesse Personnage").getValue();                                              //On récupère les valeurs, non mises à jour à chaque image, à la sortie du menu
     
       screen=0;   //Retour à l'accueil
     }
@@ -324,5 +367,6 @@ void keyReleased(){  //Lorsque l'on relâche la touche, la variable correspondan
 }
 
 void affichage(){                                                           //Affichage des personnages
-  image(Personnage,xs1,ys1,tPersonnage,tPersonnage);                
+  image(Personnage,xs1,ys1,tPersonnage1,tPersonnage1);  
+  image(Personnage,xS1,yS2,tPersonnage1,tPersonnage1);
 }

@@ -3,11 +3,10 @@ import controlP5.*;           //Librairie permettant l'ajout de barres glissante
 SoundFile explode;            //Déclaration des variables de son (Explosion)
 SoundFile music;              //Musique de fond
 
-int tPersonnage = 50;           //Taille des Objets
-int tEnnemis = 45;
-
 int eSpeed = 4;               //Vitesses ennemis et vaisseau
 int pSpeed = 6;
+
+int tPersonnage=50;
 
 int xPersonnage;                //Coordonnées du personnage
 int yPersonnage; 
@@ -60,34 +59,12 @@ void setup(){
   
   fondAccueil = loadImage("fondAccueil.jpg");                   //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");
-  Ennemis = loadImage("Ennemis.png");
   Personnage = loadImage("Personnage.png");
   
    cp5 = new ControlP5(this);                                                        //Initialisation du controlleur
    cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);  //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
-   
-    cp5.addSlider("Taille Enemis")                                                   //Initialisation des différentes barres avec leurs paramètres (Position, taille, valeurMin/Max, valeur initiale, visibilité)
-      .setPosition(10,50)
-      .setSize(550,40)
-      .setRange(15,100)
-      .setValue(tEnnemis)
-      .setVisible(false);
-      
-   cp5.addSlider("Taille Personnage")
-      .setPosition(10,170)
-      .setSize(550,40)
-      .setRange(15,100)
-      .setValue(tPersonnage)
-      .setVisible(false);
-      
-   cp5.addSlider("Vitesse Ennemis")
-      .setPosition(10,250)
-      .setSize(550,40)
-      .setRange(1,20)
-      .setValue(eSpeed)
-      .setVisible(false);
-      
-   cp5.addSlider("Vitesse Personnage")
+                                                                                        
+   cp5.addSlider("Vitesse Personnage")                                               //Initialisation des différentes barres avec leurs paramètres (Position, taille, valeurMin/Max, valeur initiale, visibilité)
       .setPosition(10,300)
       .setSize(550,40)
       .setRange(1,20)
@@ -106,14 +83,7 @@ void setup(){
       .setSize(550,40)
       .setRange(0,100)
       .setValue(50) 
-      .setVisible(false);
-      
-   cp5.addSlider("Chance d'apparation d'un ennemi")
-      .setPosition(10,450)
-      .setSize(550,40)
-      .setRange(0,100)
-      .setValue(spawnRate) 
-      .setVisible(false);   
+      .setVisible(false);  
 }
 
 void draw(){
@@ -128,12 +98,12 @@ void draw(){
 
 void bougerPersonnage(){
   if(up && (yPersonnage>=0))        yPersonnage-=pSpeed;  //Mouvement vers le haut (on soustrait la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord haut et que la touche "up" est enfoncée
-  if(down && (yPersonnage<height-tPersonnage-25)) yPersonnage+=pSpeed;  //Mouvement vers le bas (on additionne la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord bas et que la touche "down" est enfoncée
+  if(down && (yPersonnage<height-25)) yPersonnage+=pSpeed;  //Mouvement vers le bas (on additionne la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord bas et que la touche "down" est enfoncée
   if(left && (xPersonnage>=0))      xPersonnage-=pSpeed;  //Mouvement vers la gauche (on soustrait la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord gauche et que la touche "left" est enfoncée
-  if(right && (xPersonnage<width-tPersonnage)) xPersonnage+=pSpeed;  //Mouvement vers la droite (on additionne la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord droit et que la touche "right" est enfoncée
+  if(right && (xPersonnage<width-25)) xPersonnage+=pSpeed;  //Mouvement vers la droite (on additionne la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord droit et que la touche "right" est enfoncée
   
-  xs1=xPersonnage;        //Calcul des nouvelles coordonnées des sommets du triangle
-  ys1=yPersonnage;        //s1 = sommet haut gauche, s2 = sommet haut droit, s3 = sommet bas droit, s4 = sommet bas gauche
+  xs1=xPersonnage;        //Calcul des nouvelles coordonnées des coins de l'image
+  ys1=yPersonnage;        //s1 = coin haut gauche, s2 = coin haut droit, s3 = coin bas droit, s4 = coin bas gauche
   xs2=xPersonnage+tPersonnage;
   ys2=yPersonnage;
   xs3=xPersonnage+tPersonnage;
@@ -215,13 +185,9 @@ void ecranJeu1vs1(){
 
 void ecranOptions(){
   background(fondAccueil);
-  cp5.getController("Taille Enemis").setVisible(true);          //On affiche les barres définies dans le setup{}
-  cp5.getController("Taille Personnage").setVisible(true);
-  cp5.getController("Vitesse Ennemis").setVisible(true);
-  cp5.getController("Vitesse Personnage").setVisible(true);
+  cp5.getController("Vitesse Personnage").setVisible(true);            //On affiche les barres définies dans le setup{}
   cp5.getController("Volume musique").setVisible(true);
   cp5.getController("Volume Tirs").setVisible(true);
-  cp5.getController("Chance d'apparation d'un ennemi").setVisible(true);
   
   AffOp();
  
@@ -240,13 +206,6 @@ void ecranOptions(){
 //
 
 void AffOp(){   //Ces paramètres sont mis à jour à chaque image tant que l'on est sur l'écran des options
-
-  tEnnemis = (int)cp5.getController("Taille Enemis").getValue();    //Récupération de la valeur issue de la SlideBar
-  tPersonnage = (int)cp5.getController("Taille Personnage").getValue();
-  
-  imageMode(CENTER);                                                //Affichage instantané d'un aperçu "en jeu" du paramètre réglé
-  //image(Ennemis,725,70,tEnnemis,tEnnemis);
-  image(Personnage,725,190,tPersonnage,tPersonnage);
   
   volumeM=(cp5.getController("Volume musique").getValue())/100;    //Réglage du volume
   music.amp(0.125*volumeM);
@@ -314,20 +273,13 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
   
   if(screen == 2){      //Dans l'écran des options
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40){      //Click sur le bouton retour -> masquage des barres
-      cp5.getController("Taille Enemis").setVisible(false);
-      cp5.getController("Taille Personnage").setVisible(false);
-      cp5.getController("Vitesse Ennemis").setVisible(false);
       cp5.getController("Vitesse Personnage").setVisible(false);
       cp5.getController("Volume musique").setVisible(false);
       cp5.getController("Volume Tirs").setVisible(false);
-      cp5.getController("Chance d'apparation d'un ennemi").setVisible(false);
       
       
       pSpeed =(int) cp5.getController("Vitesse Personnage").getValue();                                              //On récupère les valeurs, non mises à jour à chaque image, à la sortie du menu
-      eSpeed =(int) cp5.getController("Vitesse Ennemis").getValue();
-      spawnRate =(int) cp5.getController("Chance d'apparation d'un ennemi").getValue()/2;  
-      
-      
+    
       screen=0;   //Retour à l'accueil
     }
   }

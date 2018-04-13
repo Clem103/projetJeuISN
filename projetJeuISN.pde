@@ -119,12 +119,10 @@ void setup(){
 void draw(){
   switch(screen) {
    case 0: ecranAccueil();        break;    //Affichage de l'écran d'accueil
-   case 1: ecranGameMode();       break;    //Affichage de l'écran choix mode de jeu
-   case 2: ecranJeuSurvie();      break;    //Affichage de l'écran de jeu (survie)
-   case 3: ecranJeu1vs1();        break;    //Affichage de l'écran de jeu (1 contre 1)
-   case 4: ecranOptions();        break;    //Affichage de l'écran des options   
-   case 5: ecranCredits();        break;    //Affichage de l'écran des crédits 
-   case 6: ecranSortie();         break;    //Affichage de l'écran de sortie
+   case 1: ecranJeu1vs1();        break;    //Affichage de l'écran de jeu (1 contre 1)
+   case 2: ecranOptions();        break;    //Affichage de l'écran des options   
+   case 3: ecranCredits();        break;    //Affichage de l'écran des crédits 
+   case 4: ecranSortie();         break;    //Affichage de l'écran de sortie
   }
 }
 
@@ -183,70 +181,11 @@ void ecranAccueil(){
   rect(width>>1,height*0.84,200,80);                                                                          //Réalisation de la case
   
   fill(homeTextColor);                                                                                        //Coloration du texte
-  text("Choose game mode",width>>1,(height/3)+10);                                                                //Ecriture du texte aux bons emplacements
+  text("Play",width>>1,(height/3)+10);                                                                //Ecriture du texte aux bons emplacements
   text("Options",width>>1,(height>>1)+10);
   text("Credits",width>>1,height*0.67+10);
   text("Exit",width>>1,height*0.84+10);
 }
-
-//
-//Définition de l'écran choix de mode jeu
-//
-
-void ecranGameMode(){
-  background(fondAccueil);
-  textAlign(CENTER);
-  fill(exitTextColor);
-  textFont(texte,30);
-  text("Choose a game mode",width>>1,height/3);
-  
-  if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) { //Case Yes
-    fill(255,50); }
-  else noFill();
-  rect(width>>2,height>>1,200,80);
-  
-  if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) { //Case No
-    fill(255,50); }
-  else noFill();
-  rect(width*0.75,height>>1,200,80);
-  
-  if(mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.75)+40 && mouseY>(height*0.75)-40){
-    fill(255,50); }
-  else noFill();
-  rect(width>>1,height*0.75,200,80);
-  
-  textFont(texte,30);
-  fill(exitYesButtonColor);
-  text("Survival",width>>2,(height>>1)+10);
-  fill(exitNoButtonColor);
-  text("1 versus 1",width*0.75,(height>>1)+10);
-  fill(gameModeBackButtonColor);
-  text("Back/Retour",width>>1,(height*0.75)+10);
-  
-}
-
-//
-//Définition de l'écran de Jeu survie
-//
-
-void ecranJeuSurvie(){
- background(fondJeu);                                 
-  noCursor();
-  bougerPersonnage();
-  affichage();
- 
-  
-  fill(gameTextColor);
-  stroke(255,0,0);
-  textFont(texte,20);                                  //Ecriture des différents éléments
-  text("Space/Espace : Pause",width>>1,height,20);
-  textFont(texte,25);
-  
-  if(espace){                                          //Si on appuie sur espace, l'écran d'accueil est ouvert (mise en pause du jeu)
-    screen=0;
-  }
-}
-
 
 //
 //Définition de l'écran de Jeu 1 contre 1
@@ -367,19 +306,13 @@ void ecranSortie(){
 void mousePressed(){    //Au moment où le click souris est enfoncé
   if (screen == 0){     //Dans l'écran d'accueil
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height/3)+40 && mouseY>(height/3)-40)       screen=1;   // Click Souris sur Play/Jouer
-    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40)     screen=4;   // Click Souris sur Options
-    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.67)+40 && mouseY>(height*0.67)-40) screen=5;   // Click Souris sur Credits
-    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.84)+40 && mouseY>(height*0.84)-40) screen=6;   // Click Souris sur Fin
+    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40)     screen=2;   // Click Souris sur Options
+    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.67)+40 && mouseY>(height*0.67)-40) screen=3;   // Click Souris sur Credits
+    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.84)+40 && mouseY>(height*0.84)-40) screen=4;   // Click Souris sur Fin
   }
   
-  if(screen==1){
-    if(mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) screen=2;
-    if(mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) screen=3;
-    if(mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.75)+40 && mouseY>(height*0.75)-40) screen=0;
-    
-  }
   
-  if(screen == 4){      //Dans l'écran des options
+  if(screen == 2){      //Dans l'écran des options
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40){      //Click sur le bouton retour -> masquage des barres
       cp5.getController("Taille Enemis").setVisible(false);
       cp5.getController("Taille Personnage").setVisible(false);
@@ -398,10 +331,10 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
       screen=0;   //Retour à l'accueil
     }
   }
-  if (screen == 5){ //Dans l'écran des crédits
+  if (screen == 3){ //Dans l'écran des crédits
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) screen=0;     //Retour à l'accueil lors du click sur Retour
   }
-  if (screen == 6){ //Dans l'écran de sortie
+  if (screen == 4){ //Dans l'écran de sortie
     if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) screen=0;   //Retour à l'accueil lors du click sur No/Non
     if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) exit();         //Fermeture de la fenêtre lors du click sur Yes/Oui
   }

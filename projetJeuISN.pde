@@ -25,7 +25,7 @@ int screen;                   //Ecran à afficher
 
 PFont titre, texte;           //Déclaration des polices d'écriture
 
-PImage fondAccueil,fondJeu, Ennemis, Personnage;    //Déclaration des images
+PImage fondAccueil,fondJeu, fondCredits, Personnage;    //Déclaration des images
 
 ControlP5 cp5;                //Déclaration du controlleur (permetant la création d'une SlideBar)
 
@@ -57,8 +57,9 @@ void setup(){
   music.loop();                                                 //Répétition en boucle de la musique
   explode.amp(0.05*volumeE);                                    //Volume initial d'explosion (Volume max = 0.05, Volume initial = 0.05*0.5)
   
-  fondAccueil = loadImage("fondAccueil.jpg");                   //Chargement des images dans des variables
+  fondAccueil = loadImage("fondAccueil.png");                   //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");
+  fondCredits = loadImage("fondCredits.png");
   Personnage = loadImage("Personnage.png");
   
    cp5 = new ControlP5(this);                                                        //Initialisation du controlleur
@@ -219,7 +220,7 @@ void AffOp(){   //Ces paramètres sont mis à jour à chaque image tant que l'on
 //
 
 void ecranCredits(){
-  background(fondJeu);
+  background(fondCredits);
   textAlign(CENTER);
   textFont(texte,30);  
   text("Back / Retour",width>>1,height*0.9+10);

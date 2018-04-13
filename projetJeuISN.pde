@@ -96,11 +96,11 @@ void draw(){
   }
 }
 
-void bougerPersonnage(){
+void bougerPersonnageClavier(){
   if(up && (yPersonnage>=0))        yPersonnage-=pSpeed;  //Mouvement vers le haut (on soustrait la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord haut et que la touche "up" est enfoncée
-  if(down && (yPersonnage<height-25)) yPersonnage+=pSpeed;  //Mouvement vers le bas (on additionne la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord bas et que la touche "down" est enfoncée
-  if(left && (xPersonnage>=0))      xPersonnage-=pSpeed;  //Mouvement vers la gauche (on soustrait la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord gauche et que la touche "left" est enfoncée
-  if(right && (xPersonnage<width-25)) xPersonnage+=pSpeed;  //Mouvement vers la droite (on additionne la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord droit et que la touche "right" est enfoncée
+  if(down && (yPersonnage<height-tPersonnage-30)) yPersonnage+=pSpeed;  //Mouvement vers le bas (on additionne la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord bas et que la touche "down" est enfoncée
+  if(left && (xPersonnage>=20))      xPersonnage-=pSpeed;  //Mouvement vers la gauche (on soustrait la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord gauche et que la touche "left" est enfoncée
+  if(right && (xPersonnage<width-tPersonnage-15)) xPersonnage+=pSpeed;  //Mouvement vers la droite (on additionne la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord droit et que la touche "right" est enfoncée
   
   xs1=xPersonnage;        //Calcul des nouvelles coordonnées des coins de l'image
   ys1=yPersonnage;        //s1 = coin haut gauche, s2 = coin haut droit, s3 = coin bas droit, s4 = coin bas gauche
@@ -164,7 +164,7 @@ void ecranAccueil(){
 void ecranJeu1vs1(){
  background(fondJeu);                                 
   noCursor();
-  bougerPersonnage();
+  bougerPersonnageClavier();
   affichage();
  
   

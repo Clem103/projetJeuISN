@@ -64,6 +64,10 @@ void setup(){
   xPersonnage1 =  width>>1;      //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs                                                                                                          //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
   yPersonnage1 = height>>1;
   
+  xPersonnage2 = 10;
+  yPersonnage2 = 10;
+  
+  
   screen = 0;                                 //Initialisation de l'écran initial à l'écran d'accueil
   
   explode = new SoundFile(this, "8BitExplosion.mp3");           //Variable qui correspond à un fichier son placé dans /data du dossier projet (son d'explosion)
@@ -103,8 +107,7 @@ void setup(){
  control = ControlIO.getInstance(this);
  gpad=control.getMatchedDevice("XboxGamePadConfig");
  if(gpad== null) System.exit(-1);
- posXGamePad= gpad.getSlider("Right & Left").getValue();
- posYGamePad= gpad.getSlider("Up & Down").getValue();
+
 }
 
 
@@ -125,8 +128,8 @@ void bougerPersonnageClavier(){
   if(left && (xPersonnage1>=20))      xPersonnage1-=pSpeed1;  //Mouvement vers la gauche (on soustrait la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord gauche et que la touche "left" est enfoncée
   if(right && (xPersonnage1<width-tPersonnage1-15)) xPersonnage1+=pSpeed1;  //Mouvement vers la droite (on additionne la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord droit et que la touche "right" est enfoncée
   
-  xs1=xPersonnage1;        //Calcul des nouvelles coordonnées des coins de l'image
-  ys1=yPersonnage1;        //s1 = coin haut gauche, s2 = coin haut droit, s3 = coin bas droit, s4 = coin bas gauche
+  xs1=xPersonnage1;        //Calcul des nouvelles coordonnées des sommets de l'image
+  ys1=yPersonnage1;        //s1 = sommet haut gauche, s2 = sommet haut droit, s3 = sommet bas droit, s4 = sommet bas gauche
   xs2=xPersonnage1+tPersonnage1;
   ys2=yPersonnage1;
   xs3=xPersonnage1+tPersonnage1;
@@ -136,22 +139,26 @@ void bougerPersonnageClavier(){
 }  
 
 
-void bougerPersonnageGamepad(){
+void bougerPersonnageGamepad(float pSpeedX2, float pSpeedY2){
+  
+  posXGamePad = gpad.getSlider("Right & Left").getValue();
+  posYGamePad = gpad.getSlider("Up & Down").getValue();
+  
+  
   pSpeedX2=pSpeedX2*posXGamePad;
   pSpeedY2=pSpeedY2*posYGamePad;
+  
   xPersonnage2+=pSpeedX2;
   yPersonnage2+=pSpeedY2;
-  
-  
-  
-  xs1=xPersonnage1;        //Calcul des nouvelles coordonnées des coins de l'image
-  ys1=yPersonnage1;        //s1 = coin haut gauche, s2 = coin haut droit, s3 = coin bas droit, s4 = coin bas gauche
-  xs2=xPersonnage1+tPersonnage1;
-  ys2=yPersonnage1;
-  xs3=xPersonnage1+tPersonnage1;
-  ys3=yPersonnage1+tPersonnage1;
-  xs4=xPersonnage1;
-  ys4=yPersonnage1+tPersonnage1;
+   
+  xS1=xPersonnage2;        //Calcul des nouvelles coordonnées des sommets de l'image
+  yS1=yPersonnage2;        //s1 = sommet haut gauche, s2 = sommet haut droit, s3 = sommet bas droit, s4 = sommet bas gauche
+  xS2=xPersonnage2+tPersonnage1;
+  yS2=yPersonnage2;
+  xS3=xPersonnage2+tPersonnage1;
+  yS3=yPersonnage2+tPersonnage1;
+  xS4=xPersonnage2;
+  yS4=yPersonnage2+tPersonnage1;
 }
 
 
@@ -194,7 +201,7 @@ void ecranAccueil(){
   rect(width>>1,height*0.84,200,80);                                                                          //Réalisation de la case
   
   fill(homeTextColor);                                                                                        //Coloration du texte
-  text("Play",width>>1,(height/3)+10);                                                                //Ecriture du texte aux bons emplacements
+  text("Play",width>>1,(height/3)+10);                                                                        //Ecriture du texte aux bons emplacements
   text("Options",width>>1,(height>>1)+10);
   text("Credits",width>>1,height*0.67+10);
   text("Exit",width>>1,height*0.84+10);
@@ -207,6 +214,7 @@ void ecranAccueil(){
 void ecranJeu1vs1(){
  background(fondJeu);                                 
   noCursor();
+  bougerPersonnageGamepad(pSpeedX2,pSpeedY2);
   bougerPersonnageClavier();
   affichage();
  

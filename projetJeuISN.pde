@@ -22,6 +22,7 @@ void setup(){
   
   fondAccueil = loadImage("fondAccueil.png");                   //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");
+  fondCredits = loadImage("fondCredits.png");
   Personnage = loadImage("Personnage.png");
   
    cp5 = new ControlP5(this);                                                        //Initialisation du controlleur

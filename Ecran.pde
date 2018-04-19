@@ -107,7 +107,7 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
 //
 
 void ecranCredits(){
-  background(fondJeu);
+  background(fondCredits);
   textAlign(CENTER);
   textFont(texte,30);  
   text("Back / Retour",width>>1,height*0.9+10);

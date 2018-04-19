@@ -36,7 +36,7 @@ int screen;                   //Ecran à afficher
 
 PFont titre, texte;           //Déclaration des polices d'écriture
 
-PImage fondAccueil,fondJeu, Ennemis, Personnage;    //Déclaration des images
+PImage fondAccueil,fondJeu, fondCredits, Personnage;    //Déclaration des images
 
 ControlP5 cp5;                //Déclaration du controlleur (permetant la création d'une SlideBar)
 

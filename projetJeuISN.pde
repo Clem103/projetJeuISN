@@ -1,59 +1,3 @@
-import processing.sound.*;          //Librairie permettant de jouer des sons
-import controlP5.*;                 //Librairie permettant l'ajout de barres glissantes
-import org.gamecontrolplus.gui.*;   //Librairies permettant de controler des perosnnages à la manette
-import org.gamecontrolplus.*;
-import net.java.games.input.*;
-
-SoundFile explode;            //Déclaration des variables de son (Explosion)
-SoundFile music;              //Musique de fond
-
-int eSpeed = 4;               //Vitesses ennemis et vaisseau
-int pSpeed1 = 6;
-float pSpeedX2=6;
-float pSpeedY2=6;
-
-int tPersonnage1=50;
-
-
-int xPersonnage1;                //Coordonnées du personnage
-int yPersonnage1; 
-int xs1,ys1,xs2,ys2,xs3,ys3,xs4,ys4;  //Coordonnées des sommets du personnage1 (en carré) s1 = sommet haut gauche, s2 = sommet haut droit, s3 = sommet bas droit, s4 = sommet bas gauche
-
-int xPersonnage2, yPersonnage2;
-int xS1,yS1,xS2,yS2,xS3,yS3,xS4,yS4;
-
-ArrayList<Integer> xE = new ArrayList();  //Liste des coordonnées des ennemis
-ArrayList<Integer> yE = new ArrayList();
-
-boolean espace =  false;      //initialisation des touches du jeu (false = touche non appuyée)
-boolean up=       false;
-boolean down=     false;
-boolean left=     false;
-boolean right=    false;
-
-int screen;                   //Ecran à afficher
-
-PFont titre, texte;           //Déclaration des polices d'écriture
-
-PImage fondAccueil,fondJeu, Ennemis, Personnage;    //Déclaration des images
-
-ControlP5 cp5;                //Déclaration du controlleur (permetant la création d'une SlideBar)
-
-float volumeM = 0.50;         //Valeur initiale en % du volume de la musique
-float volumeE = 0.50;         //Valeur initiale en % du volume de l'explosion
-
-int spawnRate = 5;            //Valeur initiale en % taux d'apparition maximum
-
-color sliderActiveColor=#FF0000, sliderForegroundColor=#AA0000;         //Couleurs liées au sliderBar
-color gameTitleColor=#FF0000, homeTextColor=#FF0000, gameTextColor=#FF0000, creditsTextColor=#FF0000, exitTextColor=#FF7800;    //Couleurs liées au texte dans les différents menus
-color optionsBackButtonColor=#007FFF, creditsBackButtonColor=#FF0000, exitYesButtonColor=#FF0000, exitNoButtonColor=#FF0000, gameModeBackButtonColor=#007FFF;    //Couleurs liées au texte dans différents "boutons"
-
-ControlIO control;                  //Definition des variables associées à l'utilisation d'une manette
-Configuration config;
-ControlDevice gpad;
-float posXGamePad, posYGamePad;
-
- 
 void setup(){
   size(800,600);
   frameRate(60);
@@ -61,11 +5,11 @@ void setup(){
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
   smooth();                                   //Rend les contours plus lisses
   
-  xPersonnage1 =  width>>1;      //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs                                                                                                          //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
-  yPersonnage1 = height>>1;
+  xPersonnage1 = (int)(width*0.75);      //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs                                                                                                          //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
+  yPersonnage1 = height>>2;
   
-  xPersonnage2 = 10;
-  yPersonnage2 = 10;
+  xPersonnage2 = width>>2;
+  yPersonnage2 = (int)(height*0.75);
   
   
   screen = 0;                                 //Initialisation de l'écran initial à l'écran d'accueil
@@ -83,11 +27,18 @@ void setup(){
    cp5 = new ControlP5(this);                                                        //Initialisation du controlleur
    cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);  //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
                                                                                         
-   cp5.addSlider("Vitesse Personnage1")                                               //Initialisation des différentes barres avec leurs paramètres (Position, taille, valeurMin/Max, valeur initiale, visibilité)
+   cp5.addSlider("Vitesse Personnage 1")                                               //Initialisation des différentes barres avec leurs paramètres (Position, taille, valeurMin/Max, valeur initiale, visibilité)
       .setPosition(10,300)
       .setSize(550,40)
       .setRange(1,20)
       .setValue(pSpeed1)
+      .setVisible(false);
+      
+   cp5.addSlider("Vitesse Personnage 2")                                               
+      .setPosition(10,250)
+      .setSize(550,40)
+      .setRange(1,20)
+      .setValue(pSpeed2)
       .setVisible(false);
       
    cp5.addSlider("Volume musique")
@@ -122,192 +73,6 @@ void draw(){
   }
 }
 
-void bougerPersonnageClavier(){
-  if(up && (yPersonnage1>=0))        yPersonnage1-=pSpeed1;  //Mouvement vers le haut (on soustrait la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord haut et que la touche "up" est enfoncée
-  if(down && (yPersonnage1<height-tPersonnage1-30)) yPersonnage1+=pSpeed1;  //Mouvement vers le bas (on additionne la vitesse (en pixel) sur y) ssi le personnage n'est pas sur le bord bas et que la touche "down" est enfoncée
-  if(left && (xPersonnage1>=20))      xPersonnage1-=pSpeed1;  //Mouvement vers la gauche (on soustrait la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord gauche et que la touche "left" est enfoncée
-  if(right && (xPersonnage1<width-tPersonnage1-15)) xPersonnage1+=pSpeed1;  //Mouvement vers la droite (on additionne la vitesse (en pixel) sur x) ssi le personnage n'est pas sur le bord droit et que la touche "right" est enfoncée
-  
-  xs1=xPersonnage1;        //Calcul des nouvelles coordonnées des sommets de l'image
-  ys1=yPersonnage1;        //s1 = sommet haut gauche, s2 = sommet haut droit, s3 = sommet bas droit, s4 = sommet bas gauche
-  xs2=xPersonnage1+tPersonnage1;
-  ys2=yPersonnage1;
-  xs3=xPersonnage1+tPersonnage1;
-  ys3=yPersonnage1+tPersonnage1;
-  xs4=xPersonnage1;
-  ys4=yPersonnage1+tPersonnage1;
-}  
-
-
-void bougerPersonnageGamepad(float pSpeedX2, float pSpeedY2){
-  
-  posXGamePad = gpad.getSlider("Right & Left").getValue();
-  posYGamePad = gpad.getSlider("Up & Down").getValue();
-  
-  
-  pSpeedX2=pSpeedX2*posXGamePad;
-  pSpeedY2=pSpeedY2*posYGamePad;
-  
-  xPersonnage2+=pSpeedX2;
-  yPersonnage2+=pSpeedY2;
-   
-  xS1=xPersonnage2;        //Calcul des nouvelles coordonnées des sommets de l'image
-  yS1=yPersonnage2;        //s1 = sommet haut gauche, s2 = sommet haut droit, s3 = sommet bas droit, s4 = sommet bas gauche
-  xS2=xPersonnage2+tPersonnage1;
-  yS2=yPersonnage2;
-  xS3=xPersonnage2+tPersonnage1;
-  yS3=yPersonnage2+tPersonnage1;
-  xS4=xPersonnage2;
-  yS4=yPersonnage2+tPersonnage1;
-}
-
-
-//
-// Définition de l'écran d'accueil
-//
-
-void ecranAccueil(){
-  
-  cursor();
-  background(fondAccueil);
-  noFill();
-  stroke(0,0,0);
-  rectMode(CENTER);
-  textFont(titre,75);
-  textAlign(CENTER);
-  fill(gameTitleColor);
-  text("Titre à trouver",width>>1,height/5);
-  textFont(titre,28);
-  noFill();
-  
-  if((mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height/3)+40 && mouseY>(height/3)-40)){       //Souris sur PLAY / JOUER
-    fill(255,50); }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent 
-  else noFill();
-  rect(width>>1,height/3,200,80);                                                                             //Réalisation de la case
-   
-  if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) {     //Souris sur Options
-    fill(255,50); }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent
-  else noFill();
-  rect(width>>1,height>>1,200,80);                                                                            //Réalisation de la case
-  
-  if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.67)+40 && mouseY>(height*0.67)-40) { //Souris sur Copyrights
-    fill(255,50); }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent
-  else noFill();
-  rect(width>>1,height*0.67,200,80);                                                                          //Réalisation de la case
-  
-  if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.84)+40 && mouseY>(height*0.84)-40) { //Souris sur Fin
-    fill(255,50); }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent
-  else noFill();
-  rect(width>>1,height*0.84,200,80);                                                                          //Réalisation de la case
-  
-  fill(homeTextColor);                                                                                        //Coloration du texte
-  text("Play",width>>1,(height/3)+10);                                                                        //Ecriture du texte aux bons emplacements
-  text("Options",width>>1,(height>>1)+10);
-  text("Credits",width>>1,height*0.67+10);
-  text("Exit",width>>1,height*0.84+10);
-}
-
-//
-//Définition de l'écran de Jeu 1 contre 1
-//
-
-void ecranJeu1vs1(){
- background(fondJeu);                                 
-  noCursor();
-  bougerPersonnageGamepad(pSpeedX2,pSpeedY2);
-  bougerPersonnageClavier();
-  affichage();
- 
-  
-  fill(gameTextColor);
-  stroke(255,0,0);
-  textFont(texte,20);                                  //Ecriture des différents éléments
-  text("Space/Espace : Pause",width>>1,height,20);
-  textFont(texte,25);
-  
-  if(espace){                                          //Si on appuie sur espace, l'écran d'accueil est ouvert (mise en pause du jeu)
-    screen=0;
-  }
-}
-
-//
-//Définition de l'écran des options
-//
-
-void ecranOptions(){
-  background(fondAccueil);
-  cp5.getController("Vitesse Personnage1").setVisible(true);            //On affiche les barres définies dans le setup{}
-  cp5.getController("Volume musique").setVisible(true);
-  cp5.getController("Volume Tirs").setVisible(true);
-  
-  AffOp();
- 
-  fill(optionsBackButtonColor);
-  textFont(texte,25);
-  text("Back / Retour",width>>1,height*0.9+10);
-  if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) {  //Bouton retour à l'écran d'accueil (avec un remplissange semi-transparent au mouse-over)
-    fill(255,50);
-  }
-  else noFill();
-  rect(width>>1,height*0.9,200,80);
-}
-
-//
-//Définition de l'actualisaiton dynamique du menu des options
-//
-
-void AffOp(){   //Ces paramètres sont mis à jour à chaque image tant que l'on est sur l'écran des options
-  
-  volumeM=(cp5.getController("Volume musique").getValue())/100;    //Réglage du volume
-  music.amp(0.125*volumeM);
-  
-  volumeE=(cp5.getController("Volume Tirs").getValue())/100;
-  explode.amp(0.05*volumeE);
-}
-
-//
-//Définition de l'écran des crédits
-//
-
-void ecranCredits(){
-  background(fondJeu);
-  textAlign(CENTER);
-  textFont(texte,30);  
-  text("Back / Retour",width>>1,height*0.9+10);
-  if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) {   //Bouton Retour
-    fill(255,50);
-  }
-  else noFill();
-  rect(width>>1,height*0.9,200,80);
-}
-
-//
-//Définition de l'écran de sortie
-//
-
-void ecranSortie(){
-  background(fondAccueil);
-  textAlign(CENTER);
-  fill(exitTextColor);
-  textFont(texte,30);
-  text("Êtes-vous sûr de vouloir quitter ?",width>>1,height/3);
-  
-  if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) { //Case Yes
-    fill(255,50); }
-  else noFill();
-  rect(width>>2,height>>1,200,80);
-  
-  if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) { //Case No
-    fill(255,50); }
-  else noFill();
-  rect(width*0.75,height>>1,200,80);
-  
-  textFont(texte,30);
-  fill(exitYesButtonColor);
-  text("Yes",width>>2,(height>>1)+10);
-  fill(exitNoButtonColor);
-  text("No",width*0.75,(height>>1)+10);
-}
 
 //
 // Utilisation de la souris
@@ -324,12 +89,14 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
   
   if(screen == 2){      //Dans l'écran des options
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40){      //Click sur le bouton retour -> masquage des barres
-      cp5.getController("Vitesse Personnage1").setVisible(false);
+      cp5.getController("Vitesse Personnage 1").setVisible(false);
+      cp5.getController("Vitesse Personnage 2").setVisible(false);
       cp5.getController("Volume musique").setVisible(false);
       cp5.getController("Volume Tirs").setVisible(false);
       
       
-      pSpeed1 =(int) cp5.getController("Vitesse Personnage").getValue();                                              //On récupère les valeurs, non mises à jour à chaque image, à la sortie du menu
+      pSpeed1 =(int) cp5.getController("Vitesse Personnage 1").getValue();                                          //On récupère les valeurs, non mises à jour à chaque image, à la sortie du menu
+      pSpeed2 =(int) cp5.getController("Vitesse Personnage 2").getValue();
     
       screen=0;   //Retour à l'accueil
     }
@@ -375,6 +142,6 @@ void keyReleased(){  //Lorsque l'on relâche la touche, la variable correspondan
 }
 
 void affichage(){                                                           //Affichage des personnages
-  image(Personnage,xs1,ys1,tPersonnage1,tPersonnage1);  
-  image(Personnage,xS1,yS2,tPersonnage1,tPersonnage1);
+  image(Personnage,xs1,ys1,tPersonnage,tPersonnage);  
+  image(Personnage,xS1,yS2,tPersonnage,tPersonnage);
 }

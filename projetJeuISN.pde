@@ -23,7 +23,7 @@ void setup(){
   fondAccueil = loadImage("fondAccueil.png");                   //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");
   fondCredits = loadImage("fondCredits.png");
-  Personnage = loadImage("Personnage.png");
+  Personnage = loadImage("PersonnageWhite.png");
   
    cp5 = new ControlP5(this);                                                        //Initialisation du controlleur
    cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);  //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
@@ -57,8 +57,8 @@ void setup(){
       .setVisible(false);  
       
  control = ControlIO.getInstance(this);
- //gpad=control.getMatchedDevice("XboxGamePadConfig");
- //if(gpad== null) System.exit(-1);
+ gpad=control.getMatchedDevice("XboxGamePadConfig");
+ if(gpad== null) System.exit(-1);
 
 }
 

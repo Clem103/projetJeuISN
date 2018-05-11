@@ -55,3 +55,5 @@ ControlIO control;                  //Definition des variables associées à l'u
 Configuration config;
 ControlDevice gpad;
 float posXGamePad, posYGamePad;
+float rollXGamePad, rollYGamePad;
+float angleAim;

@@ -66,6 +66,7 @@ void ecranJeu1vs1(){
   
   if(espace){                                          //Si on appuie sur espace, l'écran d'accueil est ouvert (mise en pause du jeu)
     screen=0;
+    strokeWeight(1);
   }
 }
 

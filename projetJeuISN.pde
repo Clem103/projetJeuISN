@@ -23,7 +23,7 @@ void setup(){
   fondAccueil = loadImage("fondAccueil.png");                   //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");
   fondCredits = loadImage("fondCredits.png");
-  Personnage = loadImage("Personnage.png");
+  Personnage = loadImage("PersonnageWhite.png");
   
    cp5 = new ControlP5(this);                                                        //Initialisation du controlleur
    cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);  //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
@@ -72,6 +72,7 @@ void draw(){
    case 3: ecranCredits();        break;    //Affichage de l'écran des crédits 
    case 4: ecranSortie();         break;    //Affichage de l'écran de sortie
   }
+  
 }
 
 

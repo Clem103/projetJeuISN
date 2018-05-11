@@ -48,12 +48,14 @@ void ecranAccueil(){
 //
 
 void ecranJeu1vs1(){
-  background(fondJeu);  
+ background(fondJeu);                                 
   noCursor();
-  //bougerPersonnageGamepad(pSpeed2);
+  bougerPersonnageGamepad(pSpeed2);
+  viseeGamepad();
   bougerPersonnageClavier();
   affichage();
-  viseeSouris();
+  
+
  
   
   fill(gameTextColor);
@@ -64,6 +66,7 @@ void ecranJeu1vs1(){
   
   if(espace){                                          //Si on appuie sur espace, l'écran d'accueil est ouvert (mise en pause du jeu)
     screen=0;
+    strokeWeight(1);
   }
 }
 
@@ -76,17 +79,10 @@ void ecranOptions(){
   cp5.getController("Vitesse Personnage 1").setVisible(true);            //On affiche les barres définies dans le setup{}
   cp5.getController("Vitesse Personnage 2").setVisible(true);
   cp5.getController("Volume musique").setVisible(true);
-  cp5.getController("Volume lasers").setVisible(true);
+  cp5.getController("Volume Tirs").setVisible(true);
   
   updateOptions();
-  
-  fill(optionsTextsColor); 
-  text("Résolution",width>>2,height*0.2+10);
-  noFill();
-  rect(width/2.5,height/5,60,40);
-  rect(width/1.635,height/5,250,40);
-  rect(width/1.22,height/5,60,40);
-  rect(width/1.1,height/5,60,40);
+ 
   fill(optionsBackButtonColor);
   textFont(texte,25);
   text("Back / Retour",width>>1,height*0.9+10);
@@ -106,7 +102,7 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
   volumeM=(cp5.getController("Volume musique").getValue())/100;    //Réglage du volume
   music.amp(0.125*volumeM);
   
-  volumeE=(cp5.getController("Volume lasers").getValue())/100;
+  volumeE=(cp5.getController("Volume Tirs").getValue())/100;
   explode.amp(0.05*volumeE);
 }
 

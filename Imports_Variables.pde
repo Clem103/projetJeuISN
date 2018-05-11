@@ -22,7 +22,6 @@ int xs1,ys1,xs2,ys2,xs3,ys3,xs4,ys4;  //Coordonnées des sommets du personnage1 
 
 int xPersonnage2, yPersonnage2;
 int xS1,yS1,xS2,yS2,xS3,yS3,xS4,yS4;
-float xP,yP,xC,yC,angleCurseur,xCP,yCP;
 
 ArrayList<Integer> xE = new ArrayList();  //Liste des coordonnées des ennemis
 ArrayList<Integer> yE = new ArrayList();
@@ -46,12 +45,13 @@ float volumeE = 0.50;         //Valeur initiale en % du volume de l'explosion
 
 int spawnRate = 5;            //Valeur initiale en % taux d'apparition maximum
 
-color sliderActiveColor = #FF0000, sliderForegroundColor=#AA0000;         //Couleurs liées au sliderBar
-color gameTitleColor = #FF0000, homeTextColor=#FF0000, gameTextColor=#FF0000, creditsTextColor=#FF0000, exitTextColor=#FF7800;    //Couleurs liées au texte dans les différents menus
-color optionsBackButtonColor = #007FFF, creditsBackButtonColor=#FF0000, exitYesButtonColor=#FF0000, exitNoButtonColor=#FF0000, gameModeBackButtonColor=#007FFF;    //Couleurs liées au texte dans différents "boutons"
-color optionsTextsColor = #FF0000;
+color sliderActiveColor=#FF0000, sliderForegroundColor=#AA0000;         //Couleurs liées au sliderBar
+color gameTitleColor=#FF0000, homeTextColor=#FF0000, gameTextColor=#FF0000, creditsTextColor=#FF0000, exitTextColor=#FF7800;    //Couleurs liées au texte dans les différents menus
+color optionsBackButtonColor=#007FFF, creditsBackButtonColor=#FF0000, exitYesButtonColor=#FF0000, exitNoButtonColor=#FF0000, gameModeBackButtonColor=#007FFF;    //Couleurs liées au texte dans différents "boutons"
 
 ControlIO control;                  //Definition des variables associées à l'utilisation d'une manette
 Configuration config;
 ControlDevice gpad;
 float posXGamePad, posYGamePad;
+float rollXGamePad, rollYGamePad;
+float angleAim;

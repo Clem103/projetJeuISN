@@ -23,7 +23,7 @@ void setup(){
   fondAccueil = loadImage("fondAccueil.png");                   //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");
   fondCredits = loadImage("fondCredits.png");
-  Personnage = loadImage("PersonnageWhite.png");
+  Personnage = loadImage("Personnage.png");
   
    cp5 = new ControlP5(this);                                                        //Initialisation du controlleur
    cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);  //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
@@ -49,7 +49,7 @@ void setup(){
       .setValue(50)
       .setVisible(false);
       
-   cp5.addSlider("Volume Tirs")
+   cp5.addSlider("Volume lasers")
       .setPosition(10,400)
       .setSize(550,40)
       .setRange(0,100)
@@ -57,8 +57,8 @@ void setup(){
       .setVisible(false);  
       
  control = ControlIO.getInstance(this);
- gpad=control.getMatchedDevice("XboxGamePadConfig");
- if(gpad== null) System.exit(-1);
+ //gpad=control.getMatchedDevice("XboxGamePadConfig");
+ //if(gpad== null) System.exit(-1);
 
 }
 
@@ -72,7 +72,6 @@ void draw(){
    case 3: ecranCredits();        break;    //Affichage de l'écran des crédits 
    case 4: ecranSortie();         break;    //Affichage de l'écran de sortie
   }
-  
 }
 
 
@@ -94,7 +93,7 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
       cp5.getController("Vitesse Personnage 1").setVisible(false);
       cp5.getController("Vitesse Personnage 2").setVisible(false);
       cp5.getController("Volume musique").setVisible(false);
-      cp5.getController("Volume Tirs").setVisible(false);
+      cp5.getController("Volume lasers").setVisible(false);
       
       
       pSpeed1 =(int) cp5.getController("Vitesse Personnage 1").getValue();                                          //On récupère les valeurs, non mises à jour à chaque image, à la sortie du menu

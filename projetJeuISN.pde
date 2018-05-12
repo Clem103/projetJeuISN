@@ -56,9 +56,9 @@ void setup(){
       .setValue(50) 
       .setVisible(false);  
       
- control = ControlIO.getInstance(this);
- gpad=control.getMatchedDevice("XboxGamePadConfig");
- if(gpad== null) System.exit(-1);
+ //control = ControlIO.getInstance(this);
+ //gpad=control.getMatchedDevice("XboxGamePadConfig");
+ //if(gpad== null) System.exit(-1);
 
 }
 
@@ -100,6 +100,11 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
       pSpeed2 =(int) cp5.getController("Vitesse Personnage 2").getValue();
     
       screen=0;   //Retour à l'accueil
+    }
+  if (mouseX<(width/1.1)+60 && mouseX>(width>>1) && mouseY<(height/5)+40 && mouseY>(height/5)){
+    launch("C://Users//PCSI//Downloads//projetJeuISN//projetJeuISN.pde");
+      
+    
     }
   }
   if (screen == 3){ //Dans l'écran des crédits

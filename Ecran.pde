@@ -54,7 +54,7 @@ void ecranJeu1vs1(){
   bougerPersonnageClavier();
   affichage();
   viseeSouris();
-  viseeGamepad();
+  //viseeGamepad();
  
   
   fill(gameTextColor);
@@ -83,12 +83,19 @@ void ecranOptions(){
   updateOptions();
   
   fill(optionsTextsColor); 
-  text("Résolution",width>>2,height*0.2+10);
-  noFill();
+  text("Résolution",width>>2,(height/5)+10);
   rect(width/2.5,height/5,60,40);
+  fill(fleches);
+  triangle((width/2.5)-10,(height/5),(width/2.5)+10,(height/5)-10,(width/2.5)+10,(height/5)+10);
+  fill(optionsTextsColor);
   rect(width/1.635,height/5,250,40);
   rect(width/1.22,height/5,60,40);
+  fill(fleches);
+  triangle((width/1.22)+10,(height/5),(width/1.22)-10,(height/5)-10,(width/1.22)-10,(height/5)+10);
+  fill(optionsTextsColor);
   rect(width/1.1,height/5,60,40);
+  fill(fleches);
+  text("OK",width/1.1,height/4.7);
   fill(optionsBackButtonColor);
   textFont(texte,25);
   text("Back / Retour",width>>1,height*0.9+10);

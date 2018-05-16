@@ -41,6 +41,7 @@ int screen;                   //Ecran à afficher
 PFont titre, texte;           //Déclaration des polices d'écriture
 
 PImage fondAccueil,fondJeu, fondCredits, Personnage;    //Déclaration des images
+PImage playIcon, pauseIcon, optionsIcon, creditsIcon, returnIcon, exitIcon, speedDownIcon, speedUpIcon, volumeDownIcon, volumeUpIcon;  //Déclaration des icones
 
 ControlP5 cp5;                //Déclaration du controlleur (permetant la création d'une SlideBar)
 

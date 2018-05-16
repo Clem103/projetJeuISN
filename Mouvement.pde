@@ -22,8 +22,8 @@ void bougerPersonnageGamepad(int pSpeed2){
   pSpeedY2 = pSpeed2;
   
   
-  posXGamePad = gpad.getSlider("Right & Left").getValue();
-  posYGamePad = gpad.getSlider("Up & Down").getValue();
+  posXGamePad = gpad.getSlider("Right_&_Left").getValue();
+  posYGamePad = gpad.getSlider("Up_&_Down").getValue();
   
   pSpeedX2=pSpeedX2*abs(posXGamePad);
   pSpeedY2=pSpeedY2*abs(posYGamePad);

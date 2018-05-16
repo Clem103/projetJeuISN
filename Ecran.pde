@@ -48,9 +48,8 @@ void ecranAccueil(){
 //
 
 void ecranJeu1vs1(){
-  background(fondJeu);  
-  noCursor();
-  //bougerPersonnageGamepad(pSpeed2);
+  background(fondJeu);
+  bougerPersonnageGamepad(pSpeed2);
   bougerPersonnageClavier();
   affichage();
   viseeSouris();

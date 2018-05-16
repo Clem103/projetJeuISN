@@ -5,7 +5,7 @@
 void ecranAccueil(){
   
   cursor();
-  image(fondAccueil,0,0,width,height);
+  background(fondAccueil);
   noFill();
   stroke(0,0,0);
   rectMode(CENTER);
@@ -48,7 +48,7 @@ void ecranAccueil(){
 //
 
 void ecranJeu1vs1(){
-  image(fondJeu,0,0,width,height);
+  background(fondJeu);
   bougerPersonnageGamepad(pSpeed2);
   bougerPersonnageClavier();
   affichage();
@@ -73,7 +73,7 @@ void ecranJeu1vs1(){
 //
 
 void ecranOptions(){
-  image(fondAccueil,0,0,width,height);
+  background(fondAccueil);
   cp5.getController("Vitesse Personnage 1").setVisible(true);            //On affiche les barres définies dans le setup{}
   cp5.getController("Vitesse Personnage 2").setVisible(true);
   cp5.getController("Volume musique").setVisible(true);
@@ -123,7 +123,7 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
 //
 
 void ecranCredits(){
-  image(fondCredits,0,0,width,height);
+  background(fondCredits);
   textAlign(CENTER);
   textFont(texte,30);  
   text("Back / Retour",width>>1,height*0.9+10);
@@ -139,7 +139,7 @@ void ecranCredits(){
 //
 
 void ecranSortie(){
-  image(fondAccueil,0,0,width,height);
+  background(fondAccueil);
   textAlign(CENTER);
   fill(exitTextColor);
   textFont(texte,30);

@@ -1,5 +1,5 @@
 void setup(){
-  size(1280,720);
+  size(1600,900);
   frameRate(60);
   titre = createFont("PoliceTitre.ttf",1);    //Initialisation de la police utilisée pour les titres
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
@@ -25,6 +25,10 @@ void setup(){
   fondCredits = loadImage("fondCredits.png");
   Personnage = loadImage("PersonnageWhite.png");
   
+  fondAccueil.resize(width,height);
+  fondJeu.resize(width,height);
+  fondCredits.resize(width,height);
+    
    cp5 = new ControlP5(this);                                                        //Initialisation du controlleur
    cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);  //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
                                                                                         

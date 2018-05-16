@@ -25,7 +25,7 @@ void setup(){
   fondCredits = loadImage("fondCredits.png");
   Personnage = loadImage("PersonnageWhite.png");
   
-  fondAccueil.resize(width,height);
+  fondAccueil.resize(width,height);                            //Changement de la taille des images
   fondJeu.resize(width,height);
   fondCredits.resize(width,height);
     

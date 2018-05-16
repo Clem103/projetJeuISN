@@ -24,16 +24,16 @@ void setup(){
   fondJeu = loadImage("fondJeu.png");
   fondCredits = loadImage("fondCredits.png");
   Personnage = loadImage("PersonnageWhite.png");
-  /*PlayIcon = loadImage("");
-  OptionsIcon = loadImage("");
-  CreditsIcon = loadImage("");
-  ReturnIcon = loadImage("");
-  ExitIcon = loadImage("");
-  ExitYesIcon = loadImage("");
-  SpeedDownIcon = loadImage("");
-  SpeedUpIcon = loadImage ("");
-  VolumeDownIcon = loadImage("");
-  VolumeUpIcon = loadImage("");*/
+  PlayIcon = loadImage("PlayIcon.png");
+  PauseIcon = loadImage("PauseIcon.png");
+  OptionsIcon = loadImage("OptionsIcon.png");
+  CreditsIcon = loadImage("CreditsIcon.png");
+  ReturnIcon = loadImage("ReturnIcon.png");
+  ExitIcon = loadImage("ExitIcon.png");
+  SpeedDownIcon = loadImage("SpeedDownIcon.png");
+  SpeedUpIcon = loadImage ("SpeedUpIcon.png");
+  VolumeDownIcon = loadImage("VolumeDownIcon.png");
+  VolumeUpIcon = loadImage("VolumeUpIcon.png");
   
   fondAccueil.resize(width,height);                            //Changement de la taille des images
   fondJeu.resize(width,height);
@@ -44,28 +44,28 @@ void setup(){
    cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);  //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
                                                                                         
    cp5.addSlider("Vitesse Personnage 1")                                               //Initialisation des différentes barres avec leurs paramètres (Position, taille, valeurMin/Max, valeur initiale, visibilité)
-      .setPosition(10,300)
+      .setPosition(width>>2,300)
       .setSize(550,40)
       .setRange(1,20)
       .setValue(pSpeed1)
       .setVisible(false);
       
    cp5.addSlider("Vitesse Personnage 2")                                               
-      .setPosition(10,250)
+      .setPosition(width>>2,350)
       .setSize(550,40)
       .setRange(1,20)
       .setValue(pSpeed2)
       .setVisible(false);
       
    cp5.addSlider("Volume musique")
-      .setPosition(10,350)
+      .setPosition(width>>2,400)
       .setSize(550,40)
       .setRange(0,100)
       .setValue(50)
       .setVisible(false);
       
    cp5.addSlider("Volume lasers")
-      .setPosition(10,400)
+      .setPosition(width>>2,450)
       .setSize(550,40)
       .setRange(0,100)
       .setValue(50) 
@@ -102,7 +102,6 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.84)+40 && mouseY>(height*0.84)-40) screen=4;   // Click Souris sur Fin
   }
   
-  
   if(screen == 2){      //Dans l'écran des options
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40){      //Click sur le bouton retour -> masquage des barres
       cp5.getController("Vitesse Personnage 1").setVisible(false);
@@ -116,15 +115,15 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
     
       screen=0;   //Retour à l'accueil
     }
-  if (mouseX<(width/1.1)+60 && mouseX>(width>>1) && mouseY<(height/5)+40 && mouseY>(height/5)){
-    launch("C://Users//PCSI//Downloads//projetJeuISN//projetJeuISN.pde");
-      
-    
+    if (mouseX<(width/1.1)+60 && mouseX>(width>>1) && mouseY<(height/5)+40 && mouseY>(height/5)){
+      launch("C://Users//PCSI//Downloads//projetJeuISN//projetJeuISN.pde");
     }
   }
+  
   if (screen == 3){ //Dans l'écran des crédits
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) screen=0;     //Retour à l'accueil lors du click sur Retour
   }
+  
   if (screen == 4){ //Dans l'écran de sortie
     if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) screen=0;   //Retour à l'accueil lors du click sur No/Non
     if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) exit();         //Fermeture de la fenêtre lors du click sur Yes/Oui
@@ -162,7 +161,34 @@ void keyReleased(){  //Lorsque l'on relâche la touche, la variable correspondan
   }  
 }
 
-void affichage(){                                                           //Affichage des personnages
+void affichagePersonnages(){                                                           //Affichage des personnages
   image(Personnage,xs1,ys1,tPersonnage,tPersonnage);  
   image(Personnage,xS1,yS2,tPersonnage,tPersonnage);
+}
+void affichageIconesAccueil(){
+  image(PlayIcon,(width>>1)-175,(height/3)-30,60,60);
+  image(OptionsIcon,(width>>1)-175,(height>>1)-30,60,60);
+  image(CreditsIcon,(width>>1)-175,(height*0.67)-30,60,60);
+  image(ExitIcon,(width>>1)-175,(height*0.84)-30,60,60);
+}
+void affichageIconeJeu1vs1(){
+  image(PauseIcon,width/2.45,height-22.5,25,25);
+}
+void affichageIconesOptions(){
+  image(SpeedDownIcon,(width>>2)-50,(height>>1)-10,40,40);
+  image(SpeedDownIcon,(width>>2)-50,(height>>1)-60,40,40);
+  image(SpeedUpIcon,(width/1.3),(height>>1)-10,40,40);
+  image(SpeedUpIcon,(width/1.3),(height>>1)-60,40,40);
+  image(VolumeDownIcon,(width>>2)-50,(height/1.56)-10,40,40);
+  image(VolumeDownIcon,(width>>2)-50,(height/1.56)-60,40,40);
+  image(VolumeUpIcon,(width/1.3)-30,(height/1.56)-10,40,40);
+  image(VolumeUpIcon,(width/1.3)-30,(height/1.56)-60,40,40);
+  image(ReturnIcon,width/2.8,height*0.845,80,80);
+}
+void affichageIconeCredits(){
+  image(ReturnIcon,width/2.8,height*0.845,80,80);
+}
+void affichageIconesExit(){
+  image(ExitIcon,width/3,height/2.25,80,80);
+  image(ReturnIcon,width/1.65,height/2.25,80,80);
 }

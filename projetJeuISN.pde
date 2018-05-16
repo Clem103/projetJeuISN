@@ -102,7 +102,6 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.84)+40 && mouseY>(height*0.84)-40) screen=4;   // Click Souris sur Fin
   }
   
-  
   if(screen == 2){      //Dans l'écran des options
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40){      //Click sur le bouton retour -> masquage des barres
       cp5.getController("Vitesse Personnage 1").setVisible(false);
@@ -116,15 +115,15 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
     
       screen=0;   //Retour à l'accueil
     }
-  if (mouseX<(width/1.1)+60 && mouseX>(width>>1) && mouseY<(height/5)+40 && mouseY>(height/5)){
-    launch("C://Users//PCSI//Downloads//projetJeuISN//projetJeuISN.pde");
-      
-    
+    if (mouseX<(width/1.1)+60 && mouseX>(width>>1) && mouseY<(height/5)+40 && mouseY>(height/5)){
+      launch("C://Users//PCSI//Downloads//projetJeuISN//projetJeuISN.pde");
     }
   }
+  
   if (screen == 3){ //Dans l'écran des crédits
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) screen=0;     //Retour à l'accueil lors du click sur Retour
   }
+  
   if (screen == 4){ //Dans l'écran de sortie
     if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) screen=0;   //Retour à l'accueil lors du click sur No/Non
     if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) exit();         //Fermeture de la fenêtre lors du click sur Yes/Oui
@@ -162,7 +161,19 @@ void keyReleased(){  //Lorsque l'on relâche la touche, la variable correspondan
   }  
 }
 
-void affichage(){                                                           //Affichage des personnages
+void affichagePersonnages(){                                                           //Affichage des personnages
   image(Personnage,xs1,ys1,tPersonnage,tPersonnage);  
   image(Personnage,xS1,yS2,tPersonnage,tPersonnage);
+}
+void affichageIconesAccueil(){
+  image(PlayIcon,(width>>1)-200,(height/3)-50);
+  image(OptionsIcon,(width>>1)-200,(height>>1)-50);
+  image(CreditsIcon,(width>>1)-200,(height*0.67)-50);
+  image(ExitIcon,(width>>1)-200,(height*0.84)-50);
+}
+void affichageIconesOptions(){
+  image(SpeedUpIcon,(width>>1)+100,(height>>1)-50);
+  image(SpeedDownIcon,(width>>1)+100,(height>>1)-50);
+  image(VolumeUpIcon,(width>>1)+100,(height>>1)-50);
+  image(VolumeDownIcon,(width>>1)+100,(height>>1)-50);
 }

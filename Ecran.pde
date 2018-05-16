@@ -51,7 +51,7 @@ void ecranJeu1vs1(){
   background(fondJeu);
   bougerPersonnageGamepad(pSpeed2);
   bougerPersonnageClavier();
-  affichage();
+  affichagePersonnages();
   viseeSouris();
   viseeGamepad();
   checkHitbox();

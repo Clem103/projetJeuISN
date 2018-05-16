@@ -56,9 +56,9 @@ void setup(){
       .setValue(50) 
       .setVisible(false);  
       
- //control = ControlIO.getInstance(this);
- //gpad=control.getMatchedDevice("XboxGamePadConfig");
- //if(gpad== null) System.exit(-1);
+  control = ControlIO.getInstance(this);
+  gpad=control.getMatchedDevice("XboxGamePadConfig");
+  if(gpad== null) System.exit(-1);
 
 }
 

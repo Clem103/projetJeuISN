@@ -53,7 +53,7 @@ void ecranJeu1vs1(){
   bougerPersonnageClavier();
   affichage();
   viseeSouris();
-  //viseeGamepad();
+  viseeGamepad();
  
   
   fill(gameTextColor);

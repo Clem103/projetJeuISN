@@ -14,11 +14,10 @@ void viseeGamepad(){
   rollYGamePad=gpad.getSlider("YAim").getValue();
   
   double angleTemp =Math.acos(rollXGamePad);
-  if(rollYGamePad>=0){
+  if(rollYGamePad>0){
       angleAim = (float)(-(angleTemp));
   }
   else angleAim = (float)(angleTemp);
   strokeWeight(5);
   line(xS2-17,yS2, xS2-17+weaponLength*cos(angleAim),yS2-weaponLength*sin(angleAim));
-  
 }

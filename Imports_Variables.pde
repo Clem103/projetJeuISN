@@ -22,7 +22,10 @@ int xs1,ys1,xs2,ys2,xs3,ys3,xs4,ys4;  //Coordonnées des sommets du personnage1 
 
 int xPersonnage2, yPersonnage2;
 int xS1,yS1,xS2,yS2,xS3,yS3,xS4,yS4;
-float xP,yP,xC,yC,angleCurseur,xCP,yCP;
+float xP,yP,xC,yC,xCP,yCP,angleCurseur;
+
+float distancePerso;
+int xGp1, yGp1, xGp2, yGp2; //Centre de gravité des personnages
 
 ArrayList<Integer> xE = new ArrayList();  //Liste des coordonnées des ennemis
 ArrayList<Integer> yE = new ArrayList();

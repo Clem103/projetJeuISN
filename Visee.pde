@@ -6,7 +6,7 @@ void viseeSouris(){
   xCP=xC-xP;
   yCP=yC-yP;
   angleCurseur = atan2(yCP,xCP);
-  line(xP,yP,xP+80*cos(angleCurseur),yP+80*sin(angleCurseur));
+  line(xP,yP,xP+weaponLength*cos(angleCurseur),yP+weaponLength*sin(angleCurseur));
 }
 
 void viseeGamepad(){
@@ -19,6 +19,6 @@ void viseeGamepad(){
   }
   else angleAim = (float)(angleTemp);
   strokeWeight(5);
-  line(xS2-17,yS2, xS2-17+100*cos(angleAim),yS2-100*sin(angleAim));
+  line(xS2-17,yS2, xS2-17+weaponLength*cos(angleAim),yS2-weaponLength*sin(angleAim));
   
 }

@@ -1,5 +1,5 @@
 void setup(){
-  size(800,600);
+  size(1280,720);
   frameRate(60);
   titre = createFont("PoliceTitre.ttf",1);    //Initialisation de la police utilisée pour les titres
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte

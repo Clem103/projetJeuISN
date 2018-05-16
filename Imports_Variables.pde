@@ -58,3 +58,4 @@ ControlDevice gpad;
 float posXGamePad, posYGamePad;
 float rollXGamePad, rollYGamePad;
 float angleAim;
+int weaponLength = 100;

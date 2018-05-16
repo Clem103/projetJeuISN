@@ -25,11 +25,11 @@ void setup(){
   fondCredits = loadImage("fondCredits.png");
   Personnage = loadImage("PersonnageWhite.png");
   PlayIcon = loadImage("PlayIcon.png");
+  PauseIcon = loadImage("PauseIcon.png");
   OptionsIcon = loadImage("OptionsIcon.png");
   CreditsIcon = loadImage("CreditsIcon.png");
   ReturnIcon = loadImage("ReturnIcon.png");
   ExitIcon = loadImage("ExitIcon.png");
-  ExitYesIcon = loadImage("ExitYesIcon.png");
   SpeedDownIcon = loadImage("SpeedDownIcon.png");
   SpeedUpIcon = loadImage ("SpeedUpIcon.png");
   VolumeDownIcon = loadImage("VolumeDownIcon.png");
@@ -44,28 +44,28 @@ void setup(){
    cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);  //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
                                                                                         
    cp5.addSlider("Vitesse Personnage 1")                                               //Initialisation des différentes barres avec leurs paramètres (Position, taille, valeurMin/Max, valeur initiale, visibilité)
-      .setPosition(10,300)
+      .setPosition(width>>2,300)
       .setSize(550,40)
       .setRange(1,20)
       .setValue(pSpeed1)
       .setVisible(false);
       
    cp5.addSlider("Vitesse Personnage 2")                                               
-      .setPosition(10,250)
+      .setPosition(width>>2,350)
       .setSize(550,40)
       .setRange(1,20)
       .setValue(pSpeed2)
       .setVisible(false);
       
    cp5.addSlider("Volume musique")
-      .setPosition(10,350)
+      .setPosition(width>>2,400)
       .setSize(550,40)
       .setRange(0,100)
       .setValue(50)
       .setVisible(false);
       
    cp5.addSlider("Volume lasers")
-      .setPosition(10,400)
+      .setPosition(width>>2,450)
       .setSize(550,40)
       .setRange(0,100)
       .setValue(50) 
@@ -166,14 +166,29 @@ void affichagePersonnages(){                                                    
   image(Personnage,xS1,yS2,tPersonnage,tPersonnage);
 }
 void affichageIconesAccueil(){
-  image(PlayIcon,(width>>1)-200,(height/3)-50);
-  image(OptionsIcon,(width>>1)-200,(height>>1)-50);
-  image(CreditsIcon,(width>>1)-200,(height*0.67)-50);
-  image(ExitIcon,(width>>1)-200,(height*0.84)-50);
+  image(PlayIcon,(width>>1)-175,(height/3)-30,60,60);
+  image(OptionsIcon,(width>>1)-175,(height>>1)-30,60,60);
+  image(CreditsIcon,(width>>1)-175,(height*0.67)-30,60,60);
+  image(ExitIcon,(width>>1)-175,(height*0.84)-30,60,60);
+}
+void affichageIconeJeu1vs1(){
+  image(PauseIcon,width/2.45,height-22.5,25,25);
 }
 void affichageIconesOptions(){
-  image(SpeedUpIcon,(width>>1)+100,(height>>1)-50);
-  image(SpeedDownIcon,(width>>1)+100,(height>>1)-50);
-  image(VolumeUpIcon,(width>>1)+100,(height>>1)-50);
-  image(VolumeDownIcon,(width>>1)+100,(height>>1)-50);
+  image(SpeedDownIcon,(width>>2)-50,(height>>1)-10,40,40);
+  image(SpeedDownIcon,(width>>2)-50,(height>>1)-60,40,40);
+  image(SpeedUpIcon,(width/1.3),(height>>1)-10,40,40);
+  image(SpeedUpIcon,(width/1.3),(height>>1)-60,40,40);
+  image(VolumeDownIcon,(width>>2)-50,(height/1.56)-10,40,40);
+  image(VolumeDownIcon,(width>>2)-50,(height/1.56)-60,40,40);
+  image(VolumeUpIcon,(width/1.3)-30,(height/1.56)-10,40,40);
+  image(VolumeUpIcon,(width/1.3)-30,(height/1.56)-60,40,40);
+  image(ReturnIcon,width/2.8,height*0.845,80,80);
+}
+void affichageIconeCredits(){
+  image(ReturnIcon,width/2.8,height*0.845,80,80);
+}
+void affichageIconesExit(){
+  image(ExitIcon,width/3,height/2.25,80,80);
+  image(ReturnIcon,width/1.65,height/2.25,80,80);
 }

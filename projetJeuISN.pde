@@ -24,16 +24,16 @@ void setup(){
   fondJeu = loadImage("fondJeu.png");
   fondCredits = loadImage("fondCredits.png");
   Personnage = loadImage("PersonnageWhite.png");
-  /*PlayIcon = loadImage("");
-  OptionsIcon = loadImage("");
-  CreditsIcon = loadImage("");
-  ReturnIcon = loadImage("");
-  ExitIcon = loadImage("");
-  ExitYesIcon = loadImage("");
-  SpeedDownIcon = loadImage("");
-  SpeedUpIcon = loadImage ("");
-  VolumeDownIcon = loadImage("");
-  VolumeUpIcon = loadImage("");*/
+  PlayIcon = loadImage("PlayIcon.png");
+  OptionsIcon = loadImage("OptionsIcon.png");
+  CreditsIcon = loadImage("CreditsIcon.png");
+  ReturnIcon = loadImage("ReturnIcon.png");
+  ExitIcon = loadImage("ExitIcon.png");
+  ExitYesIcon = loadImage("ExitYesIcon.png");
+  SpeedDownIcon = loadImage("SpeedDownIcon.png");
+  SpeedUpIcon = loadImage ("SpeedUpIcon.png");
+  VolumeDownIcon = loadImage("VolumeDownIcon.png");
+  VolumeUpIcon = loadImage("VolumeUpIcon.png");
   
   fondAccueil.resize(width,height);
   fondJeu.resize(width,height);

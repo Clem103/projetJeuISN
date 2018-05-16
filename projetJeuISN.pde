@@ -24,7 +24,7 @@ void setup(){
   fondJeu = loadImage("fondJeu.png");
   fondCredits = loadImage("fondCredits.png");
   Personnage = loadImage("PersonnageWhite.png");
-  PlayIcon = loadImage("");
+  /*PlayIcon = loadImage("");
   OptionsIcon = loadImage("");
   CreditsIcon = loadImage("");
   ReturnIcon = loadImage("");
@@ -33,7 +33,7 @@ void setup(){
   SpeedDownIcon = loadImage("");
   SpeedUpIcon = loadImage ("");
   VolumeDownIcon = loadImage("");
-  VolumeUpIcon = loadImage("");
+  VolumeUpIcon = loadImage("");*/
   
   fondAccueil.resize(width,height);
   fondJeu.resize(width,height);

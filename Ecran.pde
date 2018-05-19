@@ -37,6 +37,8 @@ void ecranAccueil(){
   else noFill();
   rect(width>>1,height*0.84,200,80);                                                                          //Réalisation de la case
   
+  rect(width>>3,height*0.31,200,80);
+  
   fill(homeTextColor);                                                                                        //Coloration du texte
   text("Play",width>>1,(height/3)+10);                                                                        //Ecriture du texte aux bons emplacements
   text("Options",width>>1,(height>>1)+10);
@@ -50,11 +52,11 @@ void ecranAccueil(){
 
 void ecranJeu1vs1(){
   background(fondJeu);
-  //bougerPersonnageGamepad(pSpeed2);
+  bougerPersonnageGamepad(pSpeed2);
   bougerPersonnageClavier();
   affichagePersonnages();
   viseeSouris();
-  //viseeGamepad();
+  viseeGamepad();
   checkHitbox();
   
   debugHitboxPerso();

@@ -1,5 +1,5 @@
 void setup(){
-  size(1280,720);
+  size(800,600);
   frameRate(60);
   titre = createFont("PoliceTitre.ttf",1);    //Initialisation de la police utilisée pour les titres
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
@@ -44,36 +44,38 @@ void setup(){
    cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);  //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
                                                                                         
    cp5.addSlider("Vitesse Personnage 1")                                               //Initialisation des différentes barres avec leurs paramètres (Position, taille, valeurMin/Max, valeur initiale, visibilité)
-      .setPosition(width>>2,300)
-      .setSize(550,40)
+      .setPosition(width>>2,height*0.3333)
+      .setSize((int)(width*0.5),40)
       .setRange(1,20)
       .setValue(pSpeed1)
-      .setVisible(false);
+      .setVisible(false)
+      .setColorLabel(sliderLabelColor);
       
    cp5.addSlider("Vitesse Personnage 2")                                               
-      .setPosition(width>>2,350)
-      .setSize(550,40)
+      .setPosition(width>>2,height*0.4166)
+      .setSize((int)(width*0.5),40)
       .setRange(1,20)
       .setValue(pSpeed2)
       .setVisible(false);
       
    cp5.addSlider("Volume musique")
-      .setPosition(width>>2,400)
-      .setSize(550,40)
+      .setPosition(width>>2,height>>1)
+      .setSize((int)(width*0.5),40)
       .setRange(0,100)
       .setValue(50)
       .setVisible(false);
       
    cp5.addSlider("Volume lasers")
-      .setPosition(width>>2,450)
-      .setSize(550,40)
+      .setPosition(width>>2,height*0.5833)
+      .setSize((int)(width*0.5),40)
       .setRange(0,100)
       .setValue(50) 
       .setVisible(false);  
       
-  //control = ControlIO.getInstance(this);
-  //gpad=control.getMatchedDevice("XboxGamePadConfig");
-  //if(gpad== null) System.exit(-1);
+  control = ControlIO.getInstance(this);
+  if(gpad== null) debugMode=true;
+  else gpad=control.getMatchedDevice("XboxGamePadConfig");
+  
 
 }
 
@@ -175,14 +177,14 @@ void affichageIconeJeu1vs1(){
   image(pauseIcon,width/2.45,height-22.5,25,25);
 }
 void affichageIconesOptions(){
-  image(speedDownIcon,(width>>2)-50,(height>>1)-10,40,40);
-  image(speedDownIcon,(width>>2)-50,(height>>1)-60,40,40);
-  image(speedUpIcon,(width/1.3),(height>>1)-10,40,40);
-  image(speedUpIcon,(width/1.3),(height>>1)-60,40,40);
-  image(volumeDownIcon,(width>>2)-50,(height/1.56)-10,40,40);
-  image(volumeDownIcon,(width>>2)-50,(height/1.56)-60,40,40);
-  image(volumeUpIcon,(width/1.3)-30,(height/1.56)-10,40,40);
-  image(volumeUpIcon,(width/1.3)-30,(height/1.56)-60,40,40);
+  image(speedDownIcon,(width>>2)-50,height*0.3333,40,40);
+  image(speedDownIcon,(width>>2)-50,height*0.4166,40,40);
+  image(speedUpIcon,(width/1.3),height*0.3333,40,40);
+  image(speedUpIcon,(width/1.3),height*0.4166,40,40);
+  image(volumeDownIcon,(width>>2)-40,height>>1,40,40);
+  image(volumeDownIcon,(width>>2)-40,height*0.5833,40,40);
+  image(volumeUpIcon,(width/1.3)-10,height>>1,40,40);
+  image(volumeUpIcon,(width/1.3)-10,height*0.5833,40,40);
   image(returnIcon,width/2.8,height*0.845,80,80);
 }
 void affichageIconeCredits(){

@@ -55,7 +55,7 @@ color gameTitleColor = #FF0000, homeTextColor=#FF0000, gameTextColor=#FF0000, cr
 color optionsBackButtonColor = #007FFF, creditsBackButtonColor=#FF0000, exitYesButtonColor=#FF0000, exitNoButtonColor=#FF0000, gameModeBackButtonColor=#007FFF;    //Couleurs liées au texte dans différents "boutons"
 color optionsTextsColor = #FF0000;
 color fleches = #FFFFFF;
-color sliderLabelColor = #000000;
+color sliderLabelColor = #AA0000;
 
 ControlIO control;                  //Definition des variables associées à l'utilisation d'une manette
 Configuration config;

@@ -49,28 +49,32 @@ void setup(){
       .setRange(1,20)
       .setValue(pSpeed1)
       .setVisible(false)
-      .setColorLabel(sliderLabelColor);
+      .setColorLabel(sliderLabelColor)
+      .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setPaddingX(0);
       
    cp5.addSlider("Vitesse Personnage 2")                                               
       .setPosition(width>>2,height*0.4166)
       .setSize((int)(width*0.5),40)
       .setRange(1,20)
       .setValue(pSpeed2)
-      .setVisible(false);
+      .setVisible(false)
+      .setColorLabel(sliderLabelColor);
       
    cp5.addSlider("Volume musique")
       .setPosition(width>>2,height>>1)
       .setSize((int)(width*0.5),40)
       .setRange(0,100)
       .setValue(50)
-      .setVisible(false);
+      .setVisible(false)
+      .setColorLabel(sliderLabelColor);
       
    cp5.addSlider("Volume lasers")
       .setPosition(width>>2,height*0.5833)
       .setSize((int)(width*0.5),40)
       .setRange(0,100)
       .setValue(50) 
-      .setVisible(false);  
+      .setVisible(false)
+      .setColorLabel(sliderLabelColor);
       
   control = ControlIO.getInstance(this);
   if(gpad== null) debugMode=true;

@@ -3,6 +3,7 @@ import controlP5.*;                 //Librairie permettant l'ajout de barres gli
 import org.gamecontrolplus.gui.*;   //Librairies permettant de controler des perosnnages à la manette
 import org.gamecontrolplus.*;
 import net.java.games.input.*;
+import java.util.List;
 
 SoundFile laser;              //Déclaration des variables de son (Laser)
 SoundFile music;              //Musique de fond
@@ -54,6 +55,12 @@ color sliderLabelColor = #AA0000;
 ControlIO control;                  //Definition des variables associées à l'utilisation d'une manette
 Configuration config;
 ControlDevice gpad;
+int UpDown = 0;
+int RightLeft = 1;
+int YAim = 2;
+int XAim = 3;
+
+
 float posXGamePad, posYGamePad;
 float rollXGamePad, rollYGamePad;
 float angleAim;

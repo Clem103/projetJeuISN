@@ -80,8 +80,15 @@ void setup(){
       .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
       
   control = ControlIO.getInstance(this);
+  gpad=control.getMatchedDevice("GamePadConfig");
   if(gpad== null) debugMode=true;
-  else gpad=control.getMatchedDevice("GamePadConfig");
+  
+  if(!debugMode){
+    gpad.getSlider(UpDown).setTolerance(0.1);
+    gpad.getSlider(RightLeft).setTolerance(0.12);
+    gpad.getSlider(XAim).setTolerance(0.05);
+    gpad.getSlider(YAim).setTolerance(0.15);
+  }
 }
 
 

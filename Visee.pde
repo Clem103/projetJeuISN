@@ -12,8 +12,8 @@ void viseeSouris(){
 }
 
 void viseeGamepad(){
-  rollXGamePad=gpad.getSlider("XAim").getValue();
-  rollYGamePad=gpad.getSlider("YAim").getValue();
+  rollXGamePad=gpad.getSlider(XAim).getValue();
+  rollYGamePad=gpad.getSlider(YAim).getValue();
   
   double angleTemp =Math.acos(rollXGamePad);
   if(rollYGamePad>0){

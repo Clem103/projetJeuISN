@@ -11,6 +11,7 @@ void setup(){
   xPersonnage2 = width>>2;
   yPersonnage2 = (int)(height*0.75);
   
+  
   screen = 0;                                 //Initialisation de l'écran initial à l'écran d'accueil
   
   explode = new SoundFile(this, "8BitExplosion.mp3");           //Variable qui correspond à un fichier son placé dans /data du dossier projet (son d'explosion)
@@ -23,18 +24,18 @@ void setup(){
   fondJeu = loadImage("fondJeu.png");
   fondCredits = loadImage("fondCredits.png");
   Personnage = loadImage("PersonnageWhite.png");
-  PlayIcon = loadImage("PlayIcon.png");
-  PauseIcon = loadImage("PauseIcon.png");
-  OptionsIcon = loadImage("OptionsIcon.png");
-  CreditsIcon = loadImage("CreditsIcon.png");
-  ReturnIcon = loadImage("ReturnIcon.png");
-  ExitIcon = loadImage("ExitIcon.png");
-  SpeedDownIcon = loadImage("SpeedDownIcon.png");
-  SpeedUpIcon = loadImage ("SpeedUpIcon.png");
-  VolumeDownIcon = loadImage("VolumeDownIcon.png");
-  VolumeUpIcon = loadImage("VolumeUpIcon.png");
+  playIcon = loadImage("PlayIcon.png");
+  pauseIcon = loadImage("PauseIcon.png");
+  optionsIcon = loadImage("OptionsIcon.png");
+  creditsIcon = loadImage("CreditsIcon.png");
+  returnIcon = loadImage("ReturnIcon.png");
+  exitIcon = loadImage("ExitIcon.png");
+  speedDownIcon = loadImage("SpeedDownIcon.png");
+  speedUpIcon = loadImage ("SpeedUpIcon.png");
+  volumeDownIcon = loadImage("VolumeDownIcon.png");
+  volumeUpIcon = loadImage("VolumeUpIcon.png");
   
-  fondAccueil.resize(width,height);
+  fondAccueil.resize(width,height);                            //Changement de la taille des images
   fondJeu.resize(width,height);
   fondCredits.resize(width,height);
   
@@ -70,9 +71,9 @@ void setup(){
       .setValue(50) 
       .setVisible(false);  
       
-  control = ControlIO.getInstance(this);
-  gpad=control.getMatchedDevice("XboxGamePadConfig");
-  if(gpad== null) System.exit(-1);
+  //control = ControlIO.getInstance(this);
+  //gpad=control.getMatchedDevice("XboxGamePadConfig");
+  //if(gpad== null) System.exit(-1);
 
 }
 
@@ -165,29 +166,29 @@ void affichagePersonnages(){                                                    
   image(Personnage,xS1,yS2,tPersonnage,tPersonnage);
 }
 void affichageIconesAccueil(){
-  image(PlayIcon,(width>>1)-175,(height/3)-30,60,60);
-  image(OptionsIcon,(width>>1)-175,(height>>1)-30,60,60);
-  image(CreditsIcon,(width>>1)-175,(height*0.67)-30,60,60);
-  image(ExitIcon,(width>>1)-175,(height*0.84)-30,60,60);
+  image(playIcon,(width>>1)-175,(height/3)-30,60,60);
+  image(optionsIcon,(width>>1)-175,(height>>1)-30,60,60);
+  image(creditsIcon,(width>>1)-175,(height*0.67)-30,60,60);
+  image(exitIcon,(width>>1)-175,(height*0.84)-30,60,60);
 }
 void affichageIconeJeu1vs1(){
-  image(PauseIcon,width/2.45,height-22.5,25,25);
+  image(pauseIcon,width/2.45,height-22.5,25,25);
 }
 void affichageIconesOptions(){
-  image(SpeedDownIcon,(width>>2)-50,(height>>1)-10,40,40);
-  image(SpeedDownIcon,(width>>2)-50,(height>>1)-60,40,40);
-  image(SpeedUpIcon,(width/1.3),(height>>1)-10,40,40);
-  image(SpeedUpIcon,(width/1.3),(height>>1)-60,40,40);
-  image(VolumeDownIcon,(width>>2)-50,(height/1.56)-10,40,40);
-  image(VolumeDownIcon,(width>>2)-50,(height/1.56)-60,40,40);
-  image(VolumeUpIcon,(width/1.3)-30,(height/1.56)-10,40,40);
-  image(VolumeUpIcon,(width/1.3)-30,(height/1.56)-60,40,40);
-  image(ReturnIcon,width/2.8,height*0.845,80,80);
+  image(speedDownIcon,(width>>2)-50,(height>>1)-10,40,40);
+  image(speedDownIcon,(width>>2)-50,(height>>1)-60,40,40);
+  image(speedUpIcon,(width/1.3),(height>>1)-10,40,40);
+  image(speedUpIcon,(width/1.3),(height>>1)-60,40,40);
+  image(volumeDownIcon,(width>>2)-50,(height/1.56)-10,40,40);
+  image(volumeDownIcon,(width>>2)-50,(height/1.56)-60,40,40);
+  image(volumeUpIcon,(width/1.3)-30,(height/1.56)-10,40,40);
+  image(volumeUpIcon,(width/1.3)-30,(height/1.56)-60,40,40);
+  image(returnIcon,width/2.8,height*0.845,80,80);
 }
 void affichageIconeCredits(){
-  image(ReturnIcon,width/2.8,height*0.845,80,80);
+  image(returnIcon,width/2.8,height*0.845,80,80);
 }
 void affichageIconesExit(){
-  image(ExitIcon,width/3,height/2.25,80,80);
-  image(ReturnIcon,width/1.65,height/2.25,80,80);
+  image(exitIcon,width/3,height/2.25,80,80);
+  image(returnIcon,width/1.65,height/2.25,80,80);
 }

@@ -86,10 +86,10 @@ void setup(){
   }
   
   if(gpad== null){                                                        //Si aucun périphérique branché n'est compatible, on entre en mode débug
-    debugMode=true;
+    noGamepadMode=true;
   }
   
-  if(!debugMode){
+  if(!noGamepadMode){
     gpad.getSlider(UpDown).setTolerance(0.1);
     gpad.getSlider(RightLeft).setTolerance(0.12);
     gpad.getSlider(XAim).setTolerance(0.05);
@@ -138,6 +138,14 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
     if (mouseX<(width/1.1)+60 && mouseX>(width>>1) && mouseY<(height/5)+40 && mouseY>(height/5)){
       launch("C://Users//PCSI//Downloads//projetJeuISN//projetJeuISN.pde");
     }
+      
+    if((mouseX<(width>>3)+100 && mouseX>(width>>3)-100 && mouseY<(height*0.85)+40 && mouseY>(height*0.85)-40) && (debugMode==true)){ 
+      debugMode = false;
+    }
+      
+    else if((mouseX<(width>>3)+100 && mouseX>(width>>3)-100 && mouseY<(height*0.85)+40 && mouseY>(height*0.85)-40) && (debugMode==false)) debugMode = true;
+    
+
   }
   
   if (screen == 3){ //Dans l'écran des crédits

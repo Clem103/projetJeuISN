@@ -64,6 +64,8 @@ int XAim = 3;
 float posXGamePad, posYGamePad;
 float rollXGamePad, rollYGamePad;
 float angleAim;
+float xEndOfWeapon1, yEndOfWeapon1, xEndOfWeapon2, yEndOfWeapon2;
 int weaponLength = 100;
 
 boolean debugMode;
+boolean noGamepadMode;

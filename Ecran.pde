@@ -18,7 +18,8 @@ void ecranAccueil(){
   
   affichageIconesAccueil();
   
-  if(debugMode) text("No suitable device found, debug mode activated",width>>1,28);
+  if(debugMode) text("Debug mode activated",width>>1,28);
+  else if(noGamepadMode) text("No suitable device found, debug mode activated",width>>1,28);
   
   if((mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height/3)+40 && mouseY>(height/3)-40)){       //Souris sur PLAY / JOUER
     fill(255,50); }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent 
@@ -40,8 +41,6 @@ void ecranAccueil(){
   else noFill();
   rect(width>>1,height*0.84,200,80);                                                                          //Réalisation de la case
   
-  rect(width>>3,height*0.31,200,80);                                                                          //Case "debug"
-  
   fill(homeTextColor);                                                                                        //Coloration du texte
   text("Play",width>>1,(height/3)+10);                                                                        //Ecriture du texte aux bons emplacements
   text("Options",width>>1,(height>>1)+10);
@@ -55,10 +54,10 @@ void ecranAccueil(){
 
 void ecranJeu1vs1(){
   background(fondJeu);
-  if(!debugMode) bougerPersonnageGamepad(pSpeed2);
+  if(!noGamepadMode) bougerPersonnageGamepad(pSpeed2);
   bougerPersonnageClavier();
   viseeSouris();
-  if(!debugMode)viseeGamepad();
+  if(!noGamepadMode)viseeGamepad();
   affichagePersonnages();
   checkHitbox();
   if(debugMode)debugHitboxPerso();
@@ -106,11 +105,25 @@ void ecranOptions(){
   fill(optionsBackButtonColor);
   textFont(texte,25);
   text("Back / Retour",width>>1,height*0.9+10);
-  if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) {  //Bouton retour à l'écran d'accueil (avec un remplissange semi-transparent au mouse-over)
+  if(debugMode){
+    fill(#58FF00);
+    text("Debug ON",width>>3,height*0.85+10);
+  }
+  else{
+    fill(#FF001E);
+    text("Debug OFF",width>>3,height*0.85+10);
+  }
+  if(mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) {  //Bouton retour à l'écran d'accueil (avec un remplissange semi-transparent au mouse-over)
     fill(255,50);
   }
   else noFill();
   rect(width>>1,height*0.9,200,80);
+  
+  if(mouseX<(width>>3)+100 && mouseX>(width>>3)-100 && mouseY<(height*0.85)+40 && mouseY>(height*0.85)-40) {  
+    fill(255,50);
+  }
+  else noFill();
+  rect(width>>3,height*0.85,200,80);                                                                          //Case "debug"
 }
 
 //

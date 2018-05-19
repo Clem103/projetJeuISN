@@ -49,8 +49,8 @@ void setup(){
       .setRange(1,20)
       .setValue(pSpeed1)
       .setVisible(false)
-      .setColorLabel(sliderLabelColor)
-      .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER).setPaddingX(0);
+      .setColorLabel(#FFFFFF)
+      .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
       
    cp5.addSlider("Vitesse Personnage 2")                                               
       .setPosition(width>>2,height*0.4166)
@@ -58,7 +58,8 @@ void setup(){
       .setRange(1,20)
       .setValue(pSpeed2)
       .setVisible(false)
-      .setColorLabel(sliderLabelColor);
+      .setColorLabel(#FFFFFF)
+      .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
       
    cp5.addSlider("Volume musique")
       .setPosition(width>>2,height>>1)
@@ -66,7 +67,8 @@ void setup(){
       .setRange(0,100)
       .setValue(50)
       .setVisible(false)
-      .setColorLabel(sliderLabelColor);
+      .setColorLabel(#FFFFFF)
+      .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
       
    cp5.addSlider("Volume lasers")
       .setPosition(width>>2,height*0.5833)
@@ -74,7 +76,8 @@ void setup(){
       .setRange(0,100)
       .setValue(50) 
       .setVisible(false)
-      .setColorLabel(sliderLabelColor);
+      .setColorLabel(#FFFFFF)
+      .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
       
   control = ControlIO.getInstance(this);
   if(gpad== null) debugMode=true;

@@ -15,6 +15,7 @@ void ecranAccueil(){
   text("Titre à trouver",width>>1,height/5);
   textFont(titre,28);
   noFill();
+  affichageIconesAccueil();
   
   if((mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height/3)+40 && mouseY>(height/3)-40)){       //Souris sur PLAY / JOUER
     fill(255,50); }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent 
@@ -57,7 +58,7 @@ void ecranJeu1vs1(){
   checkHitbox();
   
   debugHitboxPerso();
- 
+  affichageIconeJeu1vs1();
   
   fill(gameTextColor);
   stroke(255,0,0);
@@ -82,7 +83,7 @@ void ecranOptions(){
   cp5.getController("Volume lasers").setVisible(true);
   
   updateOptions();
-  
+  affichageIconesOptions();
   fill(optionsTextsColor); 
   text("Résolution",width>>2,(height/5)+10);
   rect(width/2.5,height/5,60,40);
@@ -129,6 +130,7 @@ void ecranCredits(){
   textAlign(CENTER);
   textFont(texte,30);  
   text("Back / Retour",width>>1,height*0.9+10);
+  affichageIconeCredits();
   if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) {   //Bouton Retour
     fill(255,50);
   }
@@ -146,6 +148,7 @@ void ecranSortie(){
   fill(exitTextColor);
   textFont(texte,30);
   text("Êtes-vous sûr de vouloir quitter ?",width>>1,height/3);
+  affichageIconesExit();
   
   if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) { //Case Yes
     fill(255,50); }

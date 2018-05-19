@@ -1,5 +1,5 @@
 void setup(){
-  size(1920,1080);
+  size(1280,720);
   frameRate(60);
   titre = createFont("PoliceTitre.ttf",1);    //Initialisation de la police utilisée pour les titres
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
@@ -81,9 +81,7 @@ void setup(){
       
   control = ControlIO.getInstance(this);
   if(gpad== null) debugMode=true;
-  else gpad=control.getMatchedDevice("XboxGamePadConfig");
-  
-
+  else gpad=control.getMatchedDevice("GamePadConfig");
 }
 
 
@@ -181,7 +179,7 @@ void affichageIconesAccueil(){
   image(exitIcon,(width>>1)-175,(height*0.84)-30,60,60);
 }
 void affichageIconeJeu1vs1(){
-  image(pauseIcon,width/2.45,height-22.5,25,25);
+  image(pauseIcon,(width>>1)-125,height-25,25,25);
 }
 void affichageIconesOptions(){
   image(speedDownIcon,(width>>2)-50,height*0.3333,40,40);

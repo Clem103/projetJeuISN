@@ -65,7 +65,7 @@ void ecranJeu1vs1(){
   fill(gameTextColor);
   stroke(255,0,0);
   textFont(texte,20);                                  //Ecriture des différents éléments
-  text("Space/Espace : Pause",width>>1,height,20);
+  text("Space/Espace : Pause",width>>1,height-5,20);
   textFont(texte,25);
   
   if(espace){                                          //Si on appuie sur espace, l'écran d'accueil est ouvert (mise en pause du jeu)

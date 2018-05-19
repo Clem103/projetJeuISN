@@ -14,13 +14,13 @@ void setup(){
   
   screen = 0;                                 //Initialisation de l'écran initial à l'écran d'accueil
   
-  laser = new SoundFile(this, "8BitExplosion.mp3");           //Variable qui correspond à un fichier son placé dans /data du dossier projet (son d'explosion)
-  music = new SoundFile(this , "BackgroundMusic.mp3");          //Musique de fond
-  music.amp((0.125*volumeM));                                   //Volume initial de la musique de fond (Volume max = 0.125, Volume initial = 0.125*0.5)
-  music.loop();                                                 //Répétition en boucle de la musique
-  laser.amp(0.05*volumeL);                                    //Volume initial d'explosion (Volume max = 0.05, Volume initial = 0.05*0.5)
+  laser = new SoundFile(this, "8BitExplosion.mp3");           //Variable qui correspond à un fichier son placé dans /data du dossier projet (son du laser)
+  music = new SoundFile(this , "BackgroundMusic.mp3");        //Musique de fond
+  music.amp((0.125*volumeM));                                 //Volume initial de la musique de fond (Volume max = 0.125, Volume initial = 0.125*0.5)
+  music.loop();                                               //Répétition en boucle de la musique
+  laser.amp(0.05*volumeL);                                    //Volume initial du laser (Volume max = 0.05, Volume initial = 0.05*0.5)
   
-  fondAccueil = loadImage("fondAccueil.png");                   //Chargement des images dans des variables
+  fondAccueil = loadImage("fondAccueil.png");                 //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");
   fondCredits = loadImage("fondCredits.png");
   Personnage = loadImage("PersonnageWhite.png");
@@ -40,7 +40,7 @@ void setup(){
   fondCredits.resize(width,height);
   
   
-   cp5 = new ControlP5(this);                                                        //Initialisation du controlleur
+   cp5 = new ControlP5(this);                                                        //Initialisation du controleur de paramètres
    cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);  //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
                                                                                         
    cp5.addSlider("Vitesse Personnage 1")                                               //Initialisation des différentes barres avec leurs paramètres (Position, taille, valeurMin/Max, valeur initiale, visibilité)
@@ -80,8 +80,14 @@ void setup(){
       .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
       
   control = ControlIO.getInstance(this);
-  gpad=control.getMatchedDevice("GamePadConfig");
-  if(gpad== null) debugMode=true;
+  List<ControlDevice> inputs = control.getDevices();                      //On récupère les périphériques disponible dans une liste
+  for(int i=0;i<inputs.size();i++){                                       //Pour chaque élément de la liste
+     if(inputs.get(i).getTypeName()=="Gamepad") gpad=control.getDevice(i);  //Si le périphérique est du type Gamepad, alors on l'utilise comme manette
+  }
+  
+  if(gpad== null){                                                        //Si aucun périphérique branché n'est compatible, on entre en mode débug
+    debugMode=true;
+  }
   
   if(!debugMode){
     gpad.getSlider(UpDown).setTolerance(0.1);

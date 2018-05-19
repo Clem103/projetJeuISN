@@ -15,7 +15,10 @@ void ecranAccueil(){
   text("Titre à trouver",width>>1,height/5);
   textFont(titre,28);
   noFill();
+  
   affichageIconesAccueil();
+  
+  if(debugMode) text("No suitable device found, debug mode activated",width>>1,28);
   
   if((mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height/3)+40 && mouseY>(height/3)-40)){       //Souris sur PLAY / JOUER
     fill(255,50); }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent 
@@ -52,14 +55,13 @@ void ecranAccueil(){
 
 void ecranJeu1vs1(){
   background(fondJeu);
-  bougerPersonnageGamepad(pSpeed2);
+  if(!debugMode) bougerPersonnageGamepad(pSpeed2);
   bougerPersonnageClavier();
-  affichagePersonnages();
   viseeSouris();
-  viseeGamepad();
+  if(!debugMode)viseeGamepad();
+  affichagePersonnages();
   checkHitbox();
-  
-  debugHitboxPerso();
+  if(debugMode)debugHitboxPerso();
   affichageIconeJeu1vs1();
   
   fill(gameTextColor);

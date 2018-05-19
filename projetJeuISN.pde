@@ -12,6 +12,7 @@ void setup(){
   yPersonnage2 = (int)(height*0.75);
   
   
+  
   screen = 0;                                 //Initialisation de l'écran initial à l'écran d'accueil
   
   explode = new SoundFile(this, "8BitExplosion.mp3");           //Variable qui correspond à un fichier son placé dans /data du dossier projet (son d'explosion)

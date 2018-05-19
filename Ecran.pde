@@ -49,11 +49,11 @@ void ecranAccueil(){
 
 void ecranJeu1vs1(){
   background(fondJeu);
-  bougerPersonnageGamepad(pSpeed2);
+  //bougerPersonnageGamepad(pSpeed2);
   bougerPersonnageClavier();
   affichagePersonnages();
   viseeSouris();
-  viseeGamepad();
+  //viseeGamepad();
   checkHitbox();
   
   debugHitboxPerso();

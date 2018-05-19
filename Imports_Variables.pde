@@ -4,11 +4,10 @@ import org.gamecontrolplus.gui.*;   //Librairies permettant de controler des per
 import org.gamecontrolplus.*;
 import net.java.games.input.*;
 
-SoundFile explode;            //Déclaration des variables de son (Explosion)
+SoundFile laser;              //Déclaration des variables de son (Laser)
 SoundFile music;              //Musique de fond
-
-int eSpeed = 4;               //Vitesses ennemis et vaisseau
-int pSpeed1 = 6;
+            
+int pSpeed1 = 6;              //Vitesses des personnages
 int pSpeed2 = 6;
 float pSpeedX2;
 float pSpeedY2;
@@ -16,7 +15,7 @@ float pSpeedY2;
 int tPersonnage=50;
 
 
-int xPersonnage1;                //Coordonnées du personnage
+int xPersonnage1;                //Coordonnées du personnage1
 int yPersonnage1; 
 int xs1,ys1,xs2,ys2,xs3,ys3,xs4,ys4;  //Coordonnées des sommets du personnage1 (en carré) s1 = sommet haut gauche, s2 = sommet haut droit, s3 = sommet bas droit, s4 = sommet bas gauche
 
@@ -26,9 +25,6 @@ float xP,yP,xC,yC,xCP,yCP,angleCurseur;
 
 float distancePerso;
 int xGp1, yGp1, xGp2, yGp2; //Centre de gravité des personnages
-
-ArrayList<Integer> xE = new ArrayList();  //Liste des coordonnées des ennemis
-ArrayList<Integer> yE = new ArrayList();
 
 boolean espace =  false;      //initialisation des touches du jeu (false = touche non appuyée)
 boolean up=       false;
@@ -46,9 +42,7 @@ PImage playIcon, pauseIcon, optionsIcon, creditsIcon, returnIcon, exitIcon, spee
 ControlP5 cp5;                //Déclaration du controlleur (permetant la création d'une SlideBar)
 
 float volumeM = 0.50;         //Valeur initiale en % du volume de la musique
-float volumeE = 0.50;         //Valeur initiale en % du volume de l'explosion
-
-int spawnRate = 5;            //Valeur initiale en % taux d'apparition maximum
+float volumeL = 0.50;         //Valeur initiale en % du volume du laser
 
 color sliderActiveColor = #FF0000, sliderForegroundColor=#AA0000;         //Couleurs liées au sliderBar
 color gameTitleColor = #FF0000, homeTextColor=#FF0000, gameTextColor=#FF0000, creditsTextColor=#FF0000, exitTextColor=#FF7800;    //Couleurs liées au texte dans les différents menus

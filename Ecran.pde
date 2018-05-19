@@ -37,7 +37,7 @@ void ecranAccueil(){
   else noFill();
   rect(width>>1,height*0.84,200,80);                                                                          //Réalisation de la case
   
-  rect(width>>3,height*0.31,200,80);
+  rect(width>>3,height*0.31,200,80);                                                                          //Case "debug"
   
   fill(homeTextColor);                                                                                        //Coloration du texte
   text("Play",width>>1,(height/3)+10);                                                                        //Ecriture du texte aux bons emplacements
@@ -86,6 +86,7 @@ void ecranOptions(){
   
   updateOptions();
   affichageIconesOptions();
+  
   fill(optionsTextsColor); 
   text("Résolution",width>>2,(height/5)+10);
   rect(width/2.5,height/5,60,40);
@@ -119,8 +120,8 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
   volumeM=(cp5.getController("Volume musique").getValue())/100;    //Réglage du volume
   music.amp(0.125*volumeM);
   
-  volumeE=(cp5.getController("Volume lasers").getValue())/100;
-  explode.amp(0.05*volumeE);
+  volumeL=(cp5.getController("Volume lasers").getValue())/100;
+  laser.amp(0.05*volumeL);
 }
 
 //
@@ -130,7 +131,8 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
 void ecranCredits(){
   background(fondCredits);
   textAlign(CENTER);
-  textFont(texte,30);  
+  textFont(texte,30);
+  fill(creditsBackButtonColor);
   text("Back / Retour",width>>1,height*0.9+10);
   affichageIconeCredits();
   if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) {   //Bouton Retour

@@ -1,5 +1,5 @@
 void setup(){
-  size(800,600);
+  size(1920,1080);
   frameRate(60);
   titre = createFont("PoliceTitre.ttf",1);    //Initialisation de la police utilisée pour les titres
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
@@ -14,11 +14,11 @@ void setup(){
   
   screen = 0;                                 //Initialisation de l'écran initial à l'écran d'accueil
   
-  explode = new SoundFile(this, "8BitExplosion.mp3");           //Variable qui correspond à un fichier son placé dans /data du dossier projet (son d'explosion)
+  laser = new SoundFile(this, "8BitExplosion.mp3");           //Variable qui correspond à un fichier son placé dans /data du dossier projet (son d'explosion)
   music = new SoundFile(this , "BackgroundMusic.mp3");          //Musique de fond
   music.amp((0.125*volumeM));                                   //Volume initial de la musique de fond (Volume max = 0.125, Volume initial = 0.125*0.5)
   music.loop();                                                 //Répétition en boucle de la musique
-  explode.amp(0.05*volumeE);                                    //Volume initial d'explosion (Volume max = 0.05, Volume initial = 0.05*0.5)
+  laser.amp(0.05*volumeL);                                    //Volume initial d'explosion (Volume max = 0.05, Volume initial = 0.05*0.5)
   
   fondAccueil = loadImage("fondAccueil.png");                   //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");
@@ -108,7 +108,7 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height/3)+40 && mouseY>(height/3)-40)       screen=1;   // Click Souris sur Play/Jouer
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40)     screen=2;   // Click Souris sur Options
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.67)+40 && mouseY>(height*0.67)-40) screen=3;   // Click Souris sur Credits
-    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.84)+40 && mouseY>(height*0.84)-40) screen=4;   // Click Souris sur Fin
+    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.84)+40 && mouseY>(height*0.84)-40) screen=4;   // Click Souris sur Sortie
   }
   
   if(screen == 2){      //Dans l'écran des options
@@ -192,12 +192,12 @@ void affichageIconesOptions(){
   image(volumeDownIcon,(width>>2)-40,height*0.5833,40,40);
   image(volumeUpIcon,(width/1.3)-10,height>>1,40,40);
   image(volumeUpIcon,(width/1.3)-10,height*0.5833,40,40);
-  image(returnIcon,width/2.8,height*0.845,80,80);
+  image(returnIcon,(width>>1)-180,height*0.9-40,80,80);
 }
 void affichageIconeCredits(){
-  image(returnIcon,width/2.8,height*0.845,80,80);
+  image(returnIcon,(width>>1)-180,(height*0.9)-40,80,80);
 }
 void affichageIconesExit(){
-  image(exitIcon,width/3,height/2.25,80,80);
-  image(returnIcon,width/1.65,height/2.25,80,80);
+  image(exitIcon,(width>>2)+100,(height>>1)-40,80,80);
+  image(returnIcon,(width*0.75)-180,(height>>1)-40,80,80);
 }

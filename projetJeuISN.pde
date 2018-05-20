@@ -95,6 +95,8 @@ void setup(){
     gpad.getSlider(XAim).setTolerance(0.05);
     gpad.getSlider(YAim).setTolerance(0.15);
   }
+  
+  numberOfPoints=numberOfHitboxPoints();
 }
 
 

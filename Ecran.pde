@@ -12,7 +12,7 @@ void ecranAccueil(){
   textFont(titre,75);
   textAlign(CENTER);
   fill(gameTitleColor);
-  text("Titre à trouver",width>>1,height/5);
+  text("FightSabers",width>>1,height/5);
   textFont(titre,28);
   noFill();
   

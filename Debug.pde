@@ -21,16 +21,10 @@ void debugHitboxPerso(){
   if(distancePerso<=(weaponLength*3)){
    stroke(0,255,0); 
   }
-  
-  line(xs1,ys1,xs2,ys2);
-  line(xs2,ys2,xs3,ys3);
-  line(xs3,ys3,xs4,ys4);
-  line(xs4,ys4,xs1,ys1);
-  
-  line(xS1,yS1,xS2,yS2);
-  line(xS2,yS2,xS3,yS3);
-  line(xS3,yS3,xS4,yS4);
-  line(xS4,yS4,xS1,yS1);
+  rectMode(CORNER);
+  noFill();
+  rect(xs1,ys1,tPersonnage,tPersonnage);
+  rect(xS1,yS1,tPersonnage,tPersonnage);
   
   textSize(20);
   text(distancePerso,width>>1,height>>1);

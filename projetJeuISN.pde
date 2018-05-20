@@ -1,9 +1,9 @@
 void setup(){
-  size(1280,720);
+  fullScreen();
   frameRate(60);
   titre = createFont("PoliceTitre.ttf",1);    //Initialisation de la police utilisée pour les titres
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
-  smooth();                                   //Rend les contours plus lisses
+  smooth();     //Rend les contours plus lisses
   
   xPersonnage1 = (int)(width*0.75);           //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs                                                                                                          //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
   yPersonnage1 = height>>2;
@@ -22,7 +22,9 @@ void setup(){
   
   fondAccueil = loadImage("fondAccueil.png");                 //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");
+  fondOptions = loadImage("fondOptions.png");
   fondCredits = loadImage("fondCredits.png");
+  fondExit = loadImage("fondExit.png");
   Personnage = loadImage("PersonnageWhite.png");
   playIcon = loadImage("PlayIcon.png");
   pauseIcon = loadImage("PauseIcon.png");
@@ -37,7 +39,9 @@ void setup(){
   
   fondAccueil.resize(width,height);                            //Changement de la taille des images
   fondJeu.resize(width,height);
+  fondOptions.resize(width,height);
   fondCredits.resize(width,height);
+  fondExit.resize(width,height);
   
   
    cp5 = new ControlP5(this);                                                        //Initialisation du controleur de paramètres
@@ -137,13 +141,32 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
     
       screen=0;   //Retour à l'accueil
     }
-    if (mouseX<(width/1.1)+60 && mouseX>(width>>1) && mouseY<(height/5)+40 && mouseY>(height/5)){
-      launch("C://Users//PCSI//Downloads//projetJeuISN//projetJeuISN.pde");
+    
+    if (mouseX<((width/2.3)+(width/4)) && mouseX>width/2.3 && mouseY<(height/5)+40 && mouseY>(height/5) && widthResolution == 800 && heightResolution == 600 ){
+      widthResolution = 1280;
+      heightResolution = 720;
+    }
+    
+    if (mouseX<((width/2.3)+(width/4)) && mouseX>width/2.3 && mouseY<(height/5)+40 && mouseY>(height/5) && widthResolution == 1280 && heightResolution == 720 ){
+      widthResolution = 1600;
+      heightResolution = 900;
+    }
+    
+    if (mouseX<((width/2.3)+(width/4)) && mouseX>width/2.3 && mouseY<(height/5)+40 && mouseY>(height/5) && widthResolution == 1600 && heightResolution == 900 ){
+      widthResolution = 1920;
+      heightResolution = 1080;
+    }
+    
+    if (mouseX<((width/2.3)+(width/4)) && mouseX>width/2.3 && mouseY<(height/5)+40 && mouseY>(height/5) && widthResolution == 1920 && heightResolution == 1080 ){
+      widthResolution = 800;
+      heightResolution = 600;
+    }
+    
+    if (mouseX<(width/1.625)+60 && mouseX>width/1.625 && mouseY<(height/5)+40 && mouseY>(height/5)){
+      launch("projetJeuISN.exe");
     }
       
-    if((mouseX<(width>>3)+100 && mouseX>(width>>3)-100 && mouseY<(height*0.85)+40 && mouseY>(height*0.85)-40) && (debugMode==true)){ 
-      debugMode = false;
-    }
+    if((mouseX<(width>>3)+100 && mouseX>(width>>3)-100 && mouseY<(height*0.85)+40 && mouseY>(height*0.85)-40) && (debugMode==true)) debugMode = false;
       
     else if((mouseX<(width>>3)+100 && mouseX>(width>>3)-100 && mouseY<(height*0.85)+40 && mouseY>(height*0.85)-40) && (debugMode==false)) debugMode = true;
     

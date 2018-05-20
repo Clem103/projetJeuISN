@@ -37,7 +37,7 @@ int screen;                   //Ecran à afficher
 
 PFont titre, texte;           //Déclaration des polices d'écriture
 
-PImage fondAccueil,fondJeu, fondCredits, Personnage;    //Déclaration des images
+PImage fondAccueil,fondJeu, fondOptions, fondCredits, fondExit, Personnage;    //Déclaration des images
 PImage playIcon, pauseIcon, optionsIcon, creditsIcon, returnIcon, exitIcon, speedDownIcon, speedUpIcon, volumeDownIcon, volumeUpIcon;  //Déclaration des icones
 
 ControlP5 cp5;                //Déclaration du controlleur (permetant la création d'une SlideBar)
@@ -71,3 +71,7 @@ int numberOfPoints=1;
 
 boolean debugMode;
 boolean noGamepadMode;
+
+int widthResolution = 800;
+int heightResolution = 600;
+String affichageResolution = widthResolution + "x" + heightResolution;

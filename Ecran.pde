@@ -79,7 +79,7 @@ void ecranJeu1vs1(){
 //
 
 void ecranOptions(){
-  background(fondAccueil);
+  background(fondOptions);
   cp5.getController("Vitesse Personnage 1").setVisible(true);            //On affiche les barres définies dans le setup{}
   cp5.getController("Vitesse Personnage 2").setVisible(true);
   cp5.getController("Volume musique").setVisible(true);
@@ -89,29 +89,16 @@ void ecranOptions(){
   affichageIconesOptions();
   
   fill(optionsTextsColor); 
-  text("Résolution",width>>2,(height/5)+10);
-  rect(width/2.5,height/5,60,40);
-  fill(fleches);
-  triangle((width/2.5)-10,(height/5),(width/2.5)+10,(height/5)-10,(width/2.5)+10,(height/5)+10);
-  fill(optionsTextsColor);
-  rect(width/1.635,height/5,250,40);
-  rect(width/1.22,height/5,60,40);
-  fill(fleches);
-  triangle((width/1.22)+10,(height/5),(width/1.22)-10,(height/5)-10,(width/1.22)-10,(height/5)+10);
-  fill(optionsTextsColor);
-  rect(width/1.1,height/5,60,40);
-  fill(fleches);
-  text("OK",width/1.1,height/4.7);
   fill(optionsBackButtonColor);
   textFont(texte,25);
-  text("Back / Retour",width>>1,height*0.9+10);
+  text("Back / Retour",width>>1,height*0.915);
   if(debugMode){
     fill(#58FF00);
-    text("Debug ON",width>>3,height*0.85+10);
+    text("Debug ON",width>>3,height*0.862);
   }
   else{
     fill(#FF001E);
-    text("Debug OFF",width>>3,height*0.85+10);
+    text("Debug OFF",width>>3,height*0.862);
   }
   if(mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) {  //Bouton retour à l'écran d'accueil (avec un remplissange semi-transparent au mouse-over)
     fill(255,50);
@@ -162,7 +149,7 @@ void ecranCredits(){
 //
 
 void ecranSortie(){
-  background(fondAccueil);
+  background(fondExit);
   textAlign(CENTER);
   fill(exitTextColor);
   textFont(texte,30);

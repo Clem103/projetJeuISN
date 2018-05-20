@@ -3,9 +3,12 @@
 //
 
 void ecranAccueil(){
-  
+  MusiqueOptions.stop();
+  MusiqueCredits.stop();
   cursor();
   background(fondAccueil);
+  MusiqueAJE.play();
+  MusiqueAJE.loop();
   noFill();
   stroke(0,0,0);
   rectMode(CENTER);
@@ -54,6 +57,8 @@ void ecranAccueil(){
 
 void ecranJeu1vs1(){
   background(fondJeu);
+  MusiqueAJE.play();
+  MusiqueAJE.loop();
   if(!noGamepadMode) bougerPersonnageGamepad(pSpeed2);
   bougerPersonnageClavier();
   viseeSouris();
@@ -79,7 +84,10 @@ void ecranJeu1vs1(){
 //
 
 void ecranOptions(){
+  MusiqueAJE.stop();
   background(fondOptions);
+  MusiqueOptions.play();
+  MusiqueOptions.loop();
   cp5.getController("Vitesse Personnage 1").setVisible(true);            //On affiche les barres définies dans le setup{}
   cp5.getController("Vitesse Personnage 2").setVisible(true);
   cp5.getController("Volume musique").setVisible(true);
@@ -120,7 +128,9 @@ void ecranOptions(){
 void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant que l'on est sur l'écran des options
   
   volumeM=(cp5.getController("Volume musique").getValue())/100;    //Réglage du volume
-  music.amp(0.125*volumeM);
+  MusiqueAJE.amp(0.125*volumeM);
+  MusiqueOptions.amp(0.125*volumeM);
+  MusiqueCredits.amp(0.125*volumeM);
   
   volumeL=(cp5.getController("Volume lasers").getValue())/100;
   laser.amp(0.05*volumeL);
@@ -131,7 +141,10 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
 //
 
 void ecranCredits(){
+  MusiqueAJE.stop();
   background(fondCredits);
+  MusiqueCredits.play();
+  MusiqueCredits.loop();
   textAlign(CENTER);
   textFont(texte,22);
   fill(creditsBackButtonColor);
@@ -149,6 +162,8 @@ void ecranCredits(){
 
 void ecranSortie(){
   background(fondExit);
+  MusiqueAJE.play();
+  MusiqueAJE.loop();
   textAlign(CENTER);
   fill(exitTextColor);
   textFont(texte,30);

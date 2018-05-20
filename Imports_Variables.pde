@@ -6,7 +6,9 @@ import net.java.games.input.*;
 import java.util.List;
 
 SoundFile laser;              //Déclaration des variables de son (Laser)
-SoundFile music;              //Musique de fond
+SoundFile MusiqueAJE;         //Musique Accueil+Jeu+Exit
+SoundFile MusiqueOptions;
+SoundFile MusiqueCredits;
             
 int pSpeed1 = 6;              //Vitesses des personnages
 int pSpeed2 = 6;

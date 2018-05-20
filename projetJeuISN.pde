@@ -15,13 +15,14 @@ void setup(){
   
   screen = 0;                                 //Initialisation de l'écran initial à l'écran d'accueil
   
-  laser = new SoundFile(this, "8BitExplosion.mp3");           //Variable qui correspond à un fichier son placé dans /data du dossier projet (son du laser)
-  music = new SoundFile(this , "BackgroundMusic.mp3");        //Musique de fond
-  music.amp((0.125*volumeM));                                 //Volume initial de la musique de fond (Volume max = 0.125, Volume initial = 0.125*0.5)
-  music.loop();                                               //Répétition en boucle de la musique
-  laser.amp(0.05*volumeL);                                    //Volume initial du laser (Volume max = 0.05, Volume initial = 0.05*0.5)
+  laser = new SoundFile(this, "8BitExplosion.mp3");                //Variable qui correspond à un fichier son placé dans /data du dossier projet (son du laser)
+  MusiqueAJE = new SoundFile(this, "MusiqueAJE.mp3");              //Musique Accueil+Jeu+ Menu Exit
+  MusiqueOptions = new SoundFile(this, "MusiqueOptions.mp3");      //Musique Menu Options
+  MusiqueCredits = new SoundFile(this, "MusiqueCredits.mp3");      //Musique Menu Credits
+  MusiqueAJE.amp((0.125*volumeM));                                 //Volume initial de la musique de fond (Volume max = 0.125, Volume initial = 0.125*0.5)
+  laser.amp(0.05*volumeL);                                         //Volume initial du laser (Volume max = 0.05, Volume initial = 0.05*0.5)
   
-  fondAccueil = loadImage("fondAccueil.png");                 //Chargement des images dans des variables
+  fondAccueil = loadImage("fondAccueil.png");                      //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");
   fondOptions = loadImage("fondOptions.png");
   fondCredits = loadImage("fondCredits.png");

@@ -59,7 +59,6 @@ void ecranJeu1vs1(){
   viseeSouris();
   if(!noGamepadMode)viseeGamepad();
   affichagePersonnages();
-  checkHitbox();
   if(debugMode)debugHitboxPerso();
   affichageIconeJeu1vs1();
   hasCollided(numberOfPoints);

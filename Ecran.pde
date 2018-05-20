@@ -3,12 +3,20 @@
 //
 
 void ecranAccueil(){
-  MusiqueOptions.stop();
-  MusiqueCredits.stop();
+  if(isMusiqueOptionsPlaying){
+    MusiqueOptions.stop();
+    isMusiqueOptionsPlaying = false;
+  }
+  if(isMusiqueCreditsPlaying){
+    MusiqueCredits.stop();
+    isMusiqueCreditsPlaying = false;
+  }
   cursor();
   background(fondAccueil);
-  MusiqueAJE.play();
-  MusiqueAJE.loop();
+  if(!isMusiqueAJEPlaying){
+    MusiqueAJE.loop();
+    isMusiqueAJEPlaying=true;
+  }
   noFill();
   stroke(0,0,0);
   rectMode(CENTER);
@@ -57,8 +65,10 @@ void ecranAccueil(){
 
 void ecranJeu1vs1(){
   background(fondJeu);
-  MusiqueAJE.play();
-  MusiqueAJE.loop();
+  if(!isMusiqueAJEPlaying){
+    MusiqueAJE.loop();
+    isMusiqueAJEPlaying=true;
+  }
   if(!noGamepadMode) bougerPersonnageGamepad(pSpeed2);
   bougerPersonnageClavier();
   viseeSouris();
@@ -84,10 +94,15 @@ void ecranJeu1vs1(){
 //
 
 void ecranOptions(){
-  MusiqueAJE.stop();
+  if(isMusiqueAJEPlaying){
+    MusiqueAJE.stop();
+    isMusiqueAJEPlaying=false;
+  }
   background(fondOptions);
-  MusiqueOptions.play();
-  MusiqueOptions.loop();
+  if(!isMusiqueOptionsPlaying){ 
+    MusiqueOptions.loop();
+    isMusiqueOptionsPlaying=true;
+  }
   cp5.getController("Vitesse Personnage 1").setVisible(true);            //On affiche les barres définies dans le setup{}
   cp5.getController("Vitesse Personnage 2").setVisible(true);
   cp5.getController("Volume musique").setVisible(true);
@@ -141,10 +156,15 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
 //
 
 void ecranCredits(){
-  MusiqueAJE.stop();
+  if(isMusiqueAJEPlaying){
+    MusiqueAJE.stop();
+    isMusiqueAJEPlaying=false;
+  }
   background(fondCredits);
-  MusiqueCredits.play();
-  MusiqueCredits.loop();
+  if(!isMusiqueCreditsPlaying){
+    MusiqueCredits.loop();
+    isMusiqueCreditsPlaying=true;
+  }
   textAlign(CENTER);
   textFont(texte,22);
   fill(creditsBackButtonColor);
@@ -162,8 +182,10 @@ void ecranCredits(){
 
 void ecranSortie(){
   background(fondExit);
-  MusiqueAJE.play();
-  MusiqueAJE.loop();
+  if(!isMusiqueAJEPlaying){
+    MusiqueAJE.loop();
+    isMusiqueAJEPlaying=true;
+  }
   textAlign(CENTER);
   fill(exitTextColor);
   textFont(texte,30);

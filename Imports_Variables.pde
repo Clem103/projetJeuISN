@@ -9,6 +9,8 @@ SoundFile laser;              //Déclaration des variables de son (Laser)
 SoundFile MusiqueAJE;         //Musique Accueil+Jeu+Exit
 SoundFile MusiqueOptions;
 SoundFile MusiqueCredits;
+
+boolean isMusiqueAJEPlaying, isMusiqueOptionsPlaying, isMusiqueCreditsPlaying;
             
 int pSpeed1 = 6;              //Vitesses des personnages
 int pSpeed2 = 6;

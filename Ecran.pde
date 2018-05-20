@@ -19,7 +19,7 @@ void ecranAccueil(){
   affichageIconesAccueil();
   
   if(debugMode) text("Debug mode activated",width>>1,28);
-  else if(noGamepadMode) text("No suitable device found, debug mode activated",width>>1,28);
+  else if(noGamepadMode) text("No suitable device found, no gamepad mode activated",width>>1,28);
   
   if((mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height/3)+40 && mouseY>(height/3)-40)){       //Souris sur PLAY / JOUER
     fill(255,50); }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent 

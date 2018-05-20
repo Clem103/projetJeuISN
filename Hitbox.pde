@@ -6,6 +6,13 @@ void checkHitbox(){
   
   distancePerso = sqrt(pow((xGp1 - xGp2),2) + pow((yGp1 - yGp2),2));
   
-  
+}
 
+int numberOfCheckingPoints(){
+  int numberOfPoints;
+  while(distanceBetweenPoints > tPersonnage){
+     
+    
+  }
+  
 }

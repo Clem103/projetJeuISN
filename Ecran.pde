@@ -62,7 +62,7 @@ void ecranJeu1vs1(){
   checkHitbox();
   if(debugMode)debugHitboxPerso();
   affichageIconeJeu1vs1();
-  assignHitboxPoints();
+  hasCollided(numberOfPoints);
   
   fill(gameTextColor);
   stroke(255,0,0);

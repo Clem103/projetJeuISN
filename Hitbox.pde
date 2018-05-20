@@ -8,11 +8,11 @@ void checkHitbox(){
   
 }
 
-int numberOfCheckingPoints(){
-  int numberOfPoints;
-  while(distanceBetweenPoints > tPersonnage){
+//int numberOfCheckingPoints(){
+//  int numberOfPoints;
+//  while(distanceBetweenPoints > tPersonnage){
      
     
-  }
+//  }
   
-}
+//

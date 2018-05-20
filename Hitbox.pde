@@ -68,17 +68,18 @@ boolean hasP2WeaponCollided(int numberOfPoints){
        float yHitboxPoint = yS2-weaponLength*sin(angleAim)*i/numberOfPoints;
        float distancePointPerso = sqrt(pow((xGp1 - xHitboxPoint),2) + pow((yGp1 - yHitboxPoint),2));
        
-       if(debugMode){ 
-       ellipse(xHitboxPoint,yHitboxPoint,10,10);
-       fill(#00FF00);
-       text(i,xHitboxPoint,yHitboxPoint);
-       text(i+" : " + distancePointPerso, (width*0.875), (height>>2)+i*20);
-       noFill();
+       if(debugMode){
+         stroke(#FF0000);
+         ellipse(xHitboxPoint,yHitboxPoint,10,10);
+         fill(#FF0000);
+         text(i,xHitboxPoint,yHitboxPoint);
+         text(i+" : " + distancePointPerso, (width*0.875), (height>>2)+i*20);
+         noFill();
        }
        
        if(distancePointPerso <= tPersonnage*27/50){
          if(debugMode){
-           fill(#FF0000);
+           fill(#00FF00);
            text(i,xHitboxPoint,yHitboxPoint);
            text(i+" : " + distancePointPerso, (width*0.875), (height>>2)+i*20);
          }

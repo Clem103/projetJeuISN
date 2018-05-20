@@ -65,7 +65,7 @@ float posXGamePad, posYGamePad;
 float rollXGamePad, rollYGamePad;
 float angleAim;
 float xEndOfWeapon1, yEndOfWeapon1, xEndOfWeapon2, yEndOfWeapon2;
-int weaponLength = 600;
+int weaponLength = 101;
 int distanceBetweenPoints;
 int numberOfPoints=1;
 

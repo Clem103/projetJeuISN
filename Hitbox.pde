@@ -18,10 +18,16 @@ int numberOfHitboxPoints(){
   return numberOfPoints;
 }
 
-/*void assignHitboxPoints(){
+void assignHitboxPoints(){
   
   for (int i=1;i<=numberOfPoints;i++){
-     float  
+     float xHitboxPoint = (xP+weaponLength*cos(angleCurseur))/i;
+     float yHitboxPoint = (yP+weaponLength*sin(angleCurseur))/i;
+     float distancePointPerso = sqrt(pow((xGp2 - xHitboxPoint),2) + pow((yGp2 - yHitboxPoint),2));
+     if(distancePointPerso <= tPersonnage){
+        System.out.println(i); 
+     }
+     else System.out.print("bait");
   }
   
-}*/
+}

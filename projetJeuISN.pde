@@ -1,5 +1,6 @@
 void setup(){
-  fullScreen();
+  //fullScreen();
+  size(1280,720);
   frameRate(60);
   titre = createFont("PoliceTitre.ttf",1);    //Initialisation de la police utilisée pour les titres
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
@@ -141,30 +142,6 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
     
       screen=0;   //Retour à l'accueil
     }
-    
-    if (mouseX<((width/2.3)+(width/4)) && mouseX>width/2.3 && mouseY<(height/5)+40 && mouseY>(height/5) && widthResolution == 800 && heightResolution == 600 ){
-      widthResolution = 1280;
-      heightResolution = 720;
-    }
-    
-    if (mouseX<((width/2.3)+(width/4)) && mouseX>width/2.3 && mouseY<(height/5)+40 && mouseY>(height/5) && widthResolution == 1280 && heightResolution == 720 ){
-      widthResolution = 1600;
-      heightResolution = 900;
-    }
-    
-    if (mouseX<((width/2.3)+(width/4)) && mouseX>width/2.3 && mouseY<(height/5)+40 && mouseY>(height/5) && widthResolution == 1600 && heightResolution == 900 ){
-      widthResolution = 1920;
-      heightResolution = 1080;
-    }
-    
-    if (mouseX<((width/2.3)+(width/4)) && mouseX>width/2.3 && mouseY<(height/5)+40 && mouseY>(height/5) && widthResolution == 1920 && heightResolution == 1080 ){
-      widthResolution = 800;
-      heightResolution = 600;
-    }
-    
-    if (mouseX<(width/1.625)+60 && mouseX>width/1.625 && mouseY<(height/5)+40 && mouseY>(height/5)){
-      launch("projetJeuISN.exe");
-    }
       
     if((mouseX<(width>>3)+100 && mouseX>(width>>3)-100 && mouseY<(height*0.85)+40 && mouseY>(height*0.85)-40) && (debugMode==true)) debugMode = false;
       
@@ -225,7 +202,7 @@ void affichageIconesAccueil(){
   image(exitIcon,(width>>1)-175,(height*0.84)-30,60,60);
 }
 void affichageIconeJeu1vs1(){
-  image(pauseIcon,(width>>1)-125,height-25,25,25);
+  image(pauseIcon,(width>>1)-150,height-24,25,25);
 }
 void affichageIconesOptions(){
   image(speedDownIcon,(width>>2)-50,height*0.3333,40,40);
@@ -236,10 +213,6 @@ void affichageIconesOptions(){
   image(volumeDownIcon,(width>>2)-40,height*0.5833,40,40);
   image(volumeUpIcon,(width/1.3)-10,height>>1,40,40);
   image(volumeUpIcon,(width/1.3)-10,height*0.5833,40,40);
-  image(returnIcon,(width>>1)-180,height*0.9-40,80,80);
-}
-void affichageIconeCredits(){
-  image(returnIcon,(width>>1)-180,(height*0.9)-40,80,80);
 }
 void affichageIconesExit(){
   image(exitIcon,(width>>2)+100,(height>>1)-40,80,80);

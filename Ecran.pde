@@ -62,6 +62,7 @@ void ecranJeu1vs1(){
   checkHitbox();
   if(debugMode)debugHitboxPerso();
   affichageIconeJeu1vs1();
+  assignHitboxPoints();
   
   fill(gameTextColor);
   stroke(255,0,0);
@@ -90,7 +91,7 @@ void ecranOptions(){
   
   fill(optionsTextsColor); 
   fill(optionsBackButtonColor);
-  textFont(texte,25);
+  textFont(texte,22);
   text("Back / Retour",width>>1,height*0.915);
   if(debugMode){
     fill(#58FF00);
@@ -133,10 +134,9 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
 void ecranCredits(){
   background(fondCredits);
   textAlign(CENTER);
-  textFont(texte,30);
+  textFont(texte,22);
   fill(creditsBackButtonColor);
   text("Back / Retour",width>>1,height*0.9+10);
-  affichageIconeCredits();
   if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) {   //Bouton Retour
     fill(255,50);
   }

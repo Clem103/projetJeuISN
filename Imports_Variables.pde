@@ -71,7 +71,3 @@ int numberOfPoints=1;
 
 boolean debugMode;
 boolean noGamepadMode;
-
-int widthResolution = 800;
-int heightResolution = 600;
-String affichageResolution = widthResolution + "x" + heightResolution;

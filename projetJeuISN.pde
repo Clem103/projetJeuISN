@@ -29,17 +29,17 @@ void setup(){
   brightSideVMusic= new SoundFile(this, "BrightSideVMusic.mp3");           //Musique victoire coté lumineux
   darkSideVMusic= new SoundFile(this, "DarkSideVMusic.mp3");               //Musique victoire coté obscur
   MusiqueAJE.amp((0.125*volumeM));                                         //Volume initial des musiques de fond (Volume max = 0.125, Volume initial = 0.125*0.5)
-  MusiqueOptions.amp((0.125*volumeM));
-  MusiqueCredits.amp((0.125*volumeM));
-  drawMusic.amp((0.125*volumeM));
-  darkSideVMusic.amp((0.125*volumeM));
+  MusiqueOptions.amp(0.125*volumeM);
+  MusiqueCredits.amp(0.125*volumeM);
+  drawMusic.amp(0.125*volumeM);
+  darkSideVMusic.amp(0.125*volumeM);
   brightSideVMusic.amp((0.125*volumeM));
   lightSaber1.amp(0.1*volumeL);                                            //Volume initial des lasers (Volume max = 0.05, Volume initial = 0.05*0.5)
   lightSaber2.amp(0.1*volumeL);
   lightSaberOn.amp(0.25*volumeL);
   lightSaberOff.amp(0.25*volumeL);
-  deathmatchAnnouncer.amp((0.125*volumeB));
-  clicSound.amp((0.125*volumeB));
+  deathmatchAnnouncer.amp(0.3*volumeB);
+  clicSound.amp(0.25*volumeB);
   fellInLava.amp(0.1);
   
   fondAccueil = loadImage("fondAccueil.png");                      //Chargement des images dans des variables

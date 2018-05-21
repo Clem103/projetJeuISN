@@ -13,24 +13,33 @@ void setup(){
   yPersonnage2 = height>>1;
   
     
-  screen = 0;                                                      //Initialisation de l'écran initial à l'écran d'accueil
+  screen = 0;                                 //Initialisation de l'écran initial à l'écran d'accueil
   
-  lightSaber1 = new SoundFile(this, "LightSaberHit1.mp3");              //Variable qui correspond à un fichier son placé dans /data du dossier projet (son du laser)
+  lightSaber1 = new SoundFile(this, "LightSaberHit1.mp3");                 //Variables qui correspondent à un fichier son placé dans /data du dossier projet (son du laser)
   lightSaber2 = new SoundFile(this, "LightSaberHit2.mp3");
-  MusiqueAJE = new SoundFile(this, "MusiqueAJE.mp3");              //Musique Accueil+Jeu+ Menu Exit
-  MusiqueOptions = new SoundFile(this, "MusiqueOptions.mp3");      //Musique Menu Options
-  MusiqueCredits = new SoundFile(this, "MusiqueCredits.mp3");      //Musique Menu Credits
-  fellInLava = new SoundFile(this, "splashInLava.mp3");
-  lightSaberOn = new SoundFile(this, "lightSaberON.mp3");
-  lightSaberOff = new SoundFile(this, "lightSaberOFF.mp3");
-  drawMusic= new SoundFile(this, "DrawMusic.mp3");
-  brightSideVMusic= new SoundFile(this, "BrightSideVMusic.mp3");
-  darkSideVMusic= new SoundFile(this, "DarkSideVMusic.mp3");
-  MusiqueAJE.amp((0.125*volumeM));                                      //Volume initial de la musique de fond (Volume max = 0.125, Volume initial = 0.125*0.5)
-  lightSaber1.amp(0.1*volumeL);                                         //Volume initial du sabre (Volume max = 0.05, Volume initial = 0.05*0.5)
+  MusiqueAJE = new SoundFile(this, "MusiqueAJE.mp3");                      //Musique Accueil+Jeu+ Menu Exit
+  MusiqueOptions = new SoundFile(this, "MusiqueOptions.mp3");              //Musique Menu Options
+  MusiqueCredits = new SoundFile(this, "MusiqueCredits.mp3");              //Musique Menu Credits
+  fellInLava = new SoundFile(this, "splashInLava.mp3");                    //Bruit tomber dans la lave
+  lightSaberOn = new SoundFile(this, "lightSaberON.mp3");                  //Bruit allumage sabre laser
+  lightSaberOff = new SoundFile(this, "lightSaberOFF.mp3");                //Bruit eteignage sabre laser
+  clicSound = new SoundFile(this, "clicSound.ogg");                        //Bruit de clic sur case
+  deathmatchAnnouncer = new SoundFile(this, "deathmatchAnnouncer.ogg");    //Voix annoncant mode jeu
+  drawMusic= new SoundFile(this, "DrawMusic.mp3");                         //Musique égalité
+  brightSideVMusic= new SoundFile(this, "BrightSideVMusic.mp3");           //Musique victoire coté lumineux
+  darkSideVMusic= new SoundFile(this, "DarkSideVMusic.mp3");               //Musique victoire coté obscur
+  MusiqueAJE.amp((0.125*volumeM));                                         //Volume initial des musiques de fond (Volume max = 0.125, Volume initial = 0.125*0.5)
+  MusiqueOptions.amp((0.125*volumeM));
+  MusiqueCredits.amp((0.125*volumeM));
+  drawMusic.amp((0.125*volumeM));
+  darkSideVMusic.amp((0.125*volumeM));
+  brightSideVMusic.amp((0.125*volumeM));
+  lightSaber1.amp(0.1*volumeL);                                            //Volume initial des lasers (Volume max = 0.05, Volume initial = 0.05*0.5)
   lightSaber2.amp(0.1*volumeL);
   lightSaberOn.amp(0.25*volumeL);
   lightSaberOff.amp(0.25*volumeL);
+  deathmatchAnnouncer.amp((0.125*volumeB));
+  clicSound.amp((0.125*volumeB));
   fellInLava.amp(0.1);
   
   fondAccueil = loadImage("fondAccueil.png");                      //Chargement des images dans des variables
@@ -49,6 +58,8 @@ void setup(){
   speedUpIcon = loadImage ("SpeedUpIcon.png");
   volumeDownIcon = loadImage("VolumeDownIcon.png");
   volumeUpIcon = loadImage("VolumeUpIcon.png");
+  timePlusIcon = loadImage("TimePlusIcon.png");
+  timeLessIcon = loadImage("TimeLessIcon.png");
   
   fondAccueil.resize(width,height);                              //Changement de la taille des images
   fondJeu.resize(width,height);
@@ -61,7 +72,7 @@ void setup(){
    cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);    //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
                                                                                         
    cp5.addSlider("Vitesse Personnage 1")                                               //Initialisation des différentes barres avec leurs paramètres (Position, taille, valeurMin/Max, valeur initiale, visibilité)
-      .setPosition(width>>2,height*0.3333)
+      .setPosition(width>>2,height*0.2)
       .setSize((int)(width*0.5),40)
       .setRange(1,20)
       .setValue(pSpeed1)
@@ -70,7 +81,7 @@ void setup(){
       .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
       
    cp5.addSlider("Vitesse Personnage 2")                                               
-      .setPosition(width>>2,height*0.4166)
+      .setPosition(width>>2,height*0.3)
       .setSize((int)(width*0.5),40)
       .setRange(1,20)
       .setValue(pSpeed2)
@@ -79,7 +90,7 @@ void setup(){
       .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
       
    cp5.addSlider("Volume musique")
-      .setPosition(width>>2,height>>1)
+      .setPosition(width>>2,height*0.4)
       .setSize((int)(width*0.5),40)
       .setRange(0,100)
       .setValue(50)
@@ -88,7 +99,7 @@ void setup(){
       .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
       
    cp5.addSlider("Volume lasers")
-      .setPosition(width>>2,height*0.5833)
+      .setPosition(width>>2,height>>1)
       .setSize((int)(width*0.5),40)
       .setRange(0,100)
       .setValue(50) 
@@ -96,8 +107,17 @@ void setup(){
       .setColorLabel(#FFFFFF)
       .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
       
+   cp5.addSlider("Volume bruits")
+      .setPosition(width>>2,height*0.6)
+      .setSize((int)(width*0.5),40)
+      .setRange(0,100)
+      .setValue(50) 
+      .setVisible(false)
+      .setColorLabel(#FFFFFF)
+      .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);   
+      
    cp5.addSlider("Temps de Jeu")
-      .setPosition(width>>2,height*0.6667)
+      .setPosition(width>>2,height*0.7)
       .setSize((int)(width*0.5),40)
       .setRange(10,180)
       .setValue(120)
@@ -148,18 +168,33 @@ void draw(){
 
 void mousePressed(){    //Au moment où le click souris est enfoncé
   if (screen == 0){     //Dans l'écran d'accueil
-    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height/3)+40 && mouseY>(height/3)-40)       screen=1;   // Click Souris sur Play/Jouer
-    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40)     screen=2;   // Click Souris sur Options
-    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.67)+40 && mouseY>(height*0.67)-40) screen=3;   // Click Souris sur Credits
-    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.84)+40 && mouseY>(height*0.84)-40) screen=4;   // Click Souris sur Sortie
+    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height/3)+40 && mouseY>(height/3)-40){
+      screen=1;   // Click Souris sur Play/Jouer
+      clicSound.play();
+    }
+    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40){
+      screen=2;   // Click Souris sur Options
+      clicSound.play();
+    }
+    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.67)+40 && mouseY>(height*0.67)-40){
+      screen=3;   // Click Souris sur Credits
+      clicSound.play();
+    }
+    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.84)+40 && mouseY>(height*0.84)-40){
+      screen=4;   // Click Souris sur Sortie
+      clicSound.play();
+    }
   }
   
   if(screen == 2){      //Dans l'écran des options
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40){      //Click sur le bouton retour -> masquage des barres
+      clicSound.play();
+      
       cp5.getController("Vitesse Personnage 1").setVisible(false);
       cp5.getController("Vitesse Personnage 2").setVisible(false);
       cp5.getController("Volume musique").setVisible(false);
       cp5.getController("Volume lasers").setVisible(false);
+      cp5.getController("Volume bruits").setVisible(false);
       cp5.getController("Temps de Jeu").setVisible(false);
       
       
@@ -170,24 +205,39 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
       screen=0;   //Retour à l'accueil
     }
       
-    if((mouseX<(width>>3)+100 && mouseX>(width>>3)-100 && mouseY<(height*0.85)+40 && mouseY>(height*0.85)-40) && (debugMode==true)) debugMode = false;
-      
-    else if((mouseX<(width>>3)+100 && mouseX>(width>>3)-100 && mouseY<(height*0.85)+40 && mouseY>(height*0.85)-40) && (debugMode==false)) debugMode = true;
+    if((mouseX<(width>>3)+100 && mouseX>(width>>3)-100 && mouseY<(height*0.85)+40 && mouseY>(height*0.85)-40) && (debugMode==true)){
+      debugMode = false;
+      clicSound.play();
+    }
     
+    else if((mouseX<(width>>3)+100 && mouseX>(width>>3)-100 && mouseY<(height*0.85)+40 && mouseY>(height*0.85)-40) && (debugMode==false)){
+      debugMode = true;
+      clicSound.play();
+    }
 
   }
   
   if (screen == 3){ //Dans l'écran des crédits
-    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) screen=0;     //Retour à l'accueil lors du click sur Retour
-  }
+    if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40){
+      screen=0;     //Retour à l'accueil lors du click sur Retour
+      clicSound.play();  
+    }
+  }  
   
   if (screen == 4){ //Dans l'écran de sortie
-    if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) screen=0;   //Retour à l'accueil lors du click sur No/Non
-    if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) exit();         //Fermeture de la fenêtre lors du click sur Yes/Oui
+    if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40){
+      screen=0;   //Retour à l'accueil lors du click sur No/Non
+      clicSound.play();
+    }
+    if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40){
+      exit();         //Fermeture de la fenêtre lors du click sur Yes/Oui
+      clicSound.play();
+    }
   }
 
   if(screen == 5){
     if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>2)*3+40 && mouseY>(height>>2)*3-40){
+      clicSound.play();
       screen=1;               //Joueurs veulent rejouer, jeu relancé
       p1Death();
       p2Death();
@@ -195,6 +245,7 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
       scoreP2 = 0;
     }
     if (mouseX<(width>>2)*3+100 && mouseX>(width>>2)*3-100 && mouseY<(height>>2)*3+40 && mouseY>(height>>2)*3-40){
+      clicSound.play();
       screen=0;             //Joueurs ne veulent pas rejouer, retour à l'accueil
       p1Death();
       p2Death();
@@ -207,7 +258,6 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
 //
 //Utilisation du clavier
 //
-
 void keyPressed(){  //Lorsque l'on appuie sur la touche, la variable correspondante passe à true
   switch(keyCode){
     case 32 : espace =   true; break;  //Espace
@@ -249,14 +299,19 @@ void affichageIconeJeu1vs1(){                                       //Affichage 
   image(pauseIcon,(width>>1)-150,height-33,25,25);
 }
 void affichageIconesOptions(){                                      //Affichage des icones dans les options
-  image(speedDownIcon,(width>>2)-50,height*0.3333,40,40);
-  image(speedDownIcon,(width>>2)-50,height*0.4166,40,40);
-  image(speedUpIcon,(width/1.3),height*0.3333,40,40);
-  image(speedUpIcon,(width/1.3),height*0.4166,40,40);
+  image(speedDownIcon,(width>>2)-50,height*0.2,40,40);
+  image(speedDownIcon,(width>>2)-50,height*0.3,40,40);
+  image(speedUpIcon,(width/1.3),height*0.2,40,40);
+  image(speedUpIcon,(width/1.3),height*0.3,40,40);
+  image(volumeDownIcon,(width>>2)-40,height*0.4,40,40);
   image(volumeDownIcon,(width>>2)-40,height>>1,40,40);
-  image(volumeDownIcon,(width>>2)-40,height*0.5833,40,40);
+  image(volumeDownIcon,(width>>2)-40,height*0.6,40,40);
+  image(volumeUpIcon,(width/1.3)-10,height*0.4,40,40);
   image(volumeUpIcon,(width/1.3)-10,height>>1,40,40);
-  image(volumeUpIcon,(width/1.3)-10,height*0.5833,40,40);
+  image(volumeUpIcon,(width/1.3)-10,height*0.6,40,40);
+  image(timeLessIcon,(width>>2)-40,height*0.7,40,40);
+  image(timePlusIcon,(width/1.3)-10,height*0.7,40,40);
+  
 }
 void affichageIconesExit(){                                         //Affiche des icones dans le menu de sortie
   image(exitIcon,(width>>2)+100,(height>>1)-40,80,80);

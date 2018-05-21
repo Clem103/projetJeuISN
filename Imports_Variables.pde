@@ -7,6 +7,8 @@ import java.util.List;
 
 SoundFile lightSaber1, lightSaber2;     //Déclaration des variables de son (Sabres laser)
 SoundFile lightSaberOn, lightSaberOff;
+SoundFile clicSound;
+SoundFile deathmatchAnnouncer;
 SoundFile MusiqueAJE;                   //Musique Accueil+Jeu+Exit
 SoundFile MusiqueOptions;
 SoundFile MusiqueCredits;
@@ -15,7 +17,7 @@ SoundFile brightSideVMusic;
 SoundFile drawMusic;
 SoundFile fellInLava;
 
-boolean isMusicAJEPlaying, isMusicOptionsPlaying, isMusicCreditsPlaying, isVictoryMusicPlaying, isDrawMusicPlaying;
+boolean isMusicAJEPlaying, isMusicOptionsPlaying, isMusicCreditsPlaying, isDarkSideVMusicPlaying, isBrightSideVMusicPlaying, isDrawMusicPlaying, isVictoryMusicPlaying;
             
 int pSpeed1 = 8;              //Vitesses des personnages
 int pSpeed2 = 8;
@@ -53,12 +55,13 @@ int screen;                   //Ecran à afficher
 PFont titre, texte;           //Déclaration des polices d'écriture
 
 PImage fondAccueil,fondJeu, fondOptions, fondCredits, fondExit, Personnage;    //Déclaration des images
-PImage playIcon, pauseIcon, optionsIcon, creditsIcon, returnIcon, exitIcon, speedDownIcon, speedUpIcon, volumeDownIcon, volumeUpIcon;  //Déclaration des icones
+PImage playIcon, pauseIcon, optionsIcon, creditsIcon, returnIcon, exitIcon, speedDownIcon, speedUpIcon, volumeDownIcon, volumeUpIcon, timeLessIcon, timePlusIcon;   //Déclaration des icones
 
 ControlP5 cp5;                //Déclaration du controlleur (permetant la création d'une SlideBar)
 
 float volumeM = 0.50;         //Valeur initiale en % du volume de la musique
 float volumeL = 0.50;         //Valeur initiale en % du volume du laser
+float volumeB = 0.50;         //Valeur initiale en % du volume des bruits
 
 color sliderActiveColor = #FF0000, sliderForegroundColor=#AA0000;         //Couleurs liées au sliderBar
 color gameTitleColor = #FFFF00, homeTextColor=#00FF00, gameTextColor=#FF0000, creditsTextColor=#FF0000, exitTextColor=#FF7800;    //Couleurs liées au texte dans les différents menus

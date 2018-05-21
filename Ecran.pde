@@ -11,12 +11,24 @@ void ecranAccueil(){
     MusiqueCredits.stop();
     isMusicCreditsPlaying = false;
   }
+  if(isVictoryMusicPlaying){
+    darkSideVMusic.stop();
+    brightSideVMusic.stop();
+    isVictoryMusicPlaying = false;
+  }
+  if(isDrawMusicPlaying){
+    drawMusic.stop();
+    isDrawMusicPlaying = false;
+  }
+  
   cursor();
   background(fondAccueil);
+  
   if(!isMusicAJEPlaying){
     MusiqueAJE.loop();
     isMusicAJEPlaying=true;
   }
+  
   noFill();
   stroke(0,0,0);
   rectMode(CENTER);
@@ -33,22 +45,26 @@ void ecranAccueil(){
   else if(noGamepadMode) text("No suitable device found, no gamepad mode activated",width>>1,28);
   
   if((mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height/3)+40 && mouseY>(height/3)-40)){       //Souris sur PLAY / JOUER
-    fill(255,50); }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent 
+    fill(255,50);
+  }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent 
   else noFill();
   rect(width>>1,height/3,200,80);                                                                             //Réalisation de la case
    
   if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) {     //Souris sur Options
-    fill(255,50); }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent
+    fill(255,50);
+  }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent
   else noFill();
   rect(width>>1,height>>1,200,80);                                                                            //Réalisation de la case
   
   if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.67)+40 && mouseY>(height*0.67)-40) { //Souris sur Copyrights
-    fill(255,50); }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent
+    fill(255,50);
+  }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent
   else noFill();
   rect(width>>1,height*0.67,200,80);                                                                          //Réalisation de la case
   
   if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.84)+40 && mouseY>(height*0.84)-40) { //Souris sur Fin
-    fill(255,50); }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent
+    fill(255,50);
+  }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent
   else noFill();
   rect(width>>1,height*0.84,200,80);                                                                          //Réalisation de la case
   
@@ -69,6 +85,17 @@ void ecranJeu1vs1(){
     initTimer();
     inGame = true;
     lightSaberOn.play();
+    deathmatchAnnouncer.play();
+  }
+  if(isVictoryMusicPlaying){
+    darkSideVMusic.stop();
+    brightSideVMusic.stop();
+    isVictoryMusicPlaying = false;
+  }
+  
+  if(isDrawMusicPlaying){
+    drawMusic.stop();
+    isDrawMusicPlaying = false;
   }
   background(fondJeu);                   //Apparition de la carte de jeu
   if(!isMusicAJEPlaying){              
@@ -196,6 +223,7 @@ void ecranOptions(){
   cp5.getController("Vitesse Personnage 2").setVisible(true);
   cp5.getController("Volume musique").setVisible(true);
   cp5.getController("Volume lasers").setVisible(true);
+  cp5.getController("Volume bruits").setVisible(true);
   cp5.getController("Temps de Jeu").setVisible(true);
   
   updateOptions();
@@ -242,6 +270,10 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
   lightSaber2.amp(0.05*volumeL);
   lightSaberOn.amp(0.25*volumeL);
   lightSaberOff.amp(0.25*volumeL);
+  
+  volumeB=(cp5.getController("Volume bruits").getValue())/100;
+  clicSound.amp(0.125*volumeB);
+  deathmatchAnnouncer.amp(0.125*volumeB);
 }
 
 //
@@ -262,9 +294,7 @@ void ecranCredits(){
   textFont(texte,22);
   fill(creditsBackButtonColor);
   text("Back / Retour",width>>1,height*0.9+10);
-  if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) {   
-    fill(255,50);
-  }
+  if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) fill(255,50);
   else noFill();
   rect(width>>1,height*0.9,200,80);
 }
@@ -286,7 +316,8 @@ void ecranSortie(){
   text("Êtes-vous sûr de vouloir quitter ?",width>>1,height/3);                                   
   
   if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) {  //Bouton Yes
-    fill(255,50); }
+    fill(255,50);
+  }
   else noFill();
   rect(width>>2,height>>1,200,80);
   textFont(texte,30);
@@ -294,7 +325,8 @@ void ecranSortie(){
   text("Yes",width>>2,(height>>1)+10);
   
   if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) { //Bouton No
-    fill(255,50); }
+    fill(255,50);
+  }
   else noFill();
   rect(width*0.75,height>>1,200,80);
   fill(exitNoButtonColor);

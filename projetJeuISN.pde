@@ -6,8 +6,9 @@ void setup(){
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
   smooth();                                   //Rend les contours plus lisses
   
-  xPersonnage1 = width>>2;           //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs
+  xPersonnage1 = width>>2;                    //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs
   yPersonnage1 = height>>1;                   //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"  
+ 
   xPersonnage2 = (width>>2)*3;                //Positionnement des personnages
   yPersonnage2 = height>>1;
   
@@ -21,8 +22,9 @@ void setup(){
   MusiqueCredits = new SoundFile(this, "MusiqueCredits.mp3");      //Musique Menu Credits
   fellInLava = new SoundFile(this, "splashInLava.mp3");
   MusiqueAJE.amp((0.125*volumeM));                                 //Volume initial de la musique de fond (Volume max = 0.125, Volume initial = 0.125*0.5)
-  laser1.amp(0.05*volumeL);                                        //Volume initial du laser (Volume max = 0.05, Volume initial = 0.05*0.5)
-  laser2.amp(0.05*volumeL);
+  laser1.amp(0.1*volumeL);                                        //Volume initial du laser (Volume max = 0.05, Volume initial = 0.05*0.5)
+  laser2.amp(0.1*volumeL);
+  fellInLava.amp(0.1);
   
   fondAccueil = loadImage("fondAccueil.png");                      //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");
@@ -119,6 +121,7 @@ void draw(){
    case 5: ecranFinPartie();      break;    //Affichage de l'écran de fin de partie
   }
 }
+
 
 //
 // Utilisation de la souris

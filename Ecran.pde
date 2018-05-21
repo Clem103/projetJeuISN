@@ -84,8 +84,8 @@ void ecranJeu1vs1(){
   if(debugMode){
     debugHitboxPerso();
     debugHitboxMap();
+    debugRespawn();
   }
-
   fill(gameTextColor);                                              //Affichage des scores
   stroke(255,0,0);
   textFont(texte,20);                                  

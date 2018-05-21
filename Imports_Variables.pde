@@ -20,6 +20,7 @@ float pSpeedY2;
 
 int scoreP1=0, scoreP2=0;
 
+
 int tPersonnage=50;
 
 

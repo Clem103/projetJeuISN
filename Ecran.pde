@@ -57,6 +57,7 @@ void ecranAccueil(){
   text("Options",width>>1,(height>>1)+10);
   text("Credits",width>>1,height*0.67+10);
   text("Exit",width>>1,height*0.84+10);
+  noFill();
 }
 
 //
@@ -69,20 +70,29 @@ void ecranJeu1vs1(){
     MusiqueAJE.loop();
     isMusiqueAJEPlaying=true;
   }
-  if(!noGamepadMode) bougerPersonnageGamepad(pSpeed2);
+  
+  if(!noGamepadMode){
+    bougerPersonnageGamepad(pSpeed2);
+    viseeGamepad();
+  }
   bougerPersonnageClavier();
   viseeSouris();
-  if(!noGamepadMode)viseeGamepad();
   affichagePersonnages();
-  if(debugMode)debugHitboxPerso();
   affichageIconeJeu1vs1();
-  checkHitbox();
+  checkHitbox(numberOfPoints);
+  
+  if(debugMode){
+    debugHitboxPerso();
+    debugHitboxMap();
+  }
   
   fill(gameTextColor);
   stroke(255,0,0);
   textFont(texte,20);                                  //Ecriture des différents éléments
   text("Space/Espace : Pause",width>>1,height-5,20);
   textFont(texte,25);
+  noFill();
+  System.out.print(isP1InBackground()+" ");
   
   if(espace){                                          //Si on appuie sur espace, l'écran d'accueil est ouvert (mise en pause du jeu)
     screen=0;
@@ -148,7 +158,8 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
   MusiqueCredits.amp(0.125*volumeM);
   
   volumeL=(cp5.getController("Volume lasers").getValue())/100;
-  laser.amp(0.05*volumeL);
+  laser1.amp(0.05*volumeL);
+  laser2.amp(0.05*volumeL);
 }
 
 //

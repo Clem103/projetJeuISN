@@ -6,11 +6,13 @@ void viseeSouris(){
   xCP=xC-xP;
   yCP=yC-yP;
   angleCurseur = atan2(yCP,xCP);
-  strokeWeight(5);
   xEndOfWeapon1 = xP+weaponLength*cos(angleCurseur);
   yEndOfWeapon1 = yP+weaponLength*sin(angleCurseur);
+  strokeWeight(5);
+  stroke(#FF0000);
   line(xP,yP,xEndOfWeapon1,yEndOfWeapon1);
   strokeWeight(1);
+  noStroke();
 }
 
 void viseeGamepad(){
@@ -28,4 +30,5 @@ void viseeGamepad(){
   stroke(#00FF00);
   line(xS2-17,yS2,xEndOfWeapon2,yEndOfWeapon2);
   strokeWeight(1);
+  noStroke();
 }

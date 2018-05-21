@@ -5,7 +5,7 @@ import org.gamecontrolplus.*;
 import net.java.games.input.*;
 import java.util.List;
 
-SoundFile laser;              //Déclaration des variables de son (Laser)
+SoundFile laser1, laser2;     //Déclaration des variables de son (Laser)
 SoundFile MusiqueAJE;         //Musique Accueil+Jeu+Exit
 SoundFile MusiqueOptions;
 SoundFile MusiqueCredits;
@@ -28,8 +28,8 @@ int xPersonnage2, yPersonnage2;
 int xS1,yS1,xS2,yS2,xS3,yS3,xS4,yS4;
 float xP,yP,xC,yC,xCP,yCP,angleCurseur;
 
-float distancePerso;
-int xGp1, yGp1, xGp2, yGp2; //Centre de gravité des personnages
+float distancePerso, distanceP1ellipseTop, distanceP1ellipseRight, distanceP1ellipseLeft, distanceP2ellipseTop, distanceP2ellipseRight, distanceP2ellipseLeft;
+int xGp1, yGp1, xGp2, yGp2;   //Centre de gravité des personnages
 
 boolean espace =  false;      //initialisation des touches du jeu (false = touche non appuyée)
 boolean up=       false;

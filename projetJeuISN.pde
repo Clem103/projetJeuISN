@@ -1,6 +1,6 @@
 void setup(){
-  //fullScreen();
-  size(1280,720);
+  fullScreen();
+  //size(1280,720);
   frameRate(60);
   titre = createFont("PoliceTitre.ttf",1);    //Initialisation de la police utilisée pour les titres
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
@@ -15,12 +15,14 @@ void setup(){
   
   screen = 0;                                 //Initialisation de l'écran initial à l'écran d'accueil
   
-  laser = new SoundFile(this, "8BitExplosion.mp3");                //Variable qui correspond à un fichier son placé dans /data du dossier projet (son du laser)
+  laser1 = new SoundFile(this, "LightSaberHit1.mp3");               //Variable qui correspond à un fichier son placé dans /data du dossier projet (son du laser)
+  laser2 = new SoundFile(this, "LightSaberHit2.mp3");
   MusiqueAJE = new SoundFile(this, "MusiqueAJE.mp3");              //Musique Accueil+Jeu+ Menu Exit
   MusiqueOptions = new SoundFile(this, "MusiqueOptions.mp3");      //Musique Menu Options
   MusiqueCredits = new SoundFile(this, "MusiqueCredits.mp3");      //Musique Menu Credits
   MusiqueAJE.amp((0.125*volumeM));                                 //Volume initial de la musique de fond (Volume max = 0.125, Volume initial = 0.125*0.5)
-  laser.amp(0.05*volumeL);                                         //Volume initial du laser (Volume max = 0.05, Volume initial = 0.05*0.5)
+  laser1.amp(0.05*volumeL);                                        //Volume initial du laser (Volume max = 0.05, Volume initial = 0.05*0.5)
+  laser2.amp(0.05*volumeL);
   
   fondAccueil = loadImage("fondAccueil.png");                      //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");

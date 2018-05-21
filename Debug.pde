@@ -32,5 +32,18 @@ void debugHitboxPerso(){
   textSize(20);
   text(distancePerso,width>>1,height>>1);
   line(xGp1,yGp1,xGp2,yGp2);
+}
+
+void debugHitboxMap(){
+  if(isP1InBackground()) stroke(#0057FF);
+  else if (isP2InBackground()) stroke(#5EFF03);
+  else stroke(#030303);
+  rectMode(CENTER);
+  rect(width>>1,height>>1,width-width*0.0390,height-height*0.0651);
   
+  ellipseMode(CENTER);
+  ellipse(width*0.414,height*0.260,width*0.06,width*0.06);  //ellipse top
+  ellipse(width*0.688,height*0.635,width*0.06,width*0.06);  //ellipse right
+  ellipse(width*0.1875,height*0.76,width*0.06,width*0.06);  //ellipse left
+  noStroke();  
 }

@@ -6,9 +6,8 @@ void setup(){
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
   smooth();                                   //Rend les contours plus lisses
   
-  xPersonnage1 = width>>2;                    //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs
+  xPersonnage1 = width>>2;           //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs
   yPersonnage1 = height>>1;                   //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"  
- 
   xPersonnage2 = (width>>2)*3;                //Positionnement des personnages
   yPersonnage2 = height>>1;
   
@@ -22,9 +21,8 @@ void setup(){
   MusiqueCredits = new SoundFile(this, "MusiqueCredits.mp3");      //Musique Menu Credits
   fellInLava = new SoundFile(this, "splashInLava.mp3");
   MusiqueAJE.amp((0.125*volumeM));                                 //Volume initial de la musique de fond (Volume max = 0.125, Volume initial = 0.125*0.5)
-  laser1.amp(0.1*volumeL);                                        //Volume initial du laser (Volume max = 0.05, Volume initial = 0.05*0.5)
-  laser2.amp(0.1*volumeL);
-  fellInLava.amp(0.1);
+  laser1.amp(0.05*volumeL);                                        //Volume initial du laser (Volume max = 0.05, Volume initial = 0.05*0.5)
+  laser2.amp(0.05*volumeL);
   
   fondAccueil = loadImage("fondAccueil.png");                      //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");
@@ -118,9 +116,9 @@ void draw(){
    case 2: ecranOptions();        break;    //Affichage de l'écran des options   
    case 3: ecranCredits();        break;    //Affichage de l'écran des crédits 
    case 4: ecranSortie();         break;    //Affichage de l'écran de sortie
+   case 5: ecranFinPartie();      break;    //Affichage de l'écran de fin de partie
   }
 }
-
 
 //
 // Utilisation de la souris
@@ -162,6 +160,11 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
   if (screen == 4){ //Dans l'écran de sortie
     if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) screen=0;   //Retour à l'accueil lors du click sur No/Non
     if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) exit();         //Fermeture de la fenêtre lors du click sur Yes/Oui
+  }
+  
+  if(screen == 5){
+    if (mouseX<(width>>2)+200 && mouseX>(width>>2) && mouseY<(height>>2)*3+40 && mouseY>(height>>2)*3) screen=1;          //Joueurs veulent rejouer, jeu relancé
+    if (mouseX<(width>>2)+200 && mouseX>(width>>2) && mouseY<(height>>2) && mouseY>(height>>2)) exit();                   //Joueurs ne veulent pas rejouer, fermeture du jeu 
   }
 }
 

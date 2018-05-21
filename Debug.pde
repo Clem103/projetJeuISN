@@ -47,12 +47,3 @@ void debugHitboxMap(){
   ellipse(width*0.1875,height*0.76,width*0.06,width*0.06);  //ellipse left
   noStroke();  
 }
-
-void debugRespawn(){
-  rectMode(CORNER);
-  stroke(#FFFFFF);
-  rect(width>>5,height>>4,width*0.32,height*0.62);
-  rect(width*0.25,height/3,width*0.4,height*0.55);
-  rect(width*0.6,height>>4,width*0.36,height*0.49);
-  noStroke();
-}

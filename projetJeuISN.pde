@@ -23,8 +23,8 @@ void setup(){
   fellInLava = new SoundFile(this, "splashInLava.mp3");                    //Bruit tomber dans la lave
   lightSaberOn = new SoundFile(this, "lightSaberON.mp3");                  //Bruit allumage sabre laser
   lightSaberOff = new SoundFile(this, "lightSaberOFF.mp3");                //Bruit eteignage sabre laser
-  clicSound = new SoundFile(this, "clicSound.ogg");                        //Bruit de clic sur case
-  deathmatchAnnouncer = new SoundFile(this, "deathmatchAnnouncer.ogg");    //Voix annoncant mode jeu
+  clicSound = new SoundFile(this, "clicSound.mp3");                        //Bruit de clic sur case
+  deathmatchAnnouncer = new SoundFile(this, "deathmatchAnnouncer.mp3");    //Voix annoncant mode jeu
   drawMusic= new SoundFile(this, "DrawMusic.mp3");                         //Musique égalité
   brightSideVMusic= new SoundFile(this, "BrightSideVMusic.mp3");           //Musique victoire coté lumineux
   darkSideVMusic= new SoundFile(this, "DarkSideVMusic.mp3");               //Musique victoire coté obscur
@@ -40,7 +40,7 @@ void setup(){
   lightSaberOff.amp(0.25*volumeL);
   deathmatchAnnouncer.amp((0.125*volumeB));
   clicSound.amp((0.125*volumeB));
-  fellInLava.amp(0.1);
+  fellInLava.amp(0.1*volumeB);
   
   fondAccueil = loadImage("fondAccueil.png");                      //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");
@@ -144,7 +144,7 @@ void setup(){
     gpad.getSlider(XAim).setTolerance(0.05);
     gpad.getSlider(YAim).setTolerance(0.15);
   }
-  
+  sommetsPerso();
   numberOfPoints=numberOfHitboxPoints();
 }
 
@@ -287,7 +287,7 @@ void keyReleased(){  //Lorsque l'on relâche la touche, la variable correspondan
 
 void affichagePersonnages(){                                        //Affichage des personnages
   image(Personnage,xs1,ys1,tPersonnage,tPersonnage);  
-  image(Personnage,xS1,yS2,tPersonnage,tPersonnage);
+  image(Personnage,xS1,yS1,tPersonnage,tPersonnage);
 }
 void affichageIconesAccueil(){                                      //Affichage des icones dans l'accueil
   image(playIcon,(width>>1)-175,(height/3)-30,60,60);

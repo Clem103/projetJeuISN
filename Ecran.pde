@@ -109,6 +109,7 @@ void ecranJeu1vs1(){
   }
   bougerPersonnageClavier();            //Imports des fonctionnalités de jeu
   viseeSouris();
+  sommetsPerso();
   affichagePersonnages();
   affichageIconeJeu1vs1();
   checkHitbox(numberOfPoints);
@@ -274,6 +275,7 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
   volumeB=(cp5.getController("Volume bruits").getValue())/100;
   clicSound.amp(0.125*volumeB);
   deathmatchAnnouncer.amp(0.125*volumeB);
+  fellInLava.amp(0.1*volumeB);
 }
 
 //

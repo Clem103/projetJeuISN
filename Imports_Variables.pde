@@ -10,11 +10,12 @@ SoundFile lightSaberOn, lightSaberOff;
 SoundFile MusiqueAJE;                   //Musique Accueil+Jeu+Exit
 SoundFile MusiqueOptions;
 SoundFile MusiqueCredits;
-SoundFile MusiqueVictoire;
-SoundFile MusiqueEgalite;
+SoundFile darkSideVMusic;
+SoundFile brightSideVMusic;
+SoundFile drawMusic;
 SoundFile fellInLava;
 
-boolean isMusiqueAJEPlaying, isMusiqueOptionsPlaying, isMusiqueCreditsPlaying;
+boolean isMusicAJEPlaying, isMusicOptionsPlaying, isMusicCreditsPlaying, isVictoryMusicPlaying, isDrawMusicPlaying;
             
 int pSpeed1 = 8;              //Vitesses des personnages
 int pSpeed2 = 8;
@@ -22,7 +23,7 @@ float pSpeedX2;
 float pSpeedY2;
 
 int timer;
-int tpsDeJeu = 20;
+int tpsDeJeu = 120;
 int tpsEcoule;
 int tpsInit;
 int scoreP1=0, scoreP2=0;

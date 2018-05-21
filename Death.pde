@@ -12,20 +12,20 @@ void p2Death(){          //fonction appelée lorsque le personnage 2 meurt
   scoreP1++;                                                //Le score du joueur 1 augmente
 }
 
-void p1LavaDeath(){
+void p1LavaDeath(){                                         //Fonction appelé lors de la chute dans la lave
   fellInLava.play();
   p1Death();
 }
 
-void p2LavaDeath(){
+void p2LavaDeath(){                                         //Fonction appelé lors de la chute dans la lave
   fellInLava.play();
   p2Death();
 }
 
-int[] respawn(int xPersonnage,int yPersonnage){
-  spawn = (int)random(3);
+int[] respawn(int xPersonnage,int yPersonnage){             //Fonction appelé lorsque qu'un joueur meurt
+  spawn = (int)random(3);                                   //On randomise la zone de spawn
   switch(spawn){
-    case 0 : {
+    case 0 : {                                              //Au sein de la zone de spawn, on randomise la pos du personnage à la réapparition
       xPersonnage=(int)random(width>>5,width*0.35125);
       yPersonnage=(int)random(height>>4,height*0.6825);
       int[]personnage={xPersonnage,yPersonnage};
@@ -44,7 +44,7 @@ int[] respawn(int xPersonnage,int yPersonnage){
       return personnage;
     }
     default : {
-    int[] personnage={width>>1,height>>1};
+    int[] personnage={width>>1,height>>1};                //Si la valeur aléatoire ne fontionne le cas par défaut place les personnages au centre
     return personnage;
     }
   }

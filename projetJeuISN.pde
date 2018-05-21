@@ -23,6 +23,9 @@ void setup(){
   fellInLava = new SoundFile(this, "splashInLava.mp3");
   lightSaberOn = new SoundFile(this, "lightSaberON.mp3");
   lightSaberOff = new SoundFile(this, "lightSaberOFF.mp3");
+  drawMusic= new SoundFile(this, "DrawMusic.mp3");
+  brightSideVMusic= new SoundFile(this, "BrightSideVMusic.mp3");
+  darkSideVMusic= new SoundFile(this, "DarkSideVMusic.mp3");
   MusiqueAJE.amp((0.125*volumeM));                                      //Volume initial de la musique de fond (Volume max = 0.125, Volume initial = 0.125*0.5)
   lightSaber1.amp(0.1*volumeL);                                         //Volume initial du sabre (Volume max = 0.05, Volume initial = 0.05*0.5)
   lightSaber2.amp(0.1*volumeL);

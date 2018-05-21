@@ -3,19 +3,19 @@
 //
 
 void ecranAccueil(){
-  if(isMusiqueOptionsPlaying){
+  if(isMusicOptionsPlaying){
     MusiqueOptions.stop();
-    isMusiqueOptionsPlaying = false;
+    isMusicOptionsPlaying = false;
   }
-  if(isMusiqueCreditsPlaying){
+  if(isMusicCreditsPlaying){
     MusiqueCredits.stop();
-    isMusiqueCreditsPlaying = false;
+    isMusicCreditsPlaying = false;
   }
   cursor();
   background(fondAccueil);
-  if(!isMusiqueAJEPlaying){
+  if(!isMusicAJEPlaying){
     MusiqueAJE.loop();
-    isMusiqueAJEPlaying=true;
+    isMusicAJEPlaying=true;
   }
   noFill();
   stroke(0,0,0);
@@ -71,9 +71,9 @@ void ecranJeu1vs1(){
     lightSaberOn.play();
   }
   background(fondJeu);                   //Apparition de la carte de jeu
-  if(!isMusiqueAJEPlaying){              
+  if(!isMusicAJEPlaying){              
     MusiqueAJE.loop();
-    isMusiqueAJEPlaying=true;
+    isMusicAJEPlaying=true;
   }
   
   if(!noGamepadMode){
@@ -125,6 +125,8 @@ void ecranJeu1vs1(){
 // 
 
 void ecranFinPartie(){
+ MusiqueAJE.stop();
+ isMusicAJEPlaying = false;
  background(fondJeu);
  affichagePersonnages();
  textFont(titre,50);
@@ -134,12 +136,24 @@ void ecranFinPartie(){
  
  if(scoreP1==scoreP2){
    text("It's a draw !\n The scores are " + scoreP1 + " point(s)!",width>>1,height>>2);
+   if(!isDrawMusicPlaying){
+      drawMusic.play();
+      isDrawMusicPlaying=true;
+   }
  }
  if(scoreP1<scoreP2){
    text("The BrightSide won\n Its score is " + scoreP2 + " point(s)",width>>1,height>>2);
+   if(!isVictoryMusicPlaying){
+      brightSideVMusic.play();
+      isVictoryMusicPlaying=true;
+   }
  }
  if(scoreP1>scoreP2){
    text("The DarkSide won\n Its score is " + scoreP1 + " point(s)",width>>1,height>>2);
+   if(!isVictoryMusicPlaying){
+      darkSideVMusic.play();
+      isVictoryMusicPlaying=true;
+   }
  }
  
  fill(gameTextColor);
@@ -169,14 +183,14 @@ void ecranFinPartie(){
 //
 
 void ecranOptions(){
-  if(isMusiqueAJEPlaying){
+  if(isMusicAJEPlaying){
     MusiqueAJE.stop();
-    isMusiqueAJEPlaying=false;
+    isMusicAJEPlaying=false;
   }
   background(fondOptions);                          //Apparition du fond 
-  if(!isMusiqueOptionsPlaying){ 
+  if(!isMusicOptionsPlaying){ 
     MusiqueOptions.loop();
-    isMusiqueOptionsPlaying=true;
+    isMusicOptionsPlaying=true;
   }
   cp5.getController("Vitesse Personnage 1").setVisible(true);            //On affiche les barres définies dans le setup{}
   cp5.getController("Vitesse Personnage 2").setVisible(true);
@@ -226,6 +240,8 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
   volumeL=(cp5.getController("Volume lasers").getValue())/100;
   lightSaber1.amp(0.05*volumeL);
   lightSaber2.amp(0.05*volumeL);
+  lightSaberOn.amp(0.25*volumeL);
+  lightSaberOff.amp(0.25*volumeL);
 }
 
 //
@@ -233,14 +249,14 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
 //
 
 void ecranCredits(){
-  if(isMusiqueAJEPlaying){
+  if(isMusicAJEPlaying){
     MusiqueAJE.stop();
-    isMusiqueAJEPlaying=false;
+    isMusicAJEPlaying=false;
   }
   background(fondCredits);
-  if(!isMusiqueCreditsPlaying){
+  if(!isMusicCreditsPlaying){
     MusiqueCredits.loop();
-    isMusiqueCreditsPlaying=true;
+    isMusicCreditsPlaying=true;
   }
   textAlign(CENTER);                                                                                          //Création bouton retour accueil
   textFont(texte,22);
@@ -260,9 +276,9 @@ void ecranCredits(){
 void ecranSortie(){
   background(fondExit);                      //Affichage du fond écran fermer jeu
   affichageIconesExit();                     //Affichage des icones écran fermer jeu
-  if(!isMusiqueAJEPlaying){
+  if(!isMusicAJEPlaying){
     MusiqueAJE.loop();
-    isMusiqueAJEPlaying=true;
+    isMusicAJEPlaying=true;
   }
   textAlign(CENTER);                                                  //Affichage question validation
   fill(exitTextColor);

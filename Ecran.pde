@@ -274,6 +274,7 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
   volumeB=(cp5.getController("Volume bruits").getValue())/100;
   clicSound.amp(0.25*volumeB);
   deathmatchAnnouncer.amp(0.3*volumeB);
+  fellInLava.amp(0.125*volumeB);
 }
 
 //

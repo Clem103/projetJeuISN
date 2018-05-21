@@ -6,11 +6,11 @@ void setup(){
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
   smooth();                                   //Rend les contours plus lisses
   
-  xPersonnage1 = (int)(width*0.75);           //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs                                                                                                          //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
-  yPersonnage1 = height>>2;
+  xPersonnage1 = width>>2;           //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs                                                                                                          //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
+  yPersonnage1 = height>>1;
   
-  xPersonnage2 = width>>2;
-  yPersonnage2 = (int)(height*0.75);
+  xPersonnage2 = (width>>2)*3;
+  yPersonnage2 = height>>1;
   
     
   screen = 0;                                                      //Initialisation de l'écran initial à l'écran d'accueil

@@ -10,7 +10,11 @@ SoundFile MusiqueAJE;         //Musique Accueil+Jeu+Exit
 SoundFile MusiqueOptions;
 SoundFile MusiqueCredits;
 SoundFile MusiqueVictoire;
+<<<<<<< HEAD
 SoundFile MusiqueEgualite;
+=======
+SoundFile MusiqueEgalite;
+>>>>>>> tomerge
 SoundFile fellInLava;
 
 boolean isMusiqueAJEPlaying, isMusiqueOptionsPlaying, isMusiqueCreditsPlaying;
@@ -20,12 +24,11 @@ int pSpeed2 = 6;
 float pSpeedX2;
 float pSpeedY2;
 
-int timer=180;
+int timer = 180;
 int tpsEcoule;
 int scoreP1=0, scoreP2=0;
 
 int tPersonnage=50;
-
 
 int xPersonnage1;                //Coordonnées du personnage1
 int yPersonnage1; 

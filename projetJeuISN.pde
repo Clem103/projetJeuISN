@@ -161,7 +161,7 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
     if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) screen=0;   //Retour à l'accueil lors du click sur No/Non
     if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) exit();         //Fermeture de la fenêtre lors du click sur Yes/Oui
   }
-  
+
   if(screen == 5){
     if (mouseX<(width>>2)+200 && mouseX>(width>>2) && mouseY<(height>>2)*3+40 && mouseY>(height>>2)*3) screen=1;          //Joueurs veulent rejouer, jeu relancé
     if (mouseX<(width>>2)+200 && mouseX>(width>>2) && mouseY<(height>>2) && mouseY>(height>>2)) exit();                   //Joueurs ne veulent pas rejouer, fermeture du jeu 

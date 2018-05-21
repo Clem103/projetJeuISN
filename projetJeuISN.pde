@@ -4,7 +4,7 @@ void setup(){
   frameRate(60);
   titre = createFont("PoliceTitre.ttf",1);    //Initialisation de la police utilisée pour les titres
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
-  smooth();     //Rend les contours plus lisses
+  smooth();                                   //Rend les contours plus lisses
   
   xPersonnage1 = (int)(width*0.75);           //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs                                                                                                          //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
   yPersonnage1 = height>>2;
@@ -12,10 +12,10 @@ void setup(){
   xPersonnage2 = width>>2;
   yPersonnage2 = (int)(height*0.75);
   
+    
+  screen = 0;                                                      //Initialisation de l'écran initial à l'écran d'accueil
   
-  screen = 0;                                 //Initialisation de l'écran initial à l'écran d'accueil
-  
-  laser1 = new SoundFile(this, "LightSaberHit1.mp3");               //Variable qui correspond à un fichier son placé dans /data du dossier projet (son du laser)
+  laser1 = new SoundFile(this, "LightSaberHit1.mp3");              //Variable qui correspond à un fichier son placé dans /data du dossier projet (son du laser)
   laser2 = new SoundFile(this, "LightSaberHit2.mp3");
   MusiqueAJE = new SoundFile(this, "MusiqueAJE.mp3");              //Musique Accueil+Jeu+ Menu Exit
   MusiqueOptions = new SoundFile(this, "MusiqueOptions.mp3");      //Musique Menu Options
@@ -41,15 +41,15 @@ void setup(){
   volumeDownIcon = loadImage("VolumeDownIcon.png");
   volumeUpIcon = loadImage("VolumeUpIcon.png");
   
-  fondAccueil.resize(width,height);                            //Changement de la taille des images
+  fondAccueil.resize(width,height);                              //Changement de la taille des images
   fondJeu.resize(width,height);
   fondOptions.resize(width,height);
   fondCredits.resize(width,height);
   fondExit.resize(width,height);
   
   
-   cp5 = new ControlP5(this);                                                        //Initialisation du controleur de paramètres
-   cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);  //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
+   cp5 = new ControlP5(this);                                                          //Initialisation du controleur de paramètres
+   cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);    //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
                                                                                         
    cp5.addSlider("Vitesse Personnage 1")                                               //Initialisation des différentes barres avec leurs paramètres (Position, taille, valeurMin/Max, valeur initiale, visibilité)
       .setPosition(width>>2,height*0.3333)
@@ -88,12 +88,12 @@ void setup(){
       .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
       
   control = ControlIO.getInstance(this);
-  List<ControlDevice> inputs = control.getDevices();                      //On récupère les périphériques disponible dans une liste
-  for(int i=0;i<inputs.size();i++){                                       //Pour chaque élément de la liste
-     if(inputs.get(i).getTypeName()=="Gamepad") gpad=control.getDevice(i);  //Si le périphérique est du type Gamepad, alors on l'utilise comme manette
+  List<ControlDevice> inputs = control.getDevices();                          //On récupère les périphériques disponible dans une liste
+  for(int i=0;i<inputs.size();i++){                                           //Pour chaque élément de la liste
+     if(inputs.get(i).getTypeName()=="Gamepad") gpad=control.getDevice(i);    //Si le périphérique est du type Gamepad, alors on l'utilise comme manette
   }
   
-  if(gpad== null){                                                        //Si aucun périphérique branché n'est compatible, on entre en mode débug
+  if(gpad== null){                                                            //Si aucun périphérique branché n'est compatible, on entre en mode débug
     noGamepadMode=true;
   }
   
@@ -140,7 +140,7 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
       cp5.getController("Volume lasers").setVisible(false);
       
       
-      pSpeed1 =(int) cp5.getController("Vitesse Personnage 1").getValue();                                          //On récupère les valeurs, non mises à jour à chaque image, à la sortie du menu
+      pSpeed1 =(int) cp5.getController("Vitesse Personnage 1").getValue();                                        //On récupère les valeurs, non mises à jour à chaque image, à la sortie du menu
       pSpeed2 =(int) cp5.getController("Vitesse Personnage 2").getValue();
     
       screen=0;   //Retour à l'accueil
@@ -194,20 +194,20 @@ void keyReleased(){  //Lorsque l'on relâche la touche, la variable correspondan
   }  
 }
 
-void affichagePersonnages(){                                                           //Affichage des personnages
+void affichagePersonnages(){                                        //Affichage des personnages
   image(Personnage,xs1,ys1,tPersonnage,tPersonnage);  
   image(Personnage,xS1,yS2,tPersonnage,tPersonnage);
 }
-void affichageIconesAccueil(){
+void affichageIconesAccueil(){                                      //Affichage des icones dans l'accueil
   image(playIcon,(width>>1)-175,(height/3)-30,60,60);
   image(optionsIcon,(width>>1)-175,(height>>1)-30,60,60);
   image(creditsIcon,(width>>1)-175,(height*0.67)-30,60,60);
   image(exitIcon,(width>>1)-175,(height*0.84)-30,60,60);
 }
-void affichageIconeJeu1vs1(){
+void affichageIconeJeu1vs1(){                                       //Affichage des icones en jeu
   image(pauseIcon,(width>>1)-150,height-24,25,25);
 }
-void affichageIconesOptions(){
+void affichageIconesOptions(){                                      //Affichage des icones dans les options
   image(speedDownIcon,(width>>2)-50,height*0.3333,40,40);
   image(speedDownIcon,(width>>2)-50,height*0.4166,40,40);
   image(speedUpIcon,(width/1.3),height*0.3333,40,40);
@@ -217,7 +217,7 @@ void affichageIconesOptions(){
   image(volumeUpIcon,(width/1.3)-10,height>>1,40,40);
   image(volumeUpIcon,(width/1.3)-10,height*0.5833,40,40);
 }
-void affichageIconesExit(){
+void affichageIconesExit(){                                         //Affiche des icones dans le menu de sortie
   image(exitIcon,(width>>2)+100,(height>>1)-40,80,80);
   image(returnIcon,(width*0.75)-180,(height>>1)-40,80,80);
 }

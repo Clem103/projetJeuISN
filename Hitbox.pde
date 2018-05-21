@@ -8,10 +8,10 @@ void checkHitbox(int numberOfPoints){
     laser2.play();
   }
   else if(isP1InBackground()){
-   p1LavaDeath(); 
+   //p1LavaDeath(); 
   }
   else if(isP2InBackground()){
-   p2LavaDeath(); 
+   //p2LavaDeath(); 
   }
 }
 

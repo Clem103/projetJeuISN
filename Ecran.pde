@@ -84,20 +84,64 @@ void ecranJeu1vs1(){
   if(debugMode){
     debugHitboxPerso();
     debugHitboxMap();
-    debugRespawn();
   }
   
-  fill(gameTextColor);                                  //Création des informations pour le retour accueil
+  fill(gameTextColor);                                              //Affichage des scores
   stroke(255,0,0);
   textFont(texte,20);                                  
-  text("Space/Espace : Pause",width>>1,height-5,20);
+  text("DarkSide points : " + scoreP1,width>>2,height-5,20);                                     
+  text("BrightSide points : " + scoreP2,(width>>2)*3,height-5,20);
+                               
+  text("Space/Espace : Pause",width>>1,height-5,20);                //Création des informations pour le retour accueil
   textFont(texte,25);
+  
   noFill();
   System.out.print(isP1InBackground()+" ");
   
   if(espace){                                          //Si on appuie sur espace, l'écran d'accueil est ouvert (mise en pause du jeu)
     screen=0;
   }
+  
+  if(timer==0) screen=5;
+}
+
+//
+// Définition de l'écran de fin de partie
+// 
+
+void ecranFinPartie(){
+ background(fondJeu);
+ affichagePersonnages();
+ textFont(titre,50);
+ fill(gameTitleColor);
+ textAlign(CENTER);
+ 
+ if(scoreP1==scoreP2){
+   text("It's a draw !\n The scores are " + scoreP1 + " point(s)!",width>>1,height>>2);
+ }
+ if(scoreP1<scoreP2){
+   text("The BrightSide won\n It's score is " + scoreP2 + " point(s)",width>>1,height>>2);
+ }
+ if(scoreP1>scoreP2){
+   text("The DarkSide won\n It's score is " + scoreP1 + " point(s)",width>>1,height>>2);
+ }
+ 
+ fill(gameTextColor);
+ text("Do you want to play again?",width>>1,height>>2);
+ 
+ if (mouseX<(width>>2)+200 && mouseX>(width>>2) && mouseY<(height>>2)*3+40 && mouseY>(height>>2)*3) {
+   fill(255,50);
+ }
+ rect(width>>2,(height>>2)*3,200,80);
+ 
+ if (mouseX<(width>>2)+200 && mouseX>(width>>2) && mouseY<(height>>2) && mouseY>(height>>2)) {
+   fill(255,50);
+ } 
+ rect((width>>2)*3,(height>>2)*3,200,80);
+ 
+ fill(exitYesButtonColor);
+ text("Yes",width>>2,(height>>2)*3);
+ text("No",(width>>2)*3,(height>>2)*3);
 }
 
 //

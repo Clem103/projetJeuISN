@@ -15,13 +15,15 @@ SoundFile fellInLava;
 
 boolean isMusiqueAJEPlaying, isMusiqueOptionsPlaying, isMusiqueCreditsPlaying;
             
-int pSpeed1 = 6;              //Vitesses des personnages
-int pSpeed2 = 6;
+int pSpeed1 = 8;              //Vitesses des personnages
+int pSpeed2 = 8;
 float pSpeedX2;
 float pSpeedY2;
 
-int timer = 180;
+int timer;
+int tpsDeJeu = 20;
 int tpsEcoule;
+int tpsInit;
 int scoreP1=0, scoreP2=0;
 int spawn;
 
@@ -83,3 +85,4 @@ int numberOfPoints=1;
 
 boolean debugMode;
 boolean noGamepadMode;
+boolean inGame = false;

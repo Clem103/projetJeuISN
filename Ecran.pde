@@ -65,8 +65,12 @@ void ecranAccueil(){
 //
 
 void ecranJeu1vs1(){
+  if(!inGame){
+    initTimer();
+    inGame = true;
+  }
   background(fondJeu);                   //Apparition de la carte de jeu
-  if(!isMusiqueAJEPlaying){              //
+  if(!isMusiqueAJEPlaying){              
     MusiqueAJE.loop();
     isMusiqueAJEPlaying=true;
   }
@@ -80,6 +84,8 @@ void ecranJeu1vs1(){
   affichagePersonnages();
   affichageIconeJeu1vs1();
   checkHitbox(numberOfPoints);
+  updateTimer();
+  dispTimer();
   
   if(debugMode){
     debugHitboxPerso();
@@ -88,21 +94,27 @@ void ecranJeu1vs1(){
   }
   fill(gameTextColor);                                              //Affichage des scores
   stroke(255,0,0);
-  textFont(texte,20);                                  
-  text("DarkSide points : " + scoreP1,width>>2,height-5,20);                                     
-  text("BrightSide points : " + scoreP2,(width>>2)*3,height-5,20);
-                               
-  text("Space/Espace : Pause",width>>1,height-5,20);                //Création des informations pour le retour accueil
-  textFont(texte,25);
-  
+  textFont(texte,20); 
+  fill(#890000);
+  text("DarkSide points : " + scoreP1,width>>2,height-15,20); 
+  fill(#00FF00);
+  text("BrightSide points : " + scoreP2,(width>>2)*3,height-15,20);
   noFill();
-  System.out.print(isP1InBackground()+" ");
+  fill(#FFFFFF);                    
+  text("Space/Espace : Pause",width>>1,height-15,20);                //Création des informations pour le retour accueil
+  textFont(texte,25);
+  noFill();
   
   if(espace){                                          //Si on appuie sur espace, l'écran d'accueil est ouvert (mise en pause du jeu)
     screen=0;
+    tpsDeJeu = timer;
+    inGame=false;
   }
   
-  if(timer==0) screen=5;
+  if(timer<=0){
+    screen=5;
+    inGame = false;
+  }
 }
 
 //
@@ -120,28 +132,31 @@ void ecranFinPartie(){
    text("It's a draw !\n The scores are " + scoreP1 + " point(s)!",width>>1,height>>2);
  }
  if(scoreP1<scoreP2){
-   text("The BrightSide won\n It's score is " + scoreP2 + " point(s)",width>>1,height>>2);
+   text("The BrightSide won\n Its score is " + scoreP2 + " point(s)",width>>1,height>>2);
  }
  if(scoreP1>scoreP2){
-   text("The DarkSide won\n It's score is " + scoreP1 + " point(s)",width>>1,height>>2);
+   text("The DarkSide won\n Its score is " + scoreP1 + " point(s)",width>>1,height>>2);
  }
  
  fill(gameTextColor);
- text("Do you want to play again?",width>>1,height>>2);
- 
- if (mouseX<(width>>2)+200 && mouseX>(width>>2) && mouseY<(height>>2)*3+40 && mouseY>(height>>2)*3) {
+ text("Do you want to play again?",width>>1,height*0.4);
+ noFill();
+ rectMode(CENTER);
+ if(mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>2)*3+40 && mouseY>(height>>2)*3-40) {
    fill(255,50);
  }
+ else noFill();
  rect(width>>2,(height>>2)*3,200,80);
  
- if (mouseX<(width>>2)+200 && mouseX>(width>>2) && mouseY<(height>>2) && mouseY>(height>>2)) {
+ if(mouseX<(width>>2)*3+100 && mouseX>(width>>2)*3-100 && mouseY<(height>>2)*3+40 && mouseY>(height>>2)*3-40){
    fill(255,50);
- } 
+ }
+ else noFill();
  rect((width>>2)*3,(height>>2)*3,200,80);
  
  fill(exitYesButtonColor);
- text("Yes",width>>2,(height>>2)*3);
- text("No",(width>>2)*3,(height>>2)*3);
+ text("Yes",width>>2,(height>>2)*3+10);
+ text("No",(width>>2)*3,(height>>2)*3+10);
 }
 
 //
@@ -162,6 +177,7 @@ void ecranOptions(){
   cp5.getController("Vitesse Personnage 2").setVisible(true);
   cp5.getController("Volume musique").setVisible(true);
   cp5.getController("Volume lasers").setVisible(true);
+  cp5.getController("Temps de Jeu").setVisible(true);
   
   updateOptions();
   affichageIconesOptions();                        //Affichage des icones des options

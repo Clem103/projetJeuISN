@@ -89,6 +89,18 @@ void setup(){
       .setColorLabel(#FFFFFF)
       .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
       
+   cp5.addSlider("Temps de Jeu")
+      .setPosition(width>>2,height*0.6667)
+      .setSize((int)(width*0.5),40)
+      .setRange(10,180)
+      .setValue(120)
+      .setNumberOfTickMarks(18)
+      .showTickMarks(false)
+      .setVisible(false)
+      .setColorLabel(#FFFFFF)
+      .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
+      
+      
   control = ControlIO.getInstance(this);
   List<ControlDevice> inputs = control.getDevices();                          //On récupère les périphériques disponible dans une liste
   for(int i=0;i<inputs.size();i++){                                           //Pour chaque élément de la liste
@@ -141,10 +153,12 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
       cp5.getController("Vitesse Personnage 2").setVisible(false);
       cp5.getController("Volume musique").setVisible(false);
       cp5.getController("Volume lasers").setVisible(false);
+      cp5.getController("Temps de Jeu").setVisible(false);
       
       
       pSpeed1 =(int) cp5.getController("Vitesse Personnage 1").getValue();                                        //On récupère les valeurs, non mises à jour à chaque image, à la sortie du menu
       pSpeed2 =(int) cp5.getController("Vitesse Personnage 2").getValue();
+      tpsDeJeu =(int) cp5.getController("Temps de Jeu").getValue();
     
       screen=0;   //Retour à l'accueil
     }
@@ -166,8 +180,14 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
   }
 
   if(screen == 5){
-    if (mouseX<(width>>2)+200 && mouseX>(width>>2) && mouseY<(height>>2)*3+40 && mouseY>(height>>2)*3) screen=1;          //Joueurs veulent rejouer, jeu relancé
-    if (mouseX<(width>>2)+200 && mouseX>(width>>2) && mouseY<(height>>2) && mouseY>(height>>2)) exit();                   //Joueurs ne veulent pas rejouer, fermeture du jeu 
+    if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>2)*3+40 && mouseY>(height>>2)*3-40){
+      screen=1;               //Joueurs veulent rejouer, jeu relancé
+      p1Death();
+      p2Death();
+      scoreP1 = 0;
+      scoreP2 = 0;
+    }
+    if (mouseX<(width>>2)*3+100 && mouseX>(width>>2)*3-100 && mouseY<(height>>2)*3+40 && mouseY>(height>>2)*3-40) screen=0;             //Joueurs ne veulent pas rejouer, retour à l'accueil 
   }
 }
 
@@ -213,7 +233,7 @@ void affichageIconesAccueil(){                                      //Affichage 
   image(exitIcon,(width>>1)-175,(height*0.84)-30,60,60);
 }
 void affichageIconeJeu1vs1(){                                       //Affichage des icones en jeu
-  image(pauseIcon,(width>>1)-150,height-24,25,25);
+  image(pauseIcon,(width>>1)-150,height-33,25,25);
 }
 void affichageIconesOptions(){                                      //Affichage des icones dans les options
   image(speedDownIcon,(width>>2)-50,height*0.3333,40,40);

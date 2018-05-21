@@ -5,8 +5,9 @@ import org.gamecontrolplus.*;
 import net.java.games.input.*;
 import java.util.List;
 
-SoundFile laser1, laser2;     //Déclaration des variables de son (Laser)
-SoundFile MusiqueAJE;         //Musique Accueil+Jeu+Exit
+SoundFile lightSaber1, lightSaber2;     //Déclaration des variables de son (Sabres laser)
+SoundFile lightSaberOn, lightSaberOff;
+SoundFile MusiqueAJE;                   //Musique Accueil+Jeu+Exit
 SoundFile MusiqueOptions;
 SoundFile MusiqueCredits;
 SoundFile MusiqueVictoire;

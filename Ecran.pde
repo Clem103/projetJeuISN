@@ -68,6 +68,7 @@ void ecranJeu1vs1(){
   if(!inGame){
     initTimer();
     inGame = true;
+    lightSaberOn.play();
   }
   background(fondJeu);                   //Apparition de la carte de jeu
   if(!isMusiqueAJEPlaying){              
@@ -109,11 +110,13 @@ void ecranJeu1vs1(){
     screen=0;
     tpsDeJeu = timer;
     inGame=false;
+    lightSaberOff.play();
   }
   
   if(timer<=0){
     screen=5;
     inGame = false;
+    lightSaberOff.play();
   }
 }
 
@@ -219,8 +222,8 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
   MusiqueCredits.amp(0.125*volumeM);
   
   volumeL=(cp5.getController("Volume lasers").getValue())/100;
-  laser1.amp(0.05*volumeL);
-  laser2.amp(0.05*volumeL);
+  lightSaber1.amp(0.05*volumeL);
+  lightSaber2.amp(0.05*volumeL);
 }
 
 //

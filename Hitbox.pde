@@ -1,11 +1,11 @@
 void checkHitbox(int numberOfPoints){
   if(hasP1WeaponCollided(numberOfPoints)){
     p2Death();
-    laser1.play();
+    lightSaber1.play();
   }
   else if(hasP2WeaponCollided(numberOfPoints)){
     p1Death();
-    laser2.play();
+    lightSaber2.play();
   }
   else if(isP1InBackground()){
    p1LavaDeath(); 

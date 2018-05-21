@@ -1,5 +1,5 @@
 void setup(){
-  fullScreen();
+  fullScreen();                               //La taille de la fenêtre remplie tout l'écran
   //size(1280,720);
   frameRate(60);
   titre = createFont("PoliceTitre.ttf",1);    //Initialisation de la police utilisée pour les titres
@@ -183,7 +183,7 @@ void keyPressed(){  //Lorsque l'on appuie sur la touche, la variable corresponda
 void keyReleased(){  //Lorsque l'on relâche la touche, la variable correspondante passe à false
    switch(keyCode){
     case 32 : espace =      false; break;  //Espace
-    case UP : up =          false; break;  //Flèche clavier
+    case UP : up =          false; break;  //Flèches clavier
     case DOWN : down =      false; break;
     case LEFT : left =      false; break;
     case RIGHT : right =    false; break;

@@ -2,7 +2,6 @@ void p1Death(){
   xPersonnage1 = (int)(width*0.75);
   yPersonnage1 = height>>2;
   
-  
 }
 
 void p2Death(){

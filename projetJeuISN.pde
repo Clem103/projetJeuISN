@@ -6,8 +6,8 @@ void setup(){
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
   smooth();     //Rend les contours plus lisses
   
-  xPersonnage1 = (int)(width*0.75);           //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs                                                                                                          //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
-  yPersonnage1 = height>>2;
+  xPersonnage1 = (int)(width*0.75);           //En binaire : décalage à droite des chiffres de 1 (0101 -> 0010). Revient ici à diviser par 2^1  ==> Fludification des calculs
+  yPersonnage1 = height>>2;                   //Autre ex: 11010001>>2  -> 00110100 : division par 2^2=4. "left shift" & "right shift"
   
   xPersonnage2 = width>>2;
   yPersonnage2 = (int)(height*0.75);
@@ -20,6 +20,7 @@ void setup(){
   MusiqueAJE = new SoundFile(this, "MusiqueAJE.mp3");              //Musique Accueil+Jeu+ Menu Exit
   MusiqueOptions = new SoundFile(this, "MusiqueOptions.mp3");      //Musique Menu Options
   MusiqueCredits = new SoundFile(this, "MusiqueCredits.mp3");      //Musique Menu Credits
+  fellInLava = new SoundFile(this, "splashInLava.mp3");
   MusiqueAJE.amp((0.125*volumeM));                                 //Volume initial de la musique de fond (Volume max = 0.125, Volume initial = 0.125*0.5)
   laser1.amp(0.05*volumeL);                                        //Volume initial du laser (Volume max = 0.05, Volume initial = 0.05*0.5)
   laser2.amp(0.05*volumeL);

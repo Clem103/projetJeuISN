@@ -53,8 +53,9 @@ float volumeM = 0.50;         //Valeur initiale en % du volume de la musique
 float volumeL = 0.50;         //Valeur initiale en % du volume du laser
 
 color sliderActiveColor = #FF0000, sliderForegroundColor=#AA0000;         //Couleurs liées au sliderBar
-color gameTitleColor = #FF0000, homeTextColor=#FF0000, gameTextColor=#FF0000, creditsTextColor=#FF0000, exitTextColor=#FF7800;    //Couleurs liées au texte dans les différents menus
-color optionsBackButtonColor = #007FFF, creditsBackButtonColor=#FF0000, exitYesButtonColor=#FF0000, exitNoButtonColor=#FF0000, gameModeBackButtonColor=#007FFF;    //Couleurs liées au texte dans différents "boutons"
+color gameTitleColor = #FFFF00, homeTextColor=#00FF00, gameTextColor=#FF0000, creditsTextColor=#FF0000, exitTextColor=#FF7800;    //Couleurs liées au texte dans les différents menus
+
+color optionsBackButtonColor = #007FFF, creditsBackButtonColor=#007FFF, exitYesButtonColor=#FF0000, exitNoButtonColor=#FF0000, gameModeBackButtonColor=#007FFF;    //Couleurs liées au texte dans différents "boutons"
 color optionsTextsColor = #FF0000;
 color fleches = #FFFFFF;
 color sliderLabelColor = #AA0000;

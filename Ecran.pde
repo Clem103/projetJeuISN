@@ -65,8 +65,8 @@ void ecranAccueil(){
 //
 
 void ecranJeu1vs1(){
-  background(fondJeu);
-  if(!isMusiqueAJEPlaying){
+  background(fondJeu);                   //Apparition de la carte de jeu
+  if(!isMusiqueAJEPlaying){              //
     MusiqueAJE.loop();
     isMusiqueAJEPlaying=true;
   }
@@ -75,7 +75,7 @@ void ecranJeu1vs1(){
     bougerPersonnageGamepad(pSpeed2);
     viseeGamepad();
   }
-  bougerPersonnageClavier();
+  bougerPersonnageClavier();            //Imports des fonctionnalités de jeu
   viseeSouris();
   affichagePersonnages();
   affichageIconeJeu1vs1();
@@ -86,9 +86,9 @@ void ecranJeu1vs1(){
     debugHitboxMap();
   }
   
-  fill(gameTextColor);
+  fill(gameTextColor);                                  //Création des informations pour le retour accueil
   stroke(255,0,0);
-  textFont(texte,20);                                  //Ecriture des différents éléments
+  textFont(texte,20);                                  
   text("Space/Espace : Pause",width>>1,height-5,20);
   textFont(texte,25);
   noFill();
@@ -108,7 +108,7 @@ void ecranOptions(){
     MusiqueAJE.stop();
     isMusiqueAJEPlaying=false;
   }
-  background(fondOptions);
+  background(fondOptions);                          //Apparition du fond 
   if(!isMusiqueOptionsPlaying){ 
     MusiqueOptions.loop();
     isMusiqueOptionsPlaying=true;
@@ -119,9 +119,9 @@ void ecranOptions(){
   cp5.getController("Volume lasers").setVisible(true);
   
   updateOptions();
-  affichageIconesOptions();
+  affichageIconesOptions();                        //Affichage des icones des options
   
-  fill(optionsTextsColor); 
+  fill(optionsTextsColor);                         //Création bouton retour accueil
   fill(optionsBackButtonColor);
   textFont(texte,22);
   text("Back / Retour",width>>1,height*0.915);
@@ -152,7 +152,7 @@ void ecranOptions(){
 
 void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant que l'on est sur l'écran des options
   
-  volumeM=(cp5.getController("Volume musique").getValue())/100;    //Réglage du volume
+  volumeM=(cp5.getController("Volume musique").getValue())/100;    //Réglage des volumes
   MusiqueAJE.amp(0.125*volumeM);
   MusiqueOptions.amp(0.125*volumeM);
   MusiqueCredits.amp(0.125*volumeM);
@@ -176,11 +176,11 @@ void ecranCredits(){
     MusiqueCredits.loop();
     isMusiqueCreditsPlaying=true;
   }
-  textAlign(CENTER);
+  textAlign(CENTER);                                                                                          //Création bouton retour accueil
   textFont(texte,22);
   fill(creditsBackButtonColor);
   text("Back / Retour",width>>1,height*0.9+10);
-  if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) {   //Bouton Retour
+  if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40) {   
     fill(255,50);
   }
   else noFill();
@@ -192,30 +192,29 @@ void ecranCredits(){
 //
 
 void ecranSortie(){
-  background(fondExit);
+  background(fondExit);                      //Affichage du fond écran fermer jeu
+  affichageIconesExit();                     //Affichage des icones écran fermer jeu
   if(!isMusiqueAJEPlaying){
     MusiqueAJE.loop();
     isMusiqueAJEPlaying=true;
   }
-  textAlign(CENTER);
+  textAlign(CENTER);                                                  //Affichage question validation
   fill(exitTextColor);
   textFont(texte,30);
-  text("Êtes-vous sûr de vouloir quitter ?",width>>1,height/3);
-  affichageIconesExit();
+  text("Êtes-vous sûr de vouloir quitter ?",width>>1,height/3);                                   
   
-  if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) { //Case Yes
+  if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) {  //Bouton Yes
     fill(255,50); }
   else noFill();
   rect(width>>2,height>>1,200,80);
-  
-  if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) { //Case No
-    fill(255,50); }
-  else noFill();
-  rect(width*0.75,height>>1,200,80);
-  
   textFont(texte,30);
   fill(exitYesButtonColor);
   text("Yes",width>>2,(height>>1)+10);
+  
+  if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40) { //Bouton No
+    fill(255,50); }
+  else noFill();
+  rect(width*0.75,height>>1,200,80);
   fill(exitNoButtonColor);
   text("No",width*0.75,(height>>1)+10);
 }

@@ -84,6 +84,7 @@ void ecranJeu1vs1(){
   if(debugMode){
     debugHitboxPerso();
     debugHitboxMap();
+    debugRespawn();
   }
   
   fill(gameTextColor);                                  //Création des informations pour le retour accueil

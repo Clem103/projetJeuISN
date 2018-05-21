@@ -19,10 +19,9 @@ float pSpeedX2;
 float pSpeedY2;
 
 int scoreP1=0, scoreP2=0;
-
+int spawn;
 
 int tPersonnage=50;
-
 
 int xPersonnage1;                //Coordonnées du personnage1
 int yPersonnage1; 

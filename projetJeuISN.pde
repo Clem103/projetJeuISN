@@ -22,8 +22,9 @@ void setup(){
   MusiqueCredits = new SoundFile(this, "MusiqueCredits.mp3");      //Musique Menu Credits
   fellInLava = new SoundFile(this, "splashInLava.mp3");
   MusiqueAJE.amp((0.125*volumeM));                                 //Volume initial de la musique de fond (Volume max = 0.125, Volume initial = 0.125*0.5)
-  laser1.amp(0.05*volumeL);                                        //Volume initial du laser (Volume max = 0.05, Volume initial = 0.05*0.5)
-  laser2.amp(0.05*volumeL);
+  laser1.amp(0.1*volumeL);                                        //Volume initial du laser (Volume max = 0.05, Volume initial = 0.05*0.5)
+  laser2.amp(0.1*volumeL);
+  fellInLava.amp(0.1);
   
   fondAccueil = loadImage("fondAccueil.png");                      //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");

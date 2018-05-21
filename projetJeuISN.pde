@@ -38,15 +38,9 @@ void setup(){
   lightSaber2.amp(0.1*volumeL);
   lightSaberOn.amp(0.25*volumeL);
   lightSaberOff.amp(0.25*volumeL);
-<<<<<<< HEAD
-  deathmatchAnnouncer.amp((0.125*volumeB));
-  clicSound.amp((0.125*volumeB));
-  fellInLava.amp(0.1*volumeB);
-=======
   deathmatchAnnouncer.amp(0.3*volumeB);
   clicSound.amp(0.25*volumeB);
   fellInLava.amp(0.125*volumeB);
->>>>>>> f568c0146ac345290f2674793035f9ea877af2e9
   
   fondAccueil = loadImage("fondAccueil.png");                      //Chargement des images dans des variables
   fondJeu = loadImage("fondJeu.png");

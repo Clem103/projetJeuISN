@@ -273,15 +273,9 @@ void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant 
   lightSaberOff.amp(0.25*volumeL);
   
   volumeB=(cp5.getController("Volume bruits").getValue())/100;
-<<<<<<< HEAD
-  clicSound.amp(0.125*volumeB);
-  deathmatchAnnouncer.amp(0.125*volumeB);
-  fellInLava.amp(0.1*volumeB);
-=======
   clicSound.amp(0.25*volumeB);
   deathmatchAnnouncer.amp(0.3*volumeB);
   fellInLava.amp(0.125*volumeB);
->>>>>>> f568c0146ac345290f2674793035f9ea877af2e9
 }
 
 //

@@ -26,8 +26,8 @@ void setup(){
   MusiqueAJE.amp((0.125*volumeM));                                      //Volume initial de la musique de fond (Volume max = 0.125, Volume initial = 0.125*0.5)
   lightSaber1.amp(0.1*volumeL);                                         //Volume initial du sabre (Volume max = 0.05, Volume initial = 0.05*0.5)
   lightSaber2.amp(0.1*volumeL);
-  lightSaberOn.amp(0.25);
-  lightSaberOff.amp(0.25);
+  lightSaberOn.amp(0.25*volumeL);
+  lightSaberOff.amp(0.25*volumeL);
   fellInLava.amp(0.1);
   
   fondAccueil = loadImage("fondAccueil.png");                      //Chargement des images dans des variables
@@ -191,7 +191,13 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
       scoreP1 = 0;
       scoreP2 = 0;
     }
-    if (mouseX<(width>>2)*3+100 && mouseX>(width>>2)*3-100 && mouseY<(height>>2)*3+40 && mouseY>(height>>2)*3-40) screen=0;             //Joueurs ne veulent pas rejouer, retour à l'accueil 
+    if (mouseX<(width>>2)*3+100 && mouseX>(width>>2)*3-100 && mouseY<(height>>2)*3+40 && mouseY>(height>>2)*3-40){
+      screen=0;             //Joueurs ne veulent pas rejouer, retour à l'accueil
+      p1Death();
+      p2Death();
+      scoreP1 = 0;
+      scoreP2 = 0;
+    }
   }
 }
 

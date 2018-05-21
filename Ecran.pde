@@ -130,6 +130,7 @@ void ecranFinPartie(){
  textFont(titre,50);
  fill(gameTitleColor);
  textAlign(CENTER);
+ stroke(0,0,0);
  
  if(scoreP1==scoreP2){
    text("It's a draw !\n The scores are " + scoreP1 + " point(s)!",width>>1,height>>2);
@@ -157,6 +158,7 @@ void ecranFinPartie(){
  else noFill();
  rect((width>>2)*3,(height>>2)*3,200,80);
  
+ textFont(texte,22);
  fill(exitYesButtonColor);
  text("Yes",width>>2,(height>>2)*3+10);
  text("No",(width>>2)*3,(height>>2)*3+10);

@@ -1,6 +1,6 @@
 void setup(){
-  //fullScreen();                               //La taille de la fenêtre remplie tout l'écran
-  size(1280,720);
+  fullScreen();                               //La taille de la fenêtre remplie tout l'écran
+  //size(1280,720);
   frameRate(60);
   titre = createFont("PoliceTitre.ttf",1);    //Initialisation de la police utilisée pour les titres
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte

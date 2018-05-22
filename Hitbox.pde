@@ -35,7 +35,7 @@ void checkHitbox(int numberOfPoints){
   }
 }
 
-int numberOfHitboxPoints(){
+int numberOfHitboxPoints(){  //Définition du nombre de points de la hitbox en fonction de la longueur du sabre
   distanceBetweenPoints = weaponLength;
   while(distanceBetweenPoints >= tPersonnage){
     numberOfPoints++; 
@@ -44,7 +44,7 @@ int numberOfHitboxPoints(){
   return numberOfPoints;
 }
 
-boolean hasP1WeaponCollided(int numberOfPoints){
+boolean hasP1WeaponCollided(int numberOfPoints){  //On check pour chaque point si 
   
   xGp1 = (xs1 + xs2 + xs3 + xs4)/4;
   yGp1 = (ys1 + ys2 + ys3 + ys4)/4;

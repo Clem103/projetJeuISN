@@ -12,23 +12,21 @@ void viseeSouris(){
   stroke(#FF0000);
   line(xP,yP,xEndOfWeapon1,yEndOfWeapon1);
   strokeWeight(1);
-  noStroke();
 }
 
 void viseeGamepad(){
-  rollXGamePad=gpad.getSlider(XAim).getValue();
+  rollXGamePad=gpad.getSlider(XAim).getValue();    //On récupère les valeurs du stick de visee de la manette
   rollYGamePad=gpad.getSlider(YAim).getValue();
   
-  double angleTemp = Math.acos(rollXGamePad);
+  double angleTemp = Math.acos(rollXGamePad);      //On en deduit l'angle par rapport à l'axe x
   if(rollYGamePad>0){
-      angleAim = (float)(-(angleTemp));
+      angleAim = (float)(-(angleTemp));            //Si la valeur trouvée sur l'axe Y du stick est négatif, l'angle l'est aussi
   }
   else angleAim = (float)(angleTemp);
   strokeWeight(5);
   xEndOfWeapon2 = xS2-17+weaponLength*cos(angleAim);
   yEndOfWeapon2 = yS2-weaponLength*sin(angleAim);
   stroke(#00FF00);
-  line(xS2-17,yS2,xEndOfWeapon2,yEndOfWeapon2);
+  line(xS2-17,yS2,xEndOfWeapon2,yEndOfWeapon2);    //On dessine le laser
   strokeWeight(1);
-  noStroke();
 }

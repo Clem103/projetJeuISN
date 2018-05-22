@@ -54,7 +54,7 @@ boolean hasP1WeaponCollided(int numberOfPoints){
   distancePerso = sqrt(pow((xGp1 - xGp2),2) + pow((yGp1 - yGp2),2));
   
   if(distancePerso<weaponLength*3){
-    for (int i=1;i<=numberOfPoints;i++){
+    for (int i=0;i<=numberOfPoints;i++){
        float xHitboxPoint = xP+weaponLength*cos(angleCurseur)*i/numberOfPoints;
        float yHitboxPoint = yP+weaponLength*sin(angleCurseur)*i/numberOfPoints;
        float distancePointPerso = sqrt(pow((xGp2 - xHitboxPoint),2) + pow((yGp2 - yHitboxPoint),2));
@@ -92,7 +92,7 @@ boolean hasP2WeaponCollided(int numberOfPoints){
   distancePerso = sqrt(pow((xGp1 - xGp2),2) + pow((yGp1 - yGp2),2));
   
   if(distancePerso<weaponLength*3){
-    for (int i=1;i<=numberOfPoints;i++){
+    for (int i=0;i<=numberOfPoints;i++){
        float xHitboxPoint = xS2-17+weaponLength*cos(angleAim)*i/numberOfPoints;
        float yHitboxPoint = yS2-weaponLength*sin(angleAim)*i/numberOfPoints;
        float distancePointPerso = sqrt(pow((xGp1 - xHitboxPoint),2) + pow((yGp1 - yHitboxPoint),2));

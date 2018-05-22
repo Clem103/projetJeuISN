@@ -201,7 +201,9 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
       pSpeed1 =(int) cp5.getController("Vitesse Personnage 1").getValue();                                        //On récupère les valeurs, non mises à jour à chaque image, à la sortie du menu
       pSpeed2 =(int) cp5.getController("Vitesse Personnage 2").getValue();
       tpsDeJeu =(int) cp5.getController("Temps de Jeu").getValue();
-    
+      scoreP1=0;
+      scoreP2=0;
+
       screen=0;   //Retour à l'accueil
     }
       

@@ -1,6 +1,6 @@
 void setup(){
-  fullScreen();                               //La taille de la fenêtre remplie tout l'écran
-  //size(1280,720);
+  //fullScreen();                               //La taille de la fenêtre remplie tout l'écran
+  size(1280,720);
   frameRate(60);
   titre = createFont("PoliceTitre.ttf",1);    //Initialisation de la police utilisée pour les titres
   texte = createFont("PoliceTexte.ttf",1);    //Initialisation de la police utilisée pour le texte
@@ -42,7 +42,8 @@ void setup(){
   clicSound.amp(0.25*volumeB);
   fellInLava.amp(0.125*volumeB);
   
-  fondAccueil = loadImage("fondAccueil.png");                      //Chargement des images dans des variables
+  gameIcon = loadImage("gameIcon.png");                                    //Chargement des images dans des variables
+  fondAccueil = loadImage("fondAccueil.png");                      
   fondJeu = loadImage("fondJeu.png");
   fondOptions = loadImage("fondOptions.png");
   fondCredits = loadImage("fondCredits.png");
@@ -61,12 +62,16 @@ void setup(){
   timePlusIcon = loadImage("TimePlusIcon.png");
   timeLessIcon = loadImage("TimeLessIcon.png");
   
-  fondAccueil.resize(width,height);                              //Changement de la taille des images
+  gameIcon.resize(50,50);                                                //Changement de la taille des images
+  fondAccueil.resize(width,height);                              
   fondJeu.resize(width,height);
   fondOptions.resize(width,height);
   fondCredits.resize(width,height);
   fondExit.resize(width,height);
+
   
+  surface.setIcon(gameIcon);                                            //Définition de l'icone du jeu
+  surface.setTitle("FightSabers");                                      //Définiton du titre du jeu dans la barre de la fenêtre
   
    cp5 = new ControlP5(this);                                                          //Initialisation du controleur de paramètres
    cp5.setColorActive(sliderActiveColor).setColorForeground(sliderForegroundColor);    //Réglage de la couleur lors du mouse-over et couleur en règle générale des barres
@@ -169,19 +174,19 @@ void draw(){
 void mousePressed(){    //Au moment où le click souris est enfoncé
   if (screen == 0){     //Dans l'écran d'accueil
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height/3)+40 && mouseY>(height/3)-40){
-      screen=1;   // Click Souris sur Play/Jouer
+      screen=1;         // Click Souris sur Play/Jouer
       clicSound.play();
     }
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40){
-      screen=2;   // Click Souris sur Options
+      screen=2;         // Click Souris sur Options
       clicSound.play();
     }
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.67)+40 && mouseY>(height*0.67)-40){
-      screen=3;   // Click Souris sur Credits
+      screen=3;         // Click Souris sur Credits
       clicSound.play();
     }
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.84)+40 && mouseY>(height*0.84)-40){
-      screen=4;   // Click Souris sur Sortie
+      screen=4;         // Click Souris sur Sortie
       clicSound.play();
     }
   }
@@ -221,18 +226,18 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
   
   if (screen == 3){ //Dans l'écran des crédits
     if (mouseX<(width>>1)+100 && mouseX>(width>>1)-100 && mouseY<(height*0.9)+40 && mouseY>(height*0.9)-40){
-      screen=0;     //Retour à l'accueil lors du click sur Retour
+      screen=0;               //Retour à l'accueil lors du click sur Retour
       clicSound.play();  
     }
   }  
   
   if (screen == 4){ //Dans l'écran de sortie
     if (mouseX<(width*0.75)+100 && mouseX>(width*0.75)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40){
-      screen=0;   //Retour à l'accueil lors du click sur No/Non
+      screen=0;               //Retour à l'accueil lors du click sur No/Non
       clicSound.play();
     }
     if (mouseX<(width>>2)+100 && mouseX>(width>>2)-100 && mouseY<(height>>1)+40 && mouseY>(height>>1)-40){
-      exit();         //Fermeture de la fenêtre lors du click sur Yes/Oui
+      exit();                 //Fermeture de la fenêtre lors du click sur Yes/Oui
       clicSound.play();
     }
   }
@@ -248,7 +253,7 @@ void mousePressed(){    //Au moment où le click souris est enfoncé
     }
     if (mouseX<(width>>2)*3+100 && mouseX>(width>>2)*3-100 && mouseY<(height>>2)*3+40 && mouseY>(height>>2)*3-40){
       clicSound.play();
-      screen=0;             //Joueurs ne veulent pas rejouer, retour à l'accueil
+      screen=0;               //Joueurs ne veulent pas rejouer, retour à l'accueil
       p1Death();
       p2Death();
       scoreP1 = 0;
@@ -272,18 +277,21 @@ void keyPressed(){  //Lorsque l'on appuie sur la touche, la variable corresponda
     case 83: down=       true; break;  //s
     case 68: right=      true; break;  //d
  }
+ if (key == ESC) {
+    key = 0;                           //On supprime la possibilité de quitter le jeu en utilisant ESC
+  }
 }
 void keyReleased(){  //Lorsque l'on relâche la touche, la variable correspondante passe à false
    switch(keyCode){
-    case 32 : espace =      false; break;  //Espace
-    case UP : up =          false; break;  //Flèches clavier
-    case DOWN : down =      false; break;
-    case LEFT : left =      false; break;
-    case RIGHT : right =    false; break;
-    case 90: up=            false; break;  //z
-    case 81: left=          false; break;  //q
-    case 83: down=          false; break;  //s
-    case 68: right=         false; break;  //d
+    case 32 : espace =   false; break; //Espace
+    case UP : up =       false; break; //Flèches clavier
+    case DOWN : down =   false; break;
+    case LEFT : left =   false; break;
+    case RIGHT : right = false; break;
+    case 90: up=         false; break; //z
+    case 81: left=       false; break; //q
+    case 83: down=       false; break; //s
+    case 68: right=      false; break; //d
   }  
 }
 

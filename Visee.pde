@@ -1,17 +1,18 @@
 void viseeSouris(){
-  xC=mouseX;
-  yC=mouseY;
-  xP=xs2-16.2;
-  yP=ys2;
-  xCP=xC-xP;
-  yCP=yC-yP;
-  angleCurseur = atan2(yCP,xCP);
-  xEndOfWeapon1 = xP+weaponLength*cos(angleCurseur);
-  yEndOfWeapon1 = yP+weaponLength*sin(angleCurseur);
-  strokeWeight(5);
-  stroke(#FF0000);
-  line(xP,yP,xEndOfWeapon1,yEndOfWeapon1);
-  strokeWeight(1);
+  xC=mouseX;                                              //On récupère la coordonnée sur X du curseur
+  yC=mouseY;                                              //On récupère la coordonnée sur Y du curseur
+  xP=xs2-16.2;                                            //On récupère la coordonnée sur X du sabre
+  yP=ys2;                                                 //On récupère la coordonnée sur Y du sabre
+  xCP=xC-xP;                                              //On calcule la coordonnée sur X du vecteur représentant la direction du laser
+  yCP=yC-yP;                                              //On calcule la coordonnée sur Y du vecteur représentant la direction du laser
+  angleCurseur = atan2(yCP,xCP);                          //On récupère l'angle entre l'abcisse et le vecteur(laser) 
+  xEndOfWeapon1 = xP+weaponLength*cos(angleCurseur);      //On définit la coordonnée sur X de la fin du laser
+  yEndOfWeapon1 = yP+weaponLength*sin(angleCurseur);      //On définit la coordonnée sur Y de la fin du laser
+  strokeWeight(5);                                        //On définit l'épaisseur du laser
+  stroke(#FF0000);                                        //On définit la couleur du laser
+  line(xP,yP,xEndOfWeapon1,yEndOfWeapon1);                //On fait apparaître le alser
+  strokeWeight(1);                                        //On remet l'épaisseur des traits à 1 pour les cases
+  noStroke();
 }
 
 void viseeGamepad(){

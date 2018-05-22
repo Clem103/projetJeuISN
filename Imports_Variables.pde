@@ -80,13 +80,13 @@ int YAim = 2;
 int XAim = 3;
 
 
-float posXGamePad, posYGamePad;
+float posXGamePad, posYGamePad;    //Positions des sticks du gamepad
 float rollXGamePad, rollYGamePad;
-float angleAim;
+float angleAim;                    //Angle généré entre la position du stick et le 0
 float xEndOfWeapon1, yEndOfWeapon1, xEndOfWeapon2, yEndOfWeapon2;
-int weaponLength = 101;
-int distanceBetweenPoints;
-int numberOfPoints=1;
+int weaponLength = 101;            //Taille de l'arme
+int distanceBetweenPoints;         //Distance entre deux points de hitbox
+int numberOfPoints=1;              //Nombre de points de la hitbox
 
 boolean debugMode;
 boolean noGamepadMode;

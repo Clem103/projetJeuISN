@@ -22,7 +22,7 @@ void setup(){
   MusiqueCredits = new SoundFile(this, "MusiqueCredits.mp3");              //Musique Menu Credits
   fellInLava = new SoundFile(this, "splashInLava.mp3");                    //Bruit tomber dans la lave
   lightSaberOn = new SoundFile(this, "lightSaberON.mp3");                  //Bruit allumage sabre laser
-  lightSaberOff = new SoundFile(this, "lightSaberOFF.mp3");                //Bruit eteignage sabre laser
+  lightSaberOff = new SoundFile(this, "lightSaberOFF.mp3");                //Bruit extinction sabre laser
   clicSound = new SoundFile(this, "clicSound.mp3");                        //Bruit de clic sur case
   deathmatchAnnouncer = new SoundFile(this, "deathmatchAnnouncer.mp3");    //Voix annoncant mode jeu
   drawMusic= new SoundFile(this, "DrawMusic.mp3");                         //Musique égalité

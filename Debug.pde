@@ -38,3 +38,11 @@ void debugRespawn(){    //Affichage des zones de respawn
   rect(width*0.6,height>>4,width*0.36,height*0.49);
   noStroke();
 }
+
+/* Zones blanches = Zones de spawn
+*  Contours noir = hitbox du décor
+*  Points numérotés = points de hitbox du sabre laser
+*  Cercle autour des personnages = hitbox des personnages
+*  Valeurs affichées à gauche, au milieu et à droite = distance entre chaque point de hitbox et le personnage adverse(à gauche et à droite)
+*  distance entre les 2 personnages (au mileur)
+*/ 

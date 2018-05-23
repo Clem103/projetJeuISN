@@ -3,9 +3,9 @@
 //
 
 void ecranAccueil(){
-  if(isMusicOptionsPlaying){
-    MusiqueOptions.stop();
-    isMusicOptionsPlaying = false;
+  if(isMusicOptionsPlaying){          //On passe par des boolean pour détecter lorsqu'une musique est entrain d'être jouée (pour éviter de la jouer plusieurs fois en même temps)
+    MusiqueOptions.stop();            //Lors du retour à l'ecran d'accueil, toutes les musiques s'arretent (si elles sont entrain d'être jouées)
+    isMusicOptionsPlaying = false;    
   }
   if(isMusicCreditsPlaying){
     MusiqueCredits.stop();
@@ -24,7 +24,7 @@ void ecranAccueil(){
   cursor();
   background(fondAccueil);
   
-  if(!isMusicAJEPlaying){
+  if(!isMusicAJEPlaying){            //Et la musique de l'accueil est jouée en boucle (.loop();)
     MusiqueAJE.loop();
     isMusicAJEPlaying=true;
   }
@@ -66,10 +66,10 @@ void ecranAccueil(){
     fill(255,50);
   }                                                                                           //Remplissage (ou non) de la case avec blanc un peu transparent
   else noFill();
-  rect(width>>1,height*0.84,200,80);                                                                          //Réalisation de la case
+  rect(width>>1,height*0.84,200,80);                                                                          
   
-  fill(homeTextColor);                                                                                        //Coloration du texte
-  text("Play",width>>1,(height/3)+10);                                                                        //Ecriture du texte aux bons emplacements
+  fill(homeTextColor);                                                                                       
+  text("Play",width>>1,(height/3)+10);                                                                        
   text("Options",width>>1,(height>>1)+10);
   text("Credits",width>>1,height*0.67+10);
   text("Exit",width>>1,height*0.84+10);
@@ -107,7 +107,7 @@ void ecranJeu1vs1(){
     bougerPersonnageGamepad(pSpeed2);
     viseeGamepad();
   }
-  bougerPersonnageClavier();            //Imports des fonctionnalités de jeu
+  bougerPersonnageClavier();            //Appel des fonctionnalités de jeu
   viseeSouris();
   sommetsPerso();
   affichagePersonnages();
@@ -162,7 +162,7 @@ void ecranFinPartie(){
  textAlign(CENTER);
  stroke(0,0,0);
  
- if(scoreP1==scoreP2){
+ if(scoreP1==scoreP2){      //Affichage des scores finaux
    text("It's a draw !\n The scores are " + scoreP1 + " point(s)!",width>>1,height>>2);
    if(!isDrawMusicPlaying){
       drawMusic.play();
@@ -259,7 +259,7 @@ void ecranOptions(){
 //Définition de l'actualisaiton dynamique du menu des options
 //
 
-void updateOptions(){   //Ces paramètres sont mis à jour à chaque image tant que l'on est sur l'écran des options
+void updateOptions(){   //Ces paramètres sont mis à jour à chaque frame tant que l'on est sur l'écran des options
   
   volumeM=(cp5.getController("Volume musique").getValue())/100;    //Réglage des volumes
   MusiqueAJE.amp(0.125*volumeM);
@@ -297,7 +297,7 @@ void ecranCredits(){
   fill(gameTitleColor);
   text("Credits",width>>1,height*0.1);
   textFont(texte,30);                                                                                                          //Création bouton retour accueil
-  fill(0);                                                                                                                     //Couleurs en degrade
+  fill(0);                                                                                                                     //Couleurs en dégradé
   text("Graphism Management : MARSOT Vincent",width>>1,height*0.25);
   fill(51);
   text("Sound Management : MARSOT Vincent & VELLU Clément",width>>1,height*0.35);

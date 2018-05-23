@@ -24,12 +24,13 @@ int pSpeed2 = 8;
 float pSpeedX2;
 float pSpeedY2;
 
-int timer;
+int timer;                    //Variables liées au timer
 int tpsDeJeu = 120;
 int tpsEcoule;
 int tpsInit;
 int scoreP1=0, scoreP2=0;
-int spawn;
+
+int spawn;   //Variable définissant la zone de spawn
 
 int tPersonnage=50;
 
@@ -39,7 +40,7 @@ int xs1,ys1,xs2,ys2,xs3,ys3,xs4,ys4;  //Coordonnées des sommets du personnage1 
 
 int xPersonnage2, yPersonnage2;
 int xS1,yS1,xS2,yS2,xS3,yS3,xS4,yS4;
-float xP,yP,xC,yC,xCP,yCP,angleCurseur;
+float xP,yP,xC,yC,xCP,yCP,angleCurseur;    //C= curseur, P= Personnage, CP= vecteur entre curseur et personnage
 
 float distancePerso, distanceP1ellipseTop, distanceP1ellipseRight, distanceP1ellipseLeft, distanceP2ellipseTop, distanceP2ellipseRight, distanceP2ellipseLeft;
 int xGp1, yGp1, xGp2, yGp2;   //Centre de gravité des personnages

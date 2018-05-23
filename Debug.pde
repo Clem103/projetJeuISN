@@ -1,4 +1,4 @@
-void debugHitboxPerso(){
+void debugHitboxPerso(){    //Affichage d'informations supplémentaires à propos de la hitbox des personnages
   sommetsPerso();
   if(distancePerso<=(weaponLength*3)){
    stroke(0,255,0); 
@@ -16,7 +16,7 @@ void debugHitboxPerso(){
   line(xGp1,yGp1,xGp2,yGp2);
 }
 
-void debugHitboxMap(){
+void debugHitboxMap(){      //De même pour les hitbox des éléments du décor
   if(isP1InBackground()) stroke(#0057FF);
   else if (isP2InBackground()) stroke(#5EFF03);
   else stroke(#030303);
@@ -30,7 +30,7 @@ void debugHitboxMap(){
   noStroke();  
 }
 
-void debugRespawn(){
+void debugRespawn(){    //Affichage des zones de respawn
   rectMode(CORNER);
   stroke(#FFFFFF);
   rect(width>>5,height>>4,width*0.32,height*0.62);

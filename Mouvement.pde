@@ -7,7 +7,7 @@ void bougerPersonnageClavier(){
 
 
 
-void bougerPersonnageGamepad(int pSpeed2){
+void bougerPersonnageGamepad(int pSpeed2){  //Mouvement du personnage à la manette
   
   pSpeedX2 = pSpeed2;
   pSpeedY2 = pSpeed2;

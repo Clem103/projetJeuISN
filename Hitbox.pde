@@ -44,7 +44,7 @@ int numberOfHitboxPoints(){  //Définition du nombre de points de la hitbox en f
   return numberOfPoints;
 }
 
-boolean hasP1WeaponCollided(int numberOfPoints){  //On check pour chaque point si 
+boolean hasP1WeaponCollided(int numberOfPoints){  //On check pour chaque point si il est en collision avec le personnage2
   
   xGp1 = (xs1 + xs2 + xs3 + xs4)/4;
   yGp1 = (ys1 + ys2 + ys3 + ys4)/4;
@@ -82,7 +82,7 @@ boolean hasP1WeaponCollided(int numberOfPoints){  //On check pour chaque point s
   return false; 
 }
 
-boolean hasP2WeaponCollided(int numberOfPoints){
+boolean hasP2WeaponCollided(int numberOfPoints){      //On check pour chaque point si il est en collision avec le personnage1
   
   xGp1 = (xs1 + xs2 + xs3 + xs4)/4;
   yGp1 = (ys1 + ys2 + ys3 + ys4)/4;
@@ -121,7 +121,7 @@ boolean hasP2WeaponCollided(int numberOfPoints){
   return false; 
 }
 
-boolean isP1InBackground(){
+boolean isP1InBackground(){        //On check les collisions avec le décor de chaque personnage
  
   if(xGp1+tPersonnage*23/50 >= width-width*0.0195 || xGp1-tPersonnage*23/50 <= width*0.0195){
     return true;

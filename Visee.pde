@@ -1,8 +1,8 @@
 void viseeSouris(){
   xC=mouseX;                                              //On récupère la coordonnée sur X du curseur
   yC=mouseY;                                              //On récupère la coordonnée sur Y du curseur
-  xP=xs2-16.2;                                            //On récupère la coordonnée sur X du sabre
-  yP=ys2;                                                 //On récupère la coordonnée sur Y du sabre
+  xP=xs2-16.2;                                            //On récupère la coordonnée sur X du manche du sabre 
+  yP=ys2;                                                 //On récupère la coordonnée sur Y du manche du sabre
   xCP=xC-xP;                                              //On calcule la coordonnée sur X du vecteur représentant la direction du laser
   yCP=yC-yP;                                              //On calcule la coordonnée sur Y du vecteur représentant la direction du laser
   angleCurseur = atan2(yCP,xCP);                          //On récupère l'angle entre l'abcisse et le vecteur(laser) 

@@ -1,12 +1,12 @@
 void p1Death(){          //fonction appelée lorsque le personnage 1 meurt
-  int[] personnage1 = respawn(xPersonnage1,yPersonnage1);  //assignation des coordonées au personnage1
+  int[] personnage1 = respawn(xPersonnage1,yPersonnage1);  //Assignation des coordonées au personnage 1
   xPersonnage1 = personnage1[0];
   yPersonnage1 = personnage1[1];
   scoreP2++;                                               //Le score du joueur 2 augmente
 }
 
 void p2Death(){          //fonction appelée lorsque le personnage 2 meurt
-  int[] personnage2 = respawn(xPersonnage2,yPersonnage2);   //assignation des coordonées au personnage2
+  int[] personnage2 = respawn(xPersonnage2,yPersonnage2);   //Assignation des coordonées au personnage 2
   xPersonnage2 = personnage2[0];
   yPersonnage2 = personnage2[1];
   scoreP1++;                                                //Le score du joueur 1 augmente

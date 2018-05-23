@@ -62,7 +62,7 @@ void setup(){
   timePlusIcon = loadImage("TimePlusIcon.png");
   timeLessIcon = loadImage("TimeLessIcon.png");
   
-  gameIcon.resize(50,50);                                                //Changement de la taille des images
+  gameIcon.resize(50,50);                                                //Adaptation de la taille des images à la taille de la fenêtre
   fondAccueil.resize(width,height);                              
   fondJeu.resize(width,height);
   fondOptions.resize(width,height);
@@ -143,13 +143,13 @@ void setup(){
     noGamepadMode=true;
   }
   
-  if(!noGamepadMode){
+  if(!noGamepadMode){    //Définition de la tolérance
     gpad.getSlider(UpDown).setTolerance(0.1);
     gpad.getSlider(RightLeft).setTolerance(0.12);
     gpad.getSlider(XAim).setTolerance(0.05);
     gpad.getSlider(YAim).setTolerance(0.15);
   }
-  sommetsPerso();
+  sommetsPerso();        //Calcul des sommets des personnages
   numberOfPoints=numberOfHitboxPoints();
 }
 
